@@ -1,0 +1,38 @@
+<html>
+
+  <head>
+    <title>ACME Card - Transaction Alert</title>
+  </head>
+
+  <body>
+    <div style="font-family: inherit; text-align: inherit">Dear {{user}},</div>
+    <div style="font-family: inherit; text-align: inherit"><br></div> {{#equals
+    transaction_id.length 0}} <div
+      style="font-family: inherit; text-align: inherit">{{alert_message}}</div>
+    {{else}} {{#equals transaction_type 'sale'}} <div
+      style="font-family: inherit; text-align: inherit">A transaction of
+      ${{transaction_amount}} has been charged to your card number {{cc_last_4}}
+      on {{transaction_date}}. This was posted by {{vendor_name}}. Your
+      transaction ID is {{transaction_id}}.<br><br>If you have any questions or
+      did not authorize this transaction, please contact our support team
+      immediately. </div> {{else equals transaction_type 'void'}} <div
+      style="font-family: inherit; text-align: inherit">A transaction of
+      ${{transaction_amount}} has been refunded to your card number
+      {{cc_last_4}} on {{transaction_date}}. This amount was credited by
+      {{vendor_name}}. Your transaction ID is {{transaction_id}}.<br><br>If you
+      have any questions or did not authorize this refund, please contact our
+      support team immediately.</div> {{/equals}} {{/equals}} <div
+      style="font-family: inherit; text-align: inherit"><br></div>
+    <div style="font-family: inherit; text-align: inherit">Regards,</div>
+    <div style="font-family: inherit; text-align: inherit">ACME Card Manager
+    </div>
+    <hr />
+    <div style="font-family: inherit; text-align: inherit">This email was sent
+      by the LightWave ACME Card Manager Sample Application and does not
+      represent an actual card transaction.</div>
+    <div style="font-family: inherit; text-align: inherit">For more information
+      visit <a href="https://github.com/nuwavetech/acme-card-manager">LightWave
+        ACME Card Manager</a></div>
+  </body>
+
+</html>

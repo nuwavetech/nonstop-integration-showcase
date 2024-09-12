@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2019 NuWave Technologies, Inc. All rights reserved.
  */
- 
+
 #pragma nolist
 
 #include <cextdecs>
@@ -22,7 +22,6 @@
 static short card_filenum;
 static char pathmon_name[32];
 static char* acct_serverclass = "ACCT-SERVER";
-static int sms_enabled = 0;
 
 /* Static function prototypes. */
 static int activate_transaction(const char* type);
@@ -221,7 +220,7 @@ static void get_cards(void* request) {
 
     memcpy(&rp.card[rp.item_count], &card, sizeof(card_def));
     rp.item_count++;
-  }  
+  }
 
   /* Send the reply. */
   REPLYX((const char*)&rp, sizeof(rp));
@@ -301,21 +300,21 @@ static void update_card(void* request) {
    * If the lock state has changed send an alert. Note that the alert is not part of the transaction
    * and we don't care if it fails.
    */
-  if (sms_enabled != 0 && wasLocked != card.card_detail.is_locked) {
+  if (wasLocked != card.card_detail.is_locked) {
     alert_account_rq_def alert_rq;
     alert_account_rp_def alert_rp;
 
-    memset(&rq, 0, sizeof(rq));
+    memset(&alert_rq, 0, sizeof(alert_rq));
     alert_rq.rq_code = RQ_CODE_ALERT_ACCOUNT;
     memcpy(alert_rq.account_number, card.card_detail.account_number,
            sizeof(alert_rq.account_number));
 
     /* Build and send the alert message. */
     snprintf(alert_rq.alert_message, sizeof(alert_rq.alert_message),
-             "ACME Card account %-.4s:  Your card has been %s.",
-             &card.card_number[12],
+             "Your ACME Card account %-.4s has been %s.", &card.card_number[12],
              (card.card_detail.is_locked ? "locked" : "unlocked"));
- 
+    strcpy(alert_rq.name_on_card, card.card_detail.name_on_card);
+    strcpy(alert_rq.transaction_id, "");
     SERVERCLASS_SENDL_((char*)pathmon_name, (short)strlen(pathmon_name),
                        (char*)acct_serverclass, (short)strlen(acct_serverclass),
                        (char*)&alert_rq, (char*)&alert_rp, sizeof(alert_rq),
@@ -329,12 +328,12 @@ int main(int argc, char* argv[], char** envp) {
   int cc;
   short rc;
   short filenum;
-  unsigned short count_read; 
+  unsigned short count_read;
   int done;
   char request[57344];
   short* rqCode;
   char* p;
- 
+
   /* Get our pathmon name. */
   if ((p = getenv("PATHMON-NAME")) == NULL) {
     printf("PARAM PATHMON^NAME is not set.\n");
@@ -342,13 +341,6 @@ int main(int argc, char* argv[], char** envp) {
   }
   strncpy(pathmon_name, p, sizeof(pathmon_name));
 
-  /* Check for SMS enabled. Default to no. */
-  if ((p = getenv("ENABLE-SMS")) == NULL) {
-    sms_enabled = 0;
-  } else {
-    sms_enabled = atoi(p);
-  }
-  
   /* Open $RECEIVE */
   if ((rc = FILE_OPEN_("$RECEIVE", 8, &filenum, , , 0, 1)) != 0) {
     printf("Unable to open $RECEIVE, file system error %d\n", (int)rc);

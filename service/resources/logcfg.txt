@@ -4,12 +4,13 @@
 # Process log configuration.
 [log]
 file=zzlog
-level=info   # log at info level.
+level=info  # log at info level.
 format=text
 
 # Diagnostic log configuration.
 [diag-log]
 enabled=1
 subvol=*
-replyCodeFilter=1,2
-httpStatusFilter=400:599    
+# disable filters so all logs will be created
+#replyCodeFilter=1,2
+#httpStatusFilter=400:599

@@ -1,15 +1,24 @@
 ?tacl macro
-
+s
 == Set runtime environment. Customize this for your environment.
- 
-#set #param pathmon-name        $ACME
-#set #param lws-isv             [#defaults/current/]
-#set #param enable-sms          0
-#set #param lwc-isv             [#defaults/current/]
-#set #param sns-base-url        https://sns.us-east-1.amazonaws.com
+
+#set #param pathmon-name                $ACME
+#set #param lws-isv                     [#defaults/current/]
+#set #param lwc-isv                     [#defaults/current/]
+
+== Enter your Twilio account info here:
+#set #param enable-sms                  0
+#set #param twilio-messaging-base-url   https://api.twilio.com/2010-04-01
+#set #param twilio-account-sid          AC******************************fe
+#set #param twilio-phone-no             +1********39
+
+== Enter SendGrid account info here:
+#set #param enable-email                0
+#set #param sg-base-url                 https://api.sendgrid.com/v3
+#set #param sg-from-email               ACME.Card.noreply@yourdomain.com
+#set #param sg-transaction-template-id  d-<your-transaction-template-id>
+#set #param sg-card-status-template-id  d-<your-card-status-template-id>
 
 delete define =acme?pathmon
 add define =acme-pathmon, class map, file [#param pathmon-name]
 
-
- 

@@ -1,0 +1,10 @@
+#
+# Enter your Twilio AccountSID:AuthToken as a base64 encoded string.
+#
+[auth]
+Method=auth-token
+Header=Authorization
+Token=Basic QU****************************************************ZQ==
+
+
+

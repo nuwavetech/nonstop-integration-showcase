@@ -1,12 +1,24 @@
 ?tacl macro
 
-== Clear params set by SETENV.
+== Clear environment set by SETENV.
 
-clear param pathmon-name     
-clear param lws-isv          
-clear param lwc-isv          
-clear param enable-sms       
-clear param sns-base-url   
+#set #param pathmon-name
+#set #param lws-isv
+#set #param lwc-isv
+
+#set #param enable-sms
+#set #param twilio-messaging-base-url
+#set #param twilio-account-sid
+#set #param twilio-phone-no
+
+#set #param enable-email
+#set #param sg-base-url
+#set #param sg-from-email
+#set #param sg-transaction-template-id
+#set #param sg-card-status-template-id
+
+delete define =acme?pathmon
+
 
 
 

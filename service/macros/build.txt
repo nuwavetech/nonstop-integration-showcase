@@ -13,16 +13,27 @@ sink [#purge ddlout]
 ddl2 / inline, out ddlout /
 
 + ?dict !
-+ ?c snsh !
-+ ?cobol snscopy !
-+ ?source snsddl ( LIGHTWAVE-DEF, API-DEF )
++ ?c lwh !
++ ?cobol lwcopy !
++ ?source sgddl ( LIGHTWAVE-DEF )
 + ?noc
 + ?nocobol
 
-+ ?dict !
++ ?c sgh !
++ ?cobol sgcopy !
++ ?source sgddl ( API-DEF )
++ ?noc
++ ?nocobol
+
++ ?c twh !
++ ?cobol twcopy !
++ ?source twddl ( API-DEF )
++ ?noc
++ ?nocobol
+
 + ?c acmeh !
 + ?cobol acmecpy !
-+ ?source acmeddl   
++ ?source acmeddl
 + ?noc
 + ?nocobol
 
@@ -86,7 +97,7 @@ sink [#purge fupout]
 
 [#if [#fileinfo / existence / acctfile ] = 0 |then|
 
-  fup / in acctfup, out fupout / 
+  fup / in acctfup, out fupout /
 
   [#if [ :_completion:completioncode ] <> 0 |then|
     #output Creation of database file ACCTFILE completed with warnings or errors.
@@ -96,7 +107,7 @@ sink [#purge fupout]
 
 [#if [#fileinfo / existence / cardfile ] = 0 |then|
 
-  fup / in cardfup, out fupout / 
+  fup / in cardfup, out fupout /
 
   [#if [ :_completion:completioncode ] <> 0 |then|
     #output Creation of database file CARDFILE completed with warnings or errors.
@@ -106,7 +117,7 @@ sink [#purge fupout]
 
 [#if [#fileinfo / existence / tranfile ] = 0 |then|
 
-  fup / in tranfup, out fupout / 
+  fup / in tranfup, out fupout /
 
   [#if [ :_completion:completioncode ] <> 0 |then|
     #output Creation of database file TRANFILE completed with warnings or errors.
@@ -115,6 +126,6 @@ sink [#purge fupout]
 ]
 
 #output Build completed successfully.
-#output 
+#output
 
 #unframe

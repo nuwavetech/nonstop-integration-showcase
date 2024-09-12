@@ -1,0 +1,352 @@
+{
+  "name": "twilio-messaging-sendSMS",
+  "description": "Send messages to customers across preferred channels like SMS, MMS, and WhatsApp with one API.",
+  "version": 1,
+  "id": "033b6de0aac3241d808001010000012ef1",
+  "modificationTime": 1725038400,
+  "isBrief": false,
+  "operations": [
+    {
+      "path": "/Accounts/{AccountSid}/Messages.json",
+      "methods": [
+        {
+          "api": {
+            "stringPadding": "zeros"
+          },
+          "request": {
+            "mappings": [
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "34"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{AccountSid}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "160"
+                },
+                "target": {
+                  "type": "form",
+                  "value": "Body"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "32"
+                },
+                "target": {
+                  "type": "form",
+                  "value": "To"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "32"
+                },
+                "target": {
+                  "type": "form",
+                  "value": "From"
+                }
+              }
+            ],
+            "contentType": "application/x-www-form-urlencoded",
+            "contentTypeIsCustom": false,
+            "acceptTypes": [
+              "*/*"
+            ]
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "CreateMessageResponse"
+                  }
+                }
+              ],
+              "httpStatus": "201",
+              "description": "Message Created"
+            }
+          ],
+          "verb": "POST",
+          "alias": "sendSMS",
+          "description": "Send messages to customers across preferred channels like SMS, MMS, and WhatsApp with one API.",
+          "id": 1
+        }
+      ]
+    }
+  ],
+  "types": {
+    "type": {
+      "Subresource_urisType": {
+        "anonymous": true,
+        "elements": [
+          {
+            "name": "additionalProperties",
+            "type": "string",
+            "size": 16,
+            "map": {
+              "maxOccurs": 4,
+              "keySize": 16
+            }
+          }
+        ]
+      },
+      "CreateMessageResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "account_sid",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "api_version",
+            "type": "string",
+            "size": 33
+          },
+          {
+            "name": "body",
+            "type": "string",
+            "size": 38
+          },
+          {
+            "name": "date_created",
+            "type": "string",
+            "size": 33
+          },
+          {
+            "name": "date_sent",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "date_updated",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "direction",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "error_code",
+            "type": "int"
+          },
+          {
+            "name": "error_message",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "from",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "messaging_service_sid",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "num_media",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "num_segments",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "price",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "price_unit",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "sid",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "subresource_uris",
+            "type": "Subresource_urisType"
+          },
+          {
+            "name": "to",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "uri",
+            "type": "string",
+            "size": 32
+          }
+        ]
+      }
+    }
+  },
+  "generatedTypes": {
+    "WARNING": "These types are generated by LightWave Client and should not be manually edited.",
+    "type": {
+      "LightWaveRqHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rqCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "rqVersion",
+            "type": "unsignedShort",
+            "size": 2
+          },
+          {
+            "name": "rqTimeout",
+            "type": "unsignedInt",
+            "size": 4
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveRpHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rpCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "httpStatus",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoDetail",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveErrorRp": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "errorSource",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorCode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorSubcode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorMessage",
+            "type": "string",
+            "size": 4096
+          }
+        ]
+      },
+      "SendSMSRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "sendSMS",
+        "description": "Send messages to customers across preferred channels like SMS, MMS, and WhatsApp with one API.",
+        "operation": "POST /Accounts/{AccountSid}/Messages.json",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "AccountSid",
+            "type": "string",
+            "size": 34
+          },
+          {
+            "name": "Body",
+            "type": "string",
+            "size": 160
+          },
+          {
+            "name": "To",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "From",
+            "type": "string",
+            "size": 32
+          }
+        ]
+      },
+      "SendSMS201Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "CreateMessageResponse",
+            "type": "CreateMessageResponse"
+          }
+        ]
+      }
+    }
+  }
+}

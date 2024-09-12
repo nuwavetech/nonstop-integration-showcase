@@ -307,12 +307,12 @@
                     <label for="expYear">&nbsp;</label>
                     <select class="form-control" id="expYear">
                       <option value="">- Year -</option>
-                      <option value="2019">2019</option>
-                      <option value="2020">2020</option>
-                      <option value="2021">2021</option>
-                      <option value="2022">2022</option>
-                      <option value="2023">2023</option>
                       <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
                     </select>
                   </div>
                   <div class="col-md-2 mb-3">
@@ -420,12 +420,12 @@
                     <label for="expYear">&nbsp;</label>
                     <select class="form-control" id="expYear">
                       <option value="">- Year -</option>
-                      <option value="2019">2019</option>
-                      <option value="2020">2020</option>
-                      <option value="2021">2021</option>
-                      <option value="2022">2022</option>
-                      <option value="2023">2023</option>
                       <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
                     </select>
                   </div>
                   <div class="col-md-2 mb-3">
@@ -640,9 +640,10 @@
                 this shows all requests sent to the NonStop, and all responses
                 returned.</p>
               <p> When enabled, the application Pathway servers use LightWave
-                Client to send SMS notifications to simulated cardholders using
-                the <a href="https://aws.amazon.com/sns/">AWS Simple
-                  Notification Service</a> REST API. Notifications are sent for
+                Client to send SMS and email notifications to simulated cardholders using the <a
+                  href="https://www.twilio.com">Twilio SMS</a> and <a
+                  href="https://sendgrid.com/">SendGrid Email</a> REST APIs. Notifications are
+                sent for
                 sale and void transactions, and card lock status changes. </p>
               <p> LightWave Server&trade; allows HPE NonStop users to expose
                 their existing Guardian or Pathway servers as industry-standard

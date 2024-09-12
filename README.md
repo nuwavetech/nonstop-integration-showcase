@@ -3,14 +3,14 @@ ACME Card Manager simulates how a traditional NonStop payment application (such 
 
 All of these services are provided as REST APIs by LightWave Server working in conjunction with simple demo Pathway Servers on the NonStop. The details of all data exchanged with the REST services can be viewed in the API Request Log view - this shows all requests sent to the NonStop, and all responses returned.
 
-When enabled, the application Pathway servers use LightWave Client to send SMS notifications to simulated cardholders using the [AWS Simple Notification Service](https://aws.amazon.com/sns) REST API. Notifications are sent for sale and void transactions, and card lock status changes.
+When enabled, the application Pathway servers use LightWave Client to send SMS and email notifications to simulated cardholders using the [Twilio SMS](https://www.twilio.com) and [SendGrid Email](https://www.sendgrid.com) REST APIs. Notifications are sent for sale and void transactions, and card lock status changes.
 
-![](acme_card_diagram.png?raw=true)
+![](acme_card_diagram_3.png?raw=true)
 
 The sample consists of the Pathway application and a browser based client application. These components may be installed using these instructions:
 
 | Installation Instructions |
-| -- | 
+| -- |
 | [NonStop Pathway Application](service) |
 | [Browser based client application](web-app) |
 
