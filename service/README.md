@@ -52,17 +52,16 @@ In addition, a PAK archive containing all of the source files is available for t
 
 | Repository File | NonStop File |
 | -- | -- |
-| macros/build.txt | build |
-| macros/instsvc.txt | instsvc |
-| macros/setenv.txt | setenv |
-| macros/startpw.txt | startpw |
-| macros/stoppw.txt | stoppw |
-| macros/unpakdat.txt | unpakdat |
-| macros/unsetenv.txt | unsetenv |
+| macros/build.tacl | build |
+| macros/instsvc.tacl | instsvc |
+| macros/setenv.tacl | setenv |
+| macros/startpw.tacl | startpw |
+| macros/stoppw.tacl | stoppw |
+| macros/unpakdat.tacl | unpakdat |
+| macros/unsetenv.tacl | unsetenv |
 | resources/acmeapi.txt | acmeapi |
 | resources/acmeddl.txt | acmeddl |
 | resources/acmedict.txt | acmedict |
-| resources/acmesvc.txt | acmesvc |
 | resources/datapak.bin | datapak |
 | resources/logcfg.txt | logcfg |
 | resources/sgapi.json | sgapi |

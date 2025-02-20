@@ -1,0 +1,109 @@
+?tacl routine
+#frame
+
+[#push
+ddlin
+basename
+]
+
+[#def :buildserv text |body|
+  #output Building [basename]SERV ...
+  sink [#purge [basename]l]
+  sink [#purge [basename]serv]
+
+  ccomp / in [basename]c, out [basename]l / [basename]serv ; &
+    runnable, symbols, inspect, extensions, &
+    ssv0 "[#defaults/current/]", ssv1 "$system.system", &
+    ssv2 "$system.zsysdefs", xld(-set runnamed on -set saveabend on)
+
+  [#if [ :_completion:completioncode ] <> 0 |then|
+    #output Compilation of [basename]C completed with warnings or errors.
+    #return
+  ]
+]
+
+[#def :createfile text |body|
+  [#if [#fileinfo / existence / [basename]FILE ] = 0 |then|
+
+    sink [#purge fupout]
+
+    fup / in [basename]fup, out fupout /
+
+    [#if [ :_completion:completioncode ] <> 0 |then|
+      #output Creation of database file [basename]FILE completed with warnings or errors.
+      #return
+    ]
+    #output File [basename]FILE created.
+  |else|
+    #output File [basename]FILE already exists.
+  ]
+]
+
+== Creates the DDL dictionary and C header files.
+
+#output
+#output Building the DDL Dictionary ...
+
+#set ddlin
+
+[#append ddlin
+??dict !
+??c lwh !
+??cobol lwcopy !
+??source sgddl ( LIGHTWAVE-DEF )
+??noc
+??nocobol
+
+??c sgh !
+??cobol sgcopy !
+??source sgddl ( API-DEF )
+??noc
+??nocobol
+
+??c twh !
+??cobol twcopy !
+??source twddl ( API-DEF )
+??noc
+??nocobol
+
+??c acmeh !
+??cobol acmecpy !
+??source acmeddl
+??noc
+??nocobol
+]
+
+sink [#purge ddlout]
+ddl2 / inv ddlin, out ddlout /
+
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output Dicionary build completed with warnings or errors.
+  #return
+]
+
+== Build the server program files.
+
+#set basename ACCT
+:buildserv
+
+#set basename CARD
+:buildserv
+
+#set basename PAY
+:buildserv
+
+#output Creating database files ....
+
+#set basename ACCT
+:createfile
+
+#set basename CARD
+:createfile
+
+#set basename TRAN
+:createfile
+
+#output Build completed successfully.
+#output
+
+#unframe

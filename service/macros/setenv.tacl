@@ -1,10 +1,12 @@
 ?tacl macro
-s
+
 == Set runtime environment. Customize this for your environment.
 
-#set #param pathmon-name                $ACME
+#set #param pathmon-name                [#createprocessname]
+#set #param pathctl-file                zzpwpctl
 #set #param lws-isv                     [#defaults/current/]
 #set #param lwc-isv                     [#defaults/current/]
+#set #param hometerm                    $zhome
 
 == Enter your Twilio account info here:
 #set #param enable-sms                  0
@@ -16,6 +18,7 @@ s
 #set #param enable-email                0
 #set #param sg-base-url                 https://api.sendgrid.com/v3
 #set #param sg-from-email               ACME.Card.noreply@yourdomain.com
+#set #param sg-from-name                "ACME Card Demo"
 #set #param sg-transaction-template-id  d-<your-transaction-template-id>
 #set #param sg-card-status-template-id  d-<your-card-status-template-id>
 

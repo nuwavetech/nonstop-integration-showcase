@@ -11,14 +11,14 @@ $(async function () {
   state.settings = await $.getJSON("./settings.json");
 
   let responseCodeStrings = {
-    "00": "Approved",
-    "14": "Invalid Card Number",
-    "51": "Insufficient Funds",
-    "54": "Card Expired",
-    "80": "Invalid Date",
-    "82": "Invalid CVV",
-    "98": "Card Restricted"
-  }
+    "00" : "Approved",
+    "14" : "Invalid Card Number",
+    "51" : "Insufficient Funds",
+    "54" : "Card Expired",
+    "80" : "Invalid Date",
+    "82" : "Invalid CVV",
+    "98" : "Card Restricted"
+  };
 
   $(document).ready(async function () {
     /* Initialize feather icons. */
@@ -86,12 +86,12 @@ $(async function () {
     });
 
     /*
-    * Configure jQuery Typehead to autocomplete the payment form
-    * card number. A payments terminal would not typically do this
-    * but it adds convenience to the demo and illustrates one way to 
-    * do autocomplete of input fields. For more info in jQuery Typeahead
-    * see: http://www.runningcoder.org/jquerytypeahead/
-    */
+     * Configure jQuery Typehead to autocomplete the payment form
+     * card number. A payments terminal would not typically do this
+     * but it adds convenience to the demo and illustrates one way to
+     * do autocomplete of input fields. For more info in jQuery Typeahead
+     * see: http://www.runningcoder.org/jquerytypeahead/
+     */
     $("#payment-view #cardNumber").autocomplete({
     });
 
@@ -223,7 +223,7 @@ $(async function () {
 
     let date = new Date(dateTime);
 
-    let dateString = date.getFullYear() + "/"; 
+    let dateString = date.getFullYear() + "/";
     dateString += ("0" + (date.getMonth() + 1)).slice(-2) + "/";
     dateString += ("0" + date.getDate()).slice(-2) + " ";
 
@@ -496,8 +496,8 @@ $(async function () {
       return;
     }
 
-    /* The account number is the second segment in the path. If there isn't one, then 
-    this is a create request. */
+    /* The account number is the second segment in the path. If there isn't one,
+    then this is a create request. */
     let accountNumber = segments[2];
 
     if (typeof accountNumber === "undefined") {
@@ -621,8 +621,8 @@ $(async function () {
       return;
     }
 
-    /* The card number is the second segment in the path. If there isn't one, then 
-    this is a create request. */
+    /* The card number is the second segment in the path. If there isn't one,
+    then this is a create request. */
     let cardNumber = segments[2];
 
     /* Populate the account select list. */
@@ -816,7 +816,7 @@ $(async function () {
 
     transactions.forEach((item) => {
       let row = getTemplate("#transactions-table-row-template");
-  
+
       $("td:nth-of-type(1)", row).text(formatDateTime(item.timestamp));
       $("td:nth-of-type(2)", row).text((item.transactionId));
       $("td:nth-of-type(3)", row).text(transactionTypeToString(item));

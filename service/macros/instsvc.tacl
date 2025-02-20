@@ -1,0 +1,87 @@
+?tacl routine
+#frame
+
+== Installs the ACME Card Dictionary, API, and Service.
+
+[#push
+:apiname
+:dictname
+:isv
+:svcname
+:tmp
+]
+
+#set :isv [#param lws-isv]
+#set :svcname com.nuwavetech.demo.acme-card-service
+#set :dictname com.nuwavetech.demo.acme-card-dictionary
+#set :apiname com.nuwavetech.demo.acme-card-api
+
+#output
+#output Installing the ACME Card LightWave Server services ...
+#output
+
+run [:isv].lwscom ; filesystem [:isv] ; &
+  import dictionary [:dictname] !, file acmedict
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output Dicionary installation failed.
+  #return
+]
+
+run [:isv].lwscom ; filesystem [:isv] ; &
+  import api [:apiname] !, file acmeapi
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output API installation failed.
+  #return
+]
+
+run [:isv].lwscom / outv tmp / ; filesystem [:isv] ; allow 1 errors ; &
+  delete service [:svcname]
+run [:isv].lwscom ; filesystem [:isv] ; &
+  add service [:svcname],  name [:svcname], &
+  description "ACME Card Service", &
+  version 1, &
+  api [:apiname], &
+  acp allow-anonymous-access, &
+  enabled
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output Service createing failed.
+  #return
+]
+
+#output LightWave Server service installation completed.
+#output
+
+#output Dictionary:
+run [:isv].lwscom ; filesystem [:isv] ; info dictionary [:dictname], detail
+
+#output
+#output API:
+run [:isv].lwscom ; filesystem [:isv] ; info api [:apiname], detail
+
+#output
+#output Service:
+run [:isv].lwscom ; filesystem [:isv] ; info service [:svcname], detail
+#output
+#output
+
+#output
+#output Installing the ACME Card LightWave Client API definitions ...
+#output
+
+#set :isv [#param lwc-isv]
+
+run [:isv].lwccom ; filesystem [:isv] ; &
+  import api * !, file sgapi
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output API installation failed.
+  #return
+]
+
+run [:isv].lwccom ; filesystem [:isv] ; &
+  import api * !, file twapi
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output API installation failed.
+  #return
+]
+
+#unframe

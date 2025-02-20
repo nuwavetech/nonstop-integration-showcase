@@ -1,0 +1,23 @@
+?tacl macro
+#frame
+
+[#push
+pathctlFile
+]
+
+#set pathctlFile      [#param pathctl-file]
+
+== Shut down the existing pathmon.
+#set pathctlFile zzpwpctl
+[#if [#fileinfo /existence/ [pathctlFile]] = -1 |then|
+  #push rc p
+  [#setmany rc _ p, [#openinfo/processid/ [pathctlFile] 0]]
+  [#if [rc] = 0 |then|
+    #output Shutting down pathmon [p] ...
+    pathcom [p];shutdown2
+    #delay 300
+  ]
+]
+
+
+#unframe
