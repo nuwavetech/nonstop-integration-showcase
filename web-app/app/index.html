@@ -6,33 +6,47 @@
     <meta name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>ACME Card Manager - Simulation</title>
+    <title>HPE NonStop Integration Showcase - Powered by LightWave</title>
     <!-- Bootstrap core and plugins CSS -->
     <link rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
       crossorigin="anonymous" />
     <link rel="stylesheet"
-      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css"
-      href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+      href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <!-- Custom styles  -->
-    <link href="app.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
   </head>
 
   <body>
-    <!-- start of nav menu -->
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">ACME Card
-        Manager</a>
-    </nav>
+    <!-- New branded header with white background -->
+    <header class="fixed-top header-container">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-2 d-flex align-items-center">
+            <a href="/">
+              <img src="img/logo.png" alt="NuWave" class="nuwave-logo">
+            </a>
+          </div>
+          <div class="col-md-9 title-container">
+            <h1 class="showcase-title">HPE NonStop Integration Showcase</h1>
+            <p class="powered-by">Powered by the LightWave Solutions from <a
+                href="https://www.nuwavetech.com">NuWave Technologies</a></p>
+          </div>
+        </div>
+      </div>
+    </header>
     <div id="sidebar" class="container-fluid">
       <div class="row">
+        <!-- Sidebar navigation -->
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
+            <!-- Card Manager Demo section -->
             <h6
               class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Account Management</span>
+              <span>PAYMENT CARD SIMULATION</span>
             </h6>
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -43,13 +57,9 @@
                 <a id="cards-link" class="nav-link" href="#/cards">
                   <span data-feather="credit-card"></span>Cards</a>
               </li>
-              <h6
-                class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>Payments</span>
-              </h6>
               <li class="nav-item">
                 <a id="payment-link" class="nav-link" href="#/payment">
-                  <span data-feather="dollar-sign"></span>Terminal</a>
+                  <span data-feather="dollar-sign"></span>Payments</a>
               </li>
               <li class="nav-item">
                 <a id="transactions-link" class="nav-link"
@@ -57,28 +67,36 @@
                   <span data-feather="users"></span>Transactions</a>
               </li>
             </ul>
+            <!-- Showcase Tools section -->
             <h6
               class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Simulation</span>
+              <span>SHOWCASE TOOLS</span>
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
                 <a id="requestlog-link" class="nav-link" href="./#/requestlog">
-                  <span data-feather="file-text"></span>API Request Log</a>
+                  <span data-feather="file-text"></span>REST API Log</a>
               </li>
               <li class="nav-item">
                 <a id="settings-link" class="nav-link" href="#/settings">
                   <span data-feather="settings"></span>Settings</a>
               </li>
+            </ul>
+            <!-- Learn More section -->
+            <h6
+              class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>LEARN MORE</span>
+            </h6>
+            <ul class="nav flex-column mb-2">
               <li class="nav-item">
                 <a id="about-link" class="nav-link" href="#/about">
-                  <span data-feather="info"></span>About</a>
+                  <span data-feather="info"></span>About the Showcase</a>
               </li>
             </ul>
           </div>
         </nav>
-        <!-- end of nav menu -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <!-- Main content area -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 main-content">
           <!-- start of accounts view -->
           <div class="view" id="accounts-view">
             <div
@@ -133,37 +151,37 @@
                   <div class="col-md-6 mb-3">
                     <label for="firstName">First Name</label>
                     <input type="text" class="form-control" id="firstName"
-                      maxLength="32" required>
+                      maxlength="32" required>
                   </div>
                   <div class="col-md-6 mb-3">
                     <label for="lastName">Last Name</label>
                     <input type="text" class="form-control" id="lastName"
-                      maxLength="32" required>
+                      maxlength="32" required>
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="address1">Address</label>
                   <input type="text" class="form-control" id="address1"
-                    maxLength="80" required>
+                    maxlength="80" required>
                 </div>
                 <div class="mb-3">
                   <input type="text" class="form-control" id="address2"
-                    maxLength="80">
+                    maxlength="80">
                 </div>
                 <div class="row">
                   <div class="col-md-5 mb-3">
                     <label for="city">City</label>
                     <input type="text" class="form-control" id="city"
-                      maxLength="32" required>
+                      maxlength="32" required>
                   </div>
                   <div class="col-md-2 mb-3">
                     <label for="state">State</label>
                     <input type="text" class="form-control" id="state"
-                      maxLength="32" required>
+                      maxlength="32" required>
                   </div>
                   <div class="col-md-3 mb-3">
                     <label for="postalCode">Zip</label>
-                    <input type="text" class="form-control" maxLength="16"
+                    <input type="text" class="form-control" maxlength="16"
                       id="postalCode" required>
                   </div>
                 </div>
@@ -171,12 +189,12 @@
                   <div class="col-md-5 mb-3">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email"
-                      maxLength="32" required>
+                      maxlength="32" required>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="phone">Phone Number</label>
                     <input type="tel" class="form-control" id="phone"
-                      maxLength="20" required>
+                      maxlength="20" required>
                   </div>
                 </div>
                 <div class="mt-2 mb-2" role="group">
@@ -274,7 +292,7 @@
                   <div class="col-md-6 mb-3">
                     <label for="nameOnCard">Name on Card</label>
                     <input type="text" class="form-control" id="nameOnCard"
-                      maxLength="64" required>
+                      maxlength="64" required>
                   </div>
                 </div>
                 <div class="row">
@@ -325,12 +343,12 @@
                   <div class="col-md-2 mb-3">
                     <label for="spendingLimit">Spending Limit</label>
                     <input type="text" class="form-control" id="spendingLimit"
-                      maxLength="18" required>
+                      maxlength="18" required>
                   </div>
                   <div class="col-md-2 mb-3">
                     <label for="alertLimit">Alert Limit</label>
                     <input type="text" class="form-control" id="alertLimit"
-                      maxLength="18" required>
+                      maxlength="18" required>
                   </div>
                   <div class="col-md-2 mb-3" id="form-balance">
                     <label for="balance">Balance</label>
@@ -375,26 +393,26 @@
                   <div class="col-md-2 mb-3">
                     <label for="amount">Amount</label>
                     <input type="text" class="form-control" id="amount"
-                      maxLength="18" required>
+                      maxlength="18" required>
                   </div>
                   <div class="col-md-4 mb-3">
                     <label for="merchantName">Merchant Name</label>
                     <input type="text" class="form-control" id="merchantName"
-                      maxLength="20" required>
+                      maxlength="20" required>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6 mb-3 ui-widget">
                     <label for="cardNumber">Credit card number</label>
                     <input type="text" class="form-control" id="cardNumber"
-                      maxLength="16" required>
+                      maxlength="16" required>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="nameOnCard">Name on card</label>
                     <input type="text" class="form-control" id="nameOnCard"
-                      maxLength="64" required>
+                      maxlength="64" required>
                   </div>
                 </div>
                 <div class="row">
@@ -431,7 +449,7 @@
                   <div class="col-md-2 mb-3">
                     <label for="securityCode">Security Code</label>
                     <input type="text" class="form-control" id="securityCode"
-                      maxLength="4" required>
+                      maxlength="4" required>
                   </div>
                 </div>
                 <div class="mt-4 mb-2" role="group">
@@ -600,7 +618,7 @@
                   <div class="col-md-8 mb-3">
                     <label for="amount">LightWave Server Host Address</label>
                     <input type="text" class="form-control" id="host"
-                      maxLength="256" required>
+                      maxlength="256" required>
                   </div>
                 </div>
                 <div class="mt-4 mb-2" role="group">
@@ -618,49 +636,63 @@
           <div class="view" id="about-view">
             <div
               class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-              <span class="h3">About ACME Card Manager</span>
+              <span class="h3">About the Integration Showcase</span>
               <div class="btn-toolbar mb-2 mb-md-0">
               </div>
             </div>
             <div>
-              <p> ACME Card Manager simulates how a traditional NonStop payment
-                application (such as BASE24 or Connex) might be REST-enabled
-                using LightWave Server. Typical account and card functions are
-                supported from the relevant menu items. Transactions can be
-                initiated from the <em>Terminal</em> view with the results
-                viewed on the <em>Transactions</em> view. A small range of
-                relevant response codes are simulated, and the result of the
-                transaction (success or failure) can be seen in real-time in the
-                <em>Terminal</em> view, and historically in the
-                <em>Transactions</em> view. </p>
-              <p> All of these services are provided as REST APIs by LightWave
-                Server working in conjunction with simple demo Pathway Servers
-                on the NonStop. The details of all data exchanged with the REST
-                services can be viewed in the <em>API Request Log</em> view -
-                this shows all requests sent to the NonStop, and all responses
-                returned.</p>
-              <p> When enabled, the application Pathway servers use LightWave
-                Client to send SMS and email notifications to simulated cardholders using the <a
-                  href="https://www.twilio.com">Twilio SMS</a> and <a
-                  href="https://sendgrid.com/">SendGrid Email</a> REST APIs. Notifications are
-                sent for
-                sale and void transactions, and card lock status changes. </p>
-              <p> LightWave Server&trade; allows HPE NonStop users to expose
-                their existing Guardian or Pathway servers as industry-standard
-                REST services. </p>
-              <p>LightWave Client&trade; allows applications running on HPE
-                NonStop servers to securely access public or private REST APIs.
+              <p>The HPE NonStop Integration Showcase demonstrates the powerful integration
+                capabilities of NuWave's <b>LightWave</b> integration solutions for HPE
+                NonStop systems. Using a payment card manager simulation as a demonstration
+                vehicle, this showcase highlights how <b>LightWave Server™</b> and
+                <b>LightWave Client™</b> enable seamless REST API integration with both HPE
+                NonStop and external services.
               </p>
-              <p> For information on LightWave products, visit the <a
+              <p>The showcase illustrates how <b>LightWave Server™</b> can REST-enable
+                traditional HPE NonStop applications and services. Through the Payment Card
+                Simulation interface, you can explore various integration points where
+                LightWave products facilitate communication between modern web applications
+                and HPE NonStop server processes.</p>
+              <p>Key integration features demonstrated include:</p>
+              <ul>
+                <li>REST-enabling traditional NonStop pathway servers</li>
+                <li>Real-time bidirectional data exchange between web clients and HPE NonStop
+                </li>
+                <li>External API integration with third-party services</li>
+                <li>Secure authentication and transaction processing</li>
+              </ul>
+              <p>The Payment Card Simulation provides a practical context for these
+                integration capabilities. Through the <em>Payments</em> view, you can initiate
+                simulated payments transactions and see real-time results, while the
+                <em>Transactions</em> view provides a historical record. The <em>API Request
+                  Log</em> view reveals the underlying REST communication, displaying all
+                requests to and responses from the HPE NonStop.</p>
+              <p>The showcase demonstrates external API integration by using
+                <b>LightWave Client™</b> to communicate with public and private cloud
+                services:</p>
+              <ul>
+                <li>Payment transaction SMS alerts delivered via the <a
+                    href="https://www.twilio.com">Twilio SMS</a> REST API</li>
+                <li>Payment notification emails delivered via the <a
+                    href="https://sendgrid.com/">SendGrid Email</a> REST API</li>
+                    <li>Payment transaction details are streamed to a Kafka instance via the
+                      LightWave Client Kafka Connector</li>
+              </ul>
+              <img class="nsis-diagram" alt="Showcase Diagram" src="./img/nsis_diagram.png" />
+              <p><strong>LightWave Server™</strong> enables HPE NonStop users to expose their
+                existing Guardian or Pathway servers as industry-standard REST services,
+                bridging legacy systems with modern API standards.</p>
+              <p><strong>LightWave Client™</strong> allows applications running on HPE NonStop
+                servers to securely access public or private REST APIs, enabling integration
+                with cloud services and modern technology ecosystems.</p>
+              <p>For detailed information on LightWave products, visit the <a
                   href="https://docs.nuwavetech.com">NuWave Technologies
-                  Documentation Center</a>
-              </p>
-              <p>
-                Full source code for this application <a href="https://github.com/nuwavetech/acme-card-manager">is available on Github.</a>
-              </p>
-              <p><em>This application is a simulation. Card and account numbers
-                  are ficticious and no actual payment transactions occur.</em>
-              </p>
+                  Documentation Center</a>.</p>
+                  <p>Full source code for the Integration Showcase<a
+                      href="https://github.com/nuwavetech/nonstop-integration-showcase">is
+                      available on Github.</a></p>
+                  <p><em>This showcase is a simulation. All data is fictitious
+                      and no actual payment transactions occur.</em></p>
             </div>
           </div>
           <!-- end of about -->
@@ -743,29 +775,51 @@
           <div id="alert">
           </div>
           <!-- end of alert container -->
-        </main>
-      </div>
-    </div>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS, Data Feather icons, plugins, then app. -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          <div class="footer">
+            <div>
+              <div>&copy; 2025 NuWave Technologies. All rights reserved.</div>
+              <div>Third party products or services referenced herein may be trademarks or
+                registered trademarks of their respective companies.</div>
+            </div>
+          </div>
+          </main>
+          </div>
+          </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS, Data Feather
+                                                                                      icons, plugins, then app modules -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-      integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+      integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
       crossorigin="anonymous"></script>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
       crossorigin="anonymous"></script>
     <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+      integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
       crossorigin="anonymous"></script>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+      src="https://cdn.jsdelivr.net/npm/feather-icons@4.29.1/dist/feather.min.js"></script>
     <script type="text/javascript" charset="utf8"
-      src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-    <script src="app.js"></script>
+      src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <!-- Application modules -->
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/views/accounts.js"></script>
+    <script src="js/views/account.js"></script>
+    <script src="js/views/cards.js"></script>
+    <script src="js/views/card.js"></script>
+    <script src="js/views/payment.js"></script>
+    <script src="js/views/transaction.js"></script>
+    <script src="js/views/transactions.js"></script>
+    <script src="js/views/requestlog.js"></script>
+    <script src="js/views/settings.js"></script>
+    <script src="js/views/about.js"></script>
+    <script src="js/app.js"></script>
   </body>
 
 </html>

@@ -17,11 +17,11 @@
 == Enter SendGrid account info here:
 #set #param enable-email                0
 #set #param sg-base-url                 https://api.sendgrid.com/v3
-#set #param sg-from-email               ACME.Card.noreply@yourdomain.com
-#set #param sg-from-name                "ACME Card Demo"
+#set #param sg-from-email               NSIS.paysim.noreply@yourdomain.com
+#set #param sg-from-name                "NSIS Payments Simulation"
 #set #param sg-transaction-template-id  d-<your-transaction-template-id>
 #set #param sg-card-status-template-id  d-<your-card-status-template-id>
 
-delete define =acme?pathmon
-add define =acme-pathmon, class map, file [#param pathmon-name]
+delete define =nsis?pathmon
+add define =nsis-pathmon, class map, file [#param pathmon-name]
 

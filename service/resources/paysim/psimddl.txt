@@ -1,5 +1,5 @@
 !
-! ACME Card Demo DDL.
+! NSIS Payment Card Simulation DDL.
 !
 ! Copyright (c) 2019 NuWave Technologies, Inc. All rights reserved.
 

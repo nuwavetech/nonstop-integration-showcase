@@ -1,0 +1,431 @@
+{
+  "name": "com.nuwavetech.demo.nsis-kafka-producer-api",
+  "description": "Kafka Producer API for NSIS Payment Card Simulation.",
+  "version": 1,
+  "modificationTime": 1740517289,
+  "isBrief": false,
+  "operations": [
+    {
+      "path": "/clusters/{cluster_id}/topics/{topic_name}/records",
+      "methods": [
+        {
+          "api": {
+            "stringPadding": "zeros"
+          },
+          "request": {
+            "mappings": [
+              {
+                "source": {
+                  "type": "parameter",
+                  "data": "cluster-id"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{cluster_id}"
+                }
+              },
+              {
+                "source": {
+                  "type": "parameter",
+                  "data": "topic-name"
+                },
+                "target": {
+                  "type": "path",
+                  "value": "{topic_name}"
+                }
+              },
+              {
+                "source": {
+                  "type": "ipm",
+                  "data": "32000"
+                },
+                "target": {
+                  "type": "body",
+                  "value": "$BLOB"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "acceptTypes": [
+              "*/*"
+            ],
+            "contentTypeIsCustom": false
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "ProduceResponse"
+                  }
+                }
+              ],
+              "httpStatus": "200",
+              "description": "The response containing a delivery report for a record produced to a topic. In streaming mode,for each record sent, a separate delivery report will be returned, in the same order,each with its own error_code."
+            },
+            {
+              "description": "Indicates a bad request error. It could be caused by an unexpected request body format or other forms of request validation failure.",
+              "httpStatus": "400",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "RESTPROXYErrorResponse"
+                  }
+                }
+              ]
+            },
+            {
+              "httpStatus": "401",
+              "description": "Indicates a client authentication error. Kafka authentication failures will contain error code 40101 in the response body.",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "RESTPROXYErrorResponse"
+                  }
+                }
+              ]
+            },
+            {
+              "description": "This implies the client is sending the request payload format in an unsupported format.",
+              "httpStatus": "415",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "RESTPROXYErrorResponse"
+                  }
+                }
+              ]
+            },
+            {
+              "httpStatus": "422",
+              "description": "Indicates a bad request error. It could be caused by an unexpected request body format or other forms of request validation failure.",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "RESTPROXYErrorResponse"
+                  }
+                }
+              ]
+            },
+            {
+              "httpStatus": "500",
+              "mappings": [
+                {
+                  "target": {
+                    "type": "ipm"
+                  },
+                  "source": {
+                    "type": "body",
+                    "value": "RESTPROXYErrorResponse"
+                  }
+                }
+              ],
+              "description": "A server-side problem that might not be addressable from the client side. Retriable Kafka errors will contain error code 50003 in the response body."
+            }
+          ],
+          "verb": "POST",
+          "alias": "produceRecord",
+          "description": "Produce Records",
+          "id": 1
+        }
+      ]
+    }
+  ],
+  "types": {
+    "type": {
+      "ValueType-02": {
+        "anonymous": true,
+        "elements": [
+          {
+            "name": "type",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "size",
+            "type": "int"
+          }
+        ]
+      },
+      "ProduceResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "error_code",
+            "type": "int"
+          },
+          {
+            "name": "cluster_id",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "topic_name",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "partition_id",
+            "type": "int"
+          },
+          {
+            "name": "offset",
+            "type": "int"
+          },
+          {
+            "name": "timestamp",
+            "type": "timestamp",
+            "size": 8,
+            "timestampFormat": "ISO8601"
+          },
+          {
+            "name": "value",
+            "type": "ValueType-02"
+          }
+        ]
+      },
+      "RESTPROXYErrorResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "error_code",
+            "type": "int"
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "size": 248
+          }
+        ]
+      }
+    }
+  },
+  "id": "03abf7f56011061d818001010000012ef1",
+  "generatedTypes": {
+    "WARNING": "These types are generated by LightWave Client and should not be manually edited.",
+    "type": {
+      "LightWaveRqHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rqCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "rqVersion",
+            "type": "unsignedShort",
+            "size": 2
+          },
+          {
+            "name": "rqTimeout",
+            "type": "unsignedInt",
+            "size": 4
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveRpHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rpCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "httpStatus",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoDetail",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveErrorRp": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "errorSource",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorCode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorSubcode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorMessage",
+            "type": "string",
+            "size": 4096
+          }
+        ]
+      },
+      "ProduceRecordRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "produceRecord",
+        "description": "Produce Records",
+        "operation": "POST /clusters/{cluster_id}/topics/{topic_name}/records",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "BLOB-SIZE",
+            "type": "unsignedInt"
+          },
+          {
+            "name": "BLOB",
+            "type": "string",
+            "size": 32000,
+            "sizeIs": "BLOB-SIZE",
+            "isBLOB": true
+          }
+        ]
+      },
+      "ProduceRecord200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ProduceResponse",
+            "type": "ProduceResponse"
+          }
+        ]
+      },
+      "ProduceRecord400Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "RESTPROXYErrorResponse",
+            "type": "RESTPROXYErrorResponse"
+          }
+        ]
+      },
+      "ProduceRecord401Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "RESTPROXYErrorResponse",
+            "type": "RESTPROXYErrorResponse"
+          }
+        ]
+      },
+      "ProduceRecord415Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "RESTPROXYErrorResponse",
+            "type": "RESTPROXYErrorResponse"
+          }
+        ]
+      },
+      "ProduceRecord422Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "RESTPROXYErrorResponse",
+            "type": "RESTPROXYErrorResponse"
+          }
+        ]
+      },
+      "ProduceRecord500Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "RESTPROXYErrorResponse",
+            "type": "RESTPROXYErrorResponse"
+          }
+        ]
+      }
+    }
+  }
+}

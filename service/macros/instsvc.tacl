@@ -1,7 +1,7 @@
 ?tacl routine
 #frame
 
-== Installs the ACME Card Dictionary, API, and Service.
+== Installs the psim Card Dictionary, API, and Service.
 
 [#push
 :apiname
@@ -12,23 +12,23 @@
 ]
 
 #set :isv [#param lws-isv]
-#set :svcname com.nuwavetech.demo.acme-card-service
-#set :dictname com.nuwavetech.demo.acme-card-dictionary
-#set :apiname com.nuwavetech.demo.acme-card-api
+#set :svcname com.nuwavetech.demo.nsis-paysime-service
+#set :dictname com.nuwavetech.demo.nsis-paysim-dictionary
+#set :apiname com.nuwavetech.demo.nsis-paysim-api
 
 #output
-#output Installing the ACME Card LightWave Server services ...
+#output Installing the Payment Simulation LightWave Server services ...
 #output
 
 run [:isv].lwscom ; filesystem [:isv] ; &
-  import dictionary [:dictname] !, file acmedict
+  import dictionary [:dictname] !, file psimdict
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output Dicionary installation failed.
   #return
 ]
 
 run [:isv].lwscom ; filesystem [:isv] ; &
-  import api [:apiname] !, file acmeapi
+  import api [:apiname] !, file psimapi
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output API installation failed.
   #return
@@ -38,7 +38,7 @@ run [:isv].lwscom / outv tmp / ; filesystem [:isv] ; allow 1 errors ; &
   delete service [:svcname]
 run [:isv].lwscom ; filesystem [:isv] ; &
   add service [:svcname],  name [:svcname], &
-  description "ACME Card Service", &
+  description "psim Card Service", &
   version 1, &
   api [:apiname], &
   acp allow-anonymous-access, &
@@ -65,7 +65,7 @@ run [:isv].lwscom ; filesystem [:isv] ; info service [:svcname], detail
 #output
 
 #output
-#output Installing the ACME Card LightWave Client API definitions ...
+#output Installing the psim Card LightWave Client API definitions ...
 #output
 
 #set :isv [#param lwc-isv]
@@ -82,6 +82,15 @@ run [:isv].lwccom ; filesystem [:isv] ; &
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output API installation failed.
   #return
+]
+
+[#if [#param enable-kafka-producer] <> 0 |then|
+  run [:isv].lwccom ; filesystem [:isv] ; &
+    import api * !, file kfkpapi
+  [#if [ :_completion:completioncode ] <> 0 |then|
+    #output API installation failed.
+    #return
+  ]
 ]
 
 #unframe

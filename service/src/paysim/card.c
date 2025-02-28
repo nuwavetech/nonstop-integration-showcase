@@ -14,7 +14,7 @@
 #include <tal.h>
 #include <zsysc>
 
-#include "acme.h"
+#include "nsis.h"
 
 #pragma list
 
@@ -311,7 +311,8 @@ static void update_card(void* request) {
 
     /* Build and send the alert message. */
     snprintf(alert_rq.alert_message, sizeof(alert_rq.alert_message),
-             "Your ACME Card account %-.4s has been %s.", &card.card_number[12],
+             "Your NSIS Payment Card Simulation account %-.4s has been %s.",
+             &card.card_number[12],
              (card.card_detail.is_locked ? "locked" : "unlocked"));
     strcpy(alert_rq.name_on_card, card.card_detail.name_on_card);
     strcpy(alert_rq.transaction_id, "");

@@ -17,7 +17,7 @@
 #set #param sg-transaction-template-id
 #set #param sg-card-status-template-id
 
-delete define =acme?pathmon
+delete define =nsis?pathmon
 
 
 

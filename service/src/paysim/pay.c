@@ -15,7 +15,9 @@
 #include <tal.h>
 #include <zsysc>
 
-#include "acme.h"
+#include "nsis.h"
+#include "lw.h"
+#include "kfkp.h"
 
 #pragma list
 
@@ -24,6 +26,7 @@ static short transaction_filenum;
 static short card_filenum;
 static char pathmon_name[32];
 static char* acct_serverclass = "ACCT-SERVER";
+static char* kfk_producer_serverclass = "KFK-PRODUCERSVR";
 
 /* Static function prototypes. */
 static int activate_transaction(const char* type);
@@ -192,7 +195,6 @@ static void create_payment(void* request) {
    * If successful and the alert limit is met, then send an alert. Note that the
    * alert is not part of the transaction and we don't care if it fails.
    */
-
   if (reply_code == RP_CODE_SUCCESS &&
       rq->payment_detail.amount >= card.card_detail.alert_limit) {
     alert_account_rq_def alert_rq;
@@ -204,13 +206,14 @@ static void create_payment(void* request) {
            sizeof(alert_rq.account_number));
 
     /* Build and send the alert message. */
-    snprintf(alert_rq.alert_message, sizeof(alert_rq.alert_message),
-             "ACME Card account %-.4s:  A purchase in the amount of $%s at "
-             "%-.*s has been charged to your account.",
-             &card.card_number[12],
-             format_numeric(transaction.payment_detail.amount, 2),
-             sizeof(transaction.payment_detail.merchant_name),
-             transaction.payment_detail.merchant_name);
+    snprintf(
+        alert_rq.alert_message, sizeof(alert_rq.alert_message),
+        "NSIS Payment Card Simulation account %-.4s:  A purchase in the amount of $%s at "
+        "%-.*s has been charged to your account.",
+        &card.card_number[12],
+        format_numeric(transaction.payment_detail.amount, 2),
+        sizeof(transaction.payment_detail.merchant_name),
+        transaction.payment_detail.merchant_name);
     memcpy(alert_rq.card_number, card.card_number,
            sizeof(alert_rq.card_number));
 
@@ -229,6 +232,54 @@ static void create_payment(void* request) {
                        (char*)&alert_rq, (char*)&alert_rp, sizeof(alert_rq),
                        sizeof(alert_rp));
   }
+
+/* If successful, and Kafka is enabled, send the payment event to Kafka. */
+#ifdef ENABLE_KAFKA_PRODUCER
+  if (reply_code == RP_CODE_SUCCESS) {
+    produce_record_rq_def kfk_rq;
+    produce_record_200_rp_def kfk_rp;
+
+    memset(&kfk_rq, 0, sizeof(kfk_rq));
+    kfk_rq.lightwave_rq_header.rq_code = rq_produce_record;
+
+    snprintf(kfk_rq.blob, sizeof(kfk_rq.blob),
+             "{\n"
+             "  \"key\": {\n"
+             "    \"data\": \"%.*s\",\n"
+             "    \"type\": \"JSON\"\n"
+             "  },\n"
+             "  \"value\": {\n"
+             "    \"data\": {\n"
+             "      \"amount\":  %d,\n"
+             "      \"cc_number\": \"%.*s\",\n"
+             "      \"merchant_name\": \"%.*s\",\n"
+             "      \"name_on_card\": \"%.*s\",\n"
+             "      \"security_code\":  \"%.*s\"\n"
+             "    },\n"
+             "    \"type\": \"JSON\"\n"
+             "  },\n"
+             "  \"headers\": []\n"
+             "}",
+             (int)sizeof(rp.transaction.transaction_id),
+             rp.transaction.transaction_id,
+             rp.transaction.payment_detail.amount,
+             (int)sizeof(card.card_number), card.card_number,
+             (int)sizeof(rp.transaction.payment_detail.merchant_name),
+             rp.transaction.payment_detail.merchant_name,
+             (int)sizeof(card.card_detail.name_on_card),
+             card.card_detail.name_on_card,
+             (int)sizeof(card.card_detail.security_code),
+             card.card_detail.security_code);
+
+    kfk_rq.blob_size = strlen(kfk_rq.blob);
+
+    rc = SERVERCLASS_SENDL_((char*)pathmon_name, (short)strlen(pathmon_name),
+                            (char*)kfk_producer_serverclass,
+                            (short)strlen(kfk_producer_serverclass),
+                            (char*)&kfk_rq, (char*)&kfk_rp, sizeof(kfk_rq),
+                            sizeof(kfk_rp));
+  }
+#endif
 }
 
 static const char* create_transaction_id(void) {
@@ -539,13 +590,14 @@ static void void_payment(void* request) {
            sizeof(alert_rq.account_number));
 
     /* Build and send the alert message. */
-    snprintf(alert_rq.alert_message, sizeof(alert_rq.alert_message),
-             "ACME Card account %-.4s:  A refund in the amount of $%s from "
-             "%-.*s has been credited to your account.",
-             &card.card_number[12],
-             format_numeric(paymentTransaction.payment_detail.amount, 2),
-             sizeof(paymentTransaction.payment_detail.merchant_name),
-             paymentTransaction.payment_detail.merchant_name);
+    snprintf(
+        alert_rq.alert_message, sizeof(alert_rq.alert_message),
+        "NSIS Payment Card Simulation account %-.4s:  A refund in the amount of $%s from "
+        "%-.*s has been credited to your account.",
+        &card.card_number[12],
+        format_numeric(paymentTransaction.payment_detail.amount, 2),
+        sizeof(paymentTransaction.payment_detail.merchant_name),
+        paymentTransaction.payment_detail.merchant_name);
 
     memcpy(alert_rq.card_number, card.card_number,
            sizeof(alert_rq.card_number));

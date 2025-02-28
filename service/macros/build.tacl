@@ -4,15 +4,22 @@
 [#push
 ddlin
 basename
+comp^opts
 ]
 
+[#if [#param enable-kafka-producer] <> 0 |then|
+  #append comp^opts define ENABLE_KAFKA_PRODUCER,
+]
+
+[#if ]
 [#def :buildserv text |body|
   #output Building [basename]SERV ...
+  status *, prog [#defaults/current/].[basename]serv, stop, forced
   sink [#purge [basename]l]
   sink [#purge [basename]serv]
 
   ccomp / in [basename]c, out [basename]l / [basename]serv ; &
-    runnable, symbols, inspect, extensions, &
+    runnable, symbols, inspect, extensions, [comp^opts] &
     ssv0 "[#defaults/current/]", ssv1 "$system.system", &
     ssv2 "$system.zsysdefs", xld(-set runnamed on -set saveabend on)
 
@@ -66,9 +73,15 @@ basename
 ??noc
 ??nocobol
 
-??c acmeh !
-??cobol acmecpy !
-??source acmeddl
+??c psimh !
+??cobol psimcpy !
+??source psimddl
+??noc
+??nocobol
+
+??c kfkph !
+??cobol kfkpcpy !
+??source kfkpddl ( API-DEF )
 ??noc
 ??nocobol
 ]

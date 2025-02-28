@@ -1,6 +1,6 @@
 {
-  "name": "twilio-messaging-sendSMS",
-  "description": "Send messages to customers across preferred channels like SMS, MMS, and WhatsApp with one API.",
+  "name": "com.nuwavetech.demo.nsis-twilio-messaging-sms-api",
+  "description": "Twilio SMS API for NSIS Payment Card Simulation.",
   "version": 1,
   "id": "033b6de0aac3241d808001010000012ef1",
   "modificationTime": 1725038400,

@@ -1,0 +1,7 @@
+#
+# Enter your Kafka REST proxy credentials
+#
+[auth]
+method=auth-token
+Header=Authorization
+Token=Basic ZGVtbzpZb3VTaGFsbFBhc3M=

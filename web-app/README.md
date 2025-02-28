@@ -1,5 +1,5 @@
-# LightWave ACME Card Manager Web Application
-The ACME Card Manager Web Application is a Single Page Application (SPA) that implements the User Interface for the ACME Card Service. The entire application is implemented in a handful of HTML, Javascript, CSS, and image files. The files can be deployed to any HTTP server capable of hosting static content.
+# LightWave NSIS Payment Card Simulation Web Application
+The NSIS Payment Card Simulation Web Application is a Single Page Application (SPA) that implements the User Interface for the Payment Card Simulation. The entire application is implemented in a handful of HTML, Javascript, CSS, and image files. The files can be deployed to any HTTP server capable of hosting static content.
 
 The application must be accessed from an HTTP server. <em>It will not work by simply opening the files in a browser from the desktop filesystem.</em> There are a number of solutions available that will allow you to deploy the application to a web server, for example:
 + Deploy to a local copy of [Apache](https://httpd.apache.org/) or [Nginx](https://www.nginx.com/) server.
@@ -17,6 +17,6 @@ The LightWave Server service port must be configured. Edit the settings.json fil
   "baseUrl": "http://your-host:your-service-port"
 }
 ```
-Note that the port specified should be the service port on which the ACME Service is deployed, not the the Server Console port. After configuring the port, you may need to refresh your browser in order for the change to take effect.
+Note that the port specified should be the service port on which the Payment Card Simulation service is deployed, not the the Server Console port. After configuring the port, you may need to refresh your browser in order for the change to take effect.
 
 

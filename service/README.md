@@ -1,24 +1,24 @@
-# LightWave ACME Card Manager Service
+# Payment Card Simulation Application
 
 ### Prerequisites
 
 + NonStop C Compiler.
-+ An installed instance of [LightWave Server](https://docs.nuwavetech.com/lightwave-server) version 1.1.7 or greater.
++ An installed instance of [LightWave Server](https://docs.nuwavetech.com/lightwave-server) version 1.1.8 or greater.
 
 #### To enable SMS Notifications
 The [Twilio SMS API](https://www.twilio.com/en-us/messaging/channels/sms) is used to send SMS notifications. SMS notifications require:
-+ An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.7 or greater.
++ An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.8 or greater.
 + A Twilio account enabled for the SMS API. It's possible to use a trial account and send SMS messages.
 
 #### To enable email Notifications
 Twilio [Twilio SendGrid email API](https://sendgrid.com/en-us/solutions/email-api) is used to send email notifications. Email notifications require:
-+ An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.7 or greater.
++ An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.8 or greater.
 + A Twilio SendGrid account enabled for the email API. It's possible to use a trial account and send email notifications.
 
 ### Configuration
 The following values must be configured in the SETENV TACL macro after installation of the sample:
 
-+ pathmon-name - The process name of the Pathmon. The default is $ACME.
++ pathmon-name - The process name of the Pathmon. The default is $NSIS.
 + lws-isv - The installation subvolume of an installed and running LightWave Server instance. The default is the current subvolume.
 + lwc-isv - The installation subvolume of an installed LightWave Client instance. Required only if SMS notification is enabled. Note that the CONSOLE process does not need to be running. The default is the current subvolume.
 
@@ -33,7 +33,7 @@ The following values must be configured in the SETENV TACL macro after installat
 + sg-transaction-template-id - The SendGrid email template ID for payment notifications.
 + sg-card-status-template-id - The SendGrid email template ID for card status notifications.
 
-The LightWave Server API is configured to use the value of the =ACME-PATHMON DEFINE as the Pathmon process name. This DEFINE is set by the SETENV macro. The LightWave Server instance must be restarted with this DEFINE set in order to for the DEFINE to recognized.
+The LightWave Server API is configured to use the value of the =NSIS-PATHMON DEFINE as the Pathmon process name. This DEFINE is set by the SETENV macro. The LightWave Server instance must be restarted with this DEFINE set in order to for the DEFINE to recognized.
 
 ### SMS Configuration
 If using SMS notifications, the SETENV file must be updated with your Twilio SMS account information, and the TWAUTH file must be updated with the SMS API credentials. These credentials are supplied as the Twilio \<Account SID\>:\<Auth Token\> encoded as a base64 string. For more information see the [TWAUTH](./resources/twauth.txt) template file and [Request Authentication and Signing](https://docs.nuwavetech.com/lightwave-client/1.2.7/request-authentication-and-signing#id-(1.2.7_r4)RequestAuthenticationandSigning-GenericAuthorizationHeaderwithToken) in the LightWave Client documentation.
@@ -59,9 +59,9 @@ In addition, a PAK archive containing all of the source files is available for t
 | macros/stoppw.tacl | stoppw |
 | macros/unpakdat.tacl | unpakdat |
 | macros/unsetenv.tacl | unsetenv |
-| resources/acmeapi.txt | acmeapi |
-| resources/acmeddl.txt | acmeddl |
-| resources/acmedict.txt | acmedict |
+| resources/nsisapi.txt | nsisapi |
+| resources/nsisddl.txt | nsisddl |
+| resources/nsisdict.txt | nsisdict |
 | resources/datapak.bin | datapak |
 | resources/logcfg.txt | logcfg |
 | resources/sgapi.json | sgapi |
@@ -73,7 +73,7 @@ In addition, a PAK archive containing all of the source files is available for t
 | resources/twauth.txt | twauth |
 | resources/twddl.txt | twddl |
 | src/acct.c | acctc |
-| src/acme.h | acmeh |
+| src/nsis.h | nsish |
 | src/card.c | cardc |
 | src/lw.h | lwh |
 | src/pay.c | payc |
@@ -82,18 +82,18 @@ In addition, a PAK archive containing all of the source files is available for t
 
 #### Transfer the PAK archive to your NonStop System
 
-Download `acmepak.bin` from this repository to your local system, then upload to your NonStop server using binary transfer mode.
+Download `nsispak.bin` from this repository to your local system, then upload to your NonStop server using binary transfer mode.
 
-Note: to download the PAK file, click `acmepak.bin` in the file list to display the file details, then click the *Download row file* button.
+Note: to download the PAK file, click `nsispak.bin` in the file list to display the file details, then click the *Download row file* button.
 
 Logon to TACL on your NonStop system to peform the installation and build steps.
 
 #### Unpak the PAK archive
 ```
-TACL > UNPAK ACMEPAK ($*.*.*), VOL $vol.subvol, LISTALL, MYID
+TACL > UNPAK NSISPAK ($*.*.*), VOL $vol.subvol, LISTALL, MYID
 ```
 #### Customize and run SETENV
-After running SETENV, restart LightWave Server so that it will recognize the =ACME-PATHMON define.
+After running SETENV, restart LightWave Server so that it will recognize the =NSIS-PATHMON define.
 ```
 TACL> T/EDIT SETENV
 TACL> RUN SETENV

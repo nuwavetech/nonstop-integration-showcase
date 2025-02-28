@@ -15,7 +15,7 @@
 #include <zsysc>
 #include <time.h>
 
-#include "acme.h"
+#include "nsis.h"
 #include "lw.h"
 #include "sg.h"
 #include "tw.h"
@@ -202,7 +202,8 @@ static void populate_sendgrid_email_req_and_send(
   strcpy(sg_request.post_send_v_3.personalizations[0].to_rw[0].email,
          account.account_detail.email_address);
   strcpy(sg_request.post_send_v_3.from_rw.email, sg_from_email);
-  strcpy(sg_request.post_send_v_3.subject, "ACME Card Transaction alert");
+  strcpy(sg_request.post_send_v_3.subject,
+         "NSIS Payment Card Simulation - Transaction alert");
   strcpy(
       sg_request.post_send_v_3.personalizations[0].dynamic_template_data.user,
       alert_account_request->name_on_card);
