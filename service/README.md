@@ -48,37 +48,17 @@ Email templates have been included with the source. You may install these templa
 ### Installation
 
 The application is built from source. The source files are present in the repository for convenient viewing.
-In addition, a PAK archive containing all of the source files is available for transfer to your NonStop system.
+In addition, a PAK archive containing all of the source files is available for transfer to your NonStop system. Filename extensions are handled according to the following rules:
 
 | Repository File | NonStop File |
 | -- | -- |
-| macros/build.tacl | build |
-| macros/instsvc.tacl | instsvc |
-| macros/setenv.tacl | setenv |
-| macros/startpw.tacl | startpw |
-| macros/stoppw.tacl | stoppw |
-| macros/unpakdat.tacl | unpakdat |
-| macros/unsetenv.tacl | unsetenv |
-| resources/nsisapi.txt | nsisapi |
-| resources/nsisddl.txt | nsisddl |
-| resources/nsisdict.txt | nsisdict |
-| resources/datapak.bin | datapak |
-| resources/logcfg.txt | logcfg |
-| resources/sgapi.json | sgapi |
-| resources/sgauth.txt | sgauth |
-| resources/sgddl.txt | sgddl |
-| resources/tmplstat.html | tmplstat |
-| resources/tmpltran.html | tmpltran |
-| resources/twapi.json | twapi |
-| resources/twauth.txt | twauth |
-| resources/twddl.txt | twddl |
-| src/acct.c | acctc |
-| src/nsis.h | nsish |
-| src/card.c | cardc |
-| src/lw.h | lwh |
-| src/pay.c | payc |
-| src/sg.h | sgh |
-| src/tw.h | twh |
+| name.bin | name |
+| name.c   | namec |
+| name.h   | nameh |
+| name.html | name |
+| name.json | name |
+| name.tacl | name |
+| name.txt | name |
 
 #### Transfer the PAK archive to your NonStop System
 

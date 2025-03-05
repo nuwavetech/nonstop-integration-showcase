@@ -19,8 +19,10 @@ The Payment Card Simulation provides a practical context for these integration c
 When enabled, the showcase demonstrates external API integration by using **LightWave Client™** to communicate with public and private cloud services:
 - Payment transaction SMS alerts delivered via the [Twilio SMS](https://www.twilio.com) REST API
 - Payment notification emails delivered via the [SendGrid Email](https://www.sendgrid.com) REST API
+- Payment transaction details are streamed to a Kafka instance via the
+                      LightWave Client Kafka Connector
 
-![](nsis_diagram.png?raw=true)
+![](./web-app/app/img/nsis_diagram.png?raw=true)
 
 ## About LightWave Products
 
@@ -30,7 +32,7 @@ When enabled, the showcase demonstrates external API integration by using **Ligh
 
 For detailed information on LightWave products, visit the [NuWave Technologies Documentation Center](https://docs.nuwavetech.com).
 
-*This showcase is a simulation. Card and account numbers are fictitious and no actual payment transactions occur.*
+*This showcase is a simulation. All data is fictitious and no actual payment transactions occur.*
 
 The showcase consists of Payment Card Simulation Pathway application and a browser based client application. These components may be installed using these instructions:
 
@@ -42,3 +44,4 @@ The showcase consists of Payment Card Simulation Pathway application and a brows
 
 Assistance is available through the [NuWave Technologies Support Center](http://support.nuwavetech.com).
 
+ 
