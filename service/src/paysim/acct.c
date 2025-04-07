@@ -15,7 +15,7 @@
 #include <zsysc>
 #include <time.h>
 
-#include "nsis.h"
+#include "psim.h"
 #include "lw.h"
 #include "sg.h"
 #include "tw.h"

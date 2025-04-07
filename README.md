@@ -7,6 +7,7 @@ This Integration Showcase demonstrates the powerful integration capabilities of 
 The showcase illustrates how **LightWave Server™** can REST-enable traditional HPE NonStop applications and services. Through the Payment Card Simulation interface, you can explore various integration points where LightWave products facilitate communication between modern web applications and HPE NonStop server processes.
 
 Key integration features demonstrated include:
+
 - REST-enabling traditional NonStop pathway servers
 - Real-time bidirectional data exchange between web clients and HPE NonStop
 - External API integration with third-party services
@@ -17,12 +18,13 @@ Key integration features demonstrated include:
 The Payment Card Simulation provides a practical context for these integration capabilities. Through the *Payments* view, you can initiate simulated payments transactions and see real-time results, while the *Transactions* view provides a historical record. The *API Request Log* view reveals the underlying REST communication, displaying all requests to and responses from the HPE NonStop.
 
 When enabled, the showcase demonstrates external API integration by using **LightWave Client™** to communicate with public and private cloud services:
+
 - Payment transaction SMS alerts delivered via the [Twilio SMS](https://www.twilio.com) REST API
 - Payment notification emails delivered via the [SendGrid Email](https://www.sendgrid.com) REST API
 - Payment transaction details are streamed to a Kafka instance via the
                       LightWave Client Kafka Connector
 
-![](./web-app/app/img/nsis_diagram.png?raw=true)
+![NSIS Overview](./web-app/app/img/nsis_diagram.png?raw=true)
 
 ## About LightWave Products
 
@@ -41,7 +43,4 @@ The showcase consists of Payment Card Simulation Pathway application and a brows
 | [Payment Card Simulation Pathway Application](service) |
 | [Browser based client application](web-app) |
 
-
 Assistance is available through the [NuWave Technologies Support Center](http://support.nuwavetech.com).
-
- 

@@ -14,7 +14,7 @@
 #include <tal.h>
 #include <zsysc>
 
-#include "nsis.h"
+#include "psim.h"
 
 #pragma list
 

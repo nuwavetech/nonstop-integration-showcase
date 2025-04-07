@@ -88,7 +88,7 @@ set server highpin              on
 set server linkdepth            4
 set server maxservers           4
 set server maxlinks             20
-set server numstatic            0
+set server numstatic            1
 set server tmf                  on
 set server debug                off
 set server in                   [hometerm]
@@ -114,7 +114,7 @@ set server highpin              on
 set server linkdepth            4
 set server maxservers           4
 set server maxlinks             20
-set server numstatic            0
+set server numstatic            1
 set server tmf                  on
 set server debug                off
 set server in                   [hometerm]
@@ -148,7 +148,7 @@ set server highpin              on
 set server linkdepth            4
 set server maxservers           4
 set server maxlinks             20
-set server numstatic            0
+set server numstatic            1
 set server tmf                  off
 set server debug                off
 set server in                   [hometerm]
@@ -156,10 +156,17 @@ set server out                  [hometerm]
 set server program              [client]
 set server param log            +logcfg
 set server param diag-log       +logcfg
-set server param monitor        "api log diag-log auth"
 set server param api            sgapi
 set server param base-url       [#param sg-base-url]
+== set server param disable-sensitive-data-masking 1
+[#if [#param enable-auth-exits] <> 0 |then|
+set server param monitor        "api log diag-log"
+set server define               =nsis-pathmon, class map, file [#param pathmon-name]
+set server param auth-exit      sgae
+|else|
+set server param monitor        "api log diag-log auth"
 set server param auth           sgauth
+]
 set server param pathmon-name   [#param pathmon-name]
 add server sg-server
 
@@ -172,7 +179,7 @@ set server highpin              on
 set server linkdepth            4
 set server maxservers           4
 set server maxlinks             20
-set server numstatic            0
+set server numstatic            1
 set server tmf                  off
 set server debug                off
 set server in                   [hometerm]
@@ -182,8 +189,16 @@ set server param log            +logcfg
 set server param diag-log       +logcfg
 set server param monitor        "api log diag-log auth"
 set server param api            twapi
+== set server param disable-sensitive-data-masking 1
 set server param base-url       [#param twilio-messaging-base-url]
+[#if [#param enable-auth-exits] <> 0 |then|
+set server param monitor        "api log diag-log"
+set server define               =nsis-pathmon, class map, file [#param pathmon-name]
+set server param auth-exit      twae
+|else|
+set server param monitor        "api log diag-log auth"
 set server param auth           twauth
+]
 add server twl-server
 ]
 
@@ -222,7 +237,7 @@ add server twl-server
   set server linkdepth            4
   set server maxservers           4
   set server maxlinks             20
-  set server numstatic            0
+  set server numstatic            1
   set server tmf                  on
   set server debug                off
   set server in                   [hometerm]
@@ -231,6 +246,28 @@ add server twl-server
   set server param pathmon-name   [#param pathmon-name]
   set server param kfk-producerapi kfk-producerapi
   add server kfk-producersvr
+  ]
+]
+
+[#if [#param enable-auth-exits] <> 0 |then|
+  [#append pwin
+  reset server
+  set server cpus                 0:1
+  set server createdelay          10 secs
+  set server deletedelay          10 mins
+  set server highpin              on
+  set server linkdepth            4
+  set server maxservers           4
+  set server maxlinks             20
+  set server numstatic            1
+  set server tmf                  off
+  set server debug                off
+  set server in                   [hometerm]
+  set server out                  [hometerm]
+  set server program              tknserv
+  set server param                sg-auth-file sgauth
+  set server param                twilio-auth-file twauth
+  add server tkn-server
   ]
 ]
 

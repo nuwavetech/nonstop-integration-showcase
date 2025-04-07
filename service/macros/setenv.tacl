@@ -7,12 +7,16 @@
 #set #param lws-isv                     [#defaults/current/]
 #set #param lwc-isv                     [#defaults/current/]
 #set #param hometerm                    $zhome
+#set #param lwc-kafka-isv               nsiskfk
+
+#set #param enable-auth-exits           0
 
 == Enter your Twilio account info here:
 #set #param enable-sms                  0
 #set #param twilio-messaging-base-url   https://api.twilio.com/2010-04-01
 #set #param twilio-account-sid          AC******************************fe
 #set #param twilio-phone-no             +1********39
+#set #param twilio-auth-file            twauth
 
 == Enter SendGrid account info here:
 #set #param enable-email                0
@@ -21,6 +25,12 @@
 #set #param sg-from-name                "NSIS Payments Simulation"
 #set #param sg-transaction-template-id  d-<your-transaction-template-id>
 #set #param sg-card-status-template-id  d-<your-card-status-template-id>
+#set #param sg-auth-file                sgauth
+
+== Enter Kafka info here:
+#set #param enable-kafka-producer       0
+#set #param enable-kafka-consumer       0
+#set #param kfk-rest-proxy-base-url-v3  https://nsis-kafka.demo.nuwavetech.com/api/kafka/v3
 
 delete define =nsis?pathmon
 add define =nsis-pathmon, class map, file [#param pathmon-name]

@@ -17,6 +17,6 @@ The LightWave Server service port must be configured. Edit the settings.json fil
   "baseUrl": "http://your-host:your-service-port"
 }
 ```
-Note that the port specified should be the service port on which the Payment Card Simulation service is deployed, not the the Server Console port. After configuring the port, you may need to refresh your browser in order for the change to take effect.
+Note that the port specified should be the service port on which the Payment Card Simulation service is deployed, not the Server Console port. After configuring the port, you may need to refresh your browser in order for the change to take effect.
 
 

@@ -1,0 +1,13 @@
+---
+AuthExitConfig:
+  tokenProvider:
+    providerType: serverclass
+    pathmon: =nsis-pathmon
+    serverclass: tkn-server
+    ioRetryInterval: 3
+    ioRetryMax: 3
+    stringPadding: zeros
+    version: 1
+  tokenOptions:
+    tokenSetName: "sendgrid"
+...
