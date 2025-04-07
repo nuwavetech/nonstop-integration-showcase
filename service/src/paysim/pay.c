@@ -15,7 +15,7 @@
 #include <tal.h>
 #include <zsysc>
 
-#include "nsis.h"
+#include "psim.h"
 #include "lw.h"
 #include "kfkp.h"
 
@@ -26,7 +26,10 @@ static short transaction_filenum;
 static short card_filenum;
 static char pathmon_name[32];
 static char* acct_serverclass = "ACCT-SERVER";
+
+#ifdef ENABLE_KAFKA_PRODUCER
 static char* kfk_producer_serverclass = "KFK-PRODUCERSVR";
+#endif
 
 /* Static function prototypes. */
 static int activate_transaction(const char* type);
@@ -208,7 +211,7 @@ static void create_payment(void* request) {
     /* Build and send the alert message. */
     snprintf(
         alert_rq.alert_message, sizeof(alert_rq.alert_message),
-        "NSIS Payment Card Simulation account %-.4s:  A purchase in the amount of $%s at "
+        "NSIS Payment Card Simulation account %-.4s:  A purchase in the amount of %s USD at "
         "%-.*s has been charged to your account.",
         &card.card_number[12],
         format_numeric(transaction.payment_detail.amount, 2),

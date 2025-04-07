@@ -8,10 +8,11 @@ comp^opts
 ]
 
 [#if [#param enable-kafka-producer] <> 0 |then|
-  #append comp^opts define ENABLE_KAFKA_PRODUCER,
+  #set comp^opts define ENABLE_KAFKA_PRODUCER,
 ]
 
-[#if ]
+#set comp^opts [comp^opts] extensions, allow_cplusplus_comments,
+
 [#def :buildserv text |body|
   #output Building [basename]SERV ...
   status *, prog [#defaults/current/].[basename]serv, stop, forced
@@ -25,6 +26,7 @@ comp^opts
 
   [#if [ :_completion:completioncode ] <> 0 |then|
     #output Compilation of [basename]C completed with warnings or errors.
+    #unframe
     #return
   ]
 ]
@@ -38,6 +40,7 @@ comp^opts
 
     [#if [ :_completion:completioncode ] <> 0 |then|
       #output Creation of database file [basename]FILE completed with warnings or errors.
+      #unframe
       #return
     ]
     #output File [basename]FILE created.
@@ -84,6 +87,10 @@ comp^opts
 ??source kfkpddl ( API-DEF )
 ??noc
 ??nocobol
+
+??c lwaeh !
+??source lwaeddl
+??noc
 ]
 
 sink [#purge ddlout]
@@ -91,6 +98,7 @@ ddl2 / inv ddlin, out ddlout /
 
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output Dicionary build completed with warnings or errors.
+  #unframe
   #return
 ]
 
@@ -103,6 +111,9 @@ ddl2 / inv ddlin, out ddlout /
 :buildserv
 
 #set basename PAY
+:buildserv
+
+#set basename TKN
 :buildserv
 
 #output Creating database files ....

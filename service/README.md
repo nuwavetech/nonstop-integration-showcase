@@ -6,16 +6,21 @@
 + An installed instance of [LightWave Server](https://docs.nuwavetech.com/lightwave-server) version 1.1.8 or greater.
 
 #### To enable SMS Notifications
+
 The [Twilio SMS API](https://www.twilio.com/en-us/messaging/channels/sms) is used to send SMS notifications. SMS notifications require:
+
 + An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.8 or greater.
 + A Twilio account enabled for the SMS API. It's possible to use a trial account and send SMS messages.
 
 #### To enable email Notifications
+
 Twilio [Twilio SendGrid email API](https://sendgrid.com/en-us/solutions/email-api) is used to send email notifications. Email notifications require:
+
 + An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.8 or greater.
 + A Twilio SendGrid account enabled for the email API. It's possible to use a trial account and send email notifications.
 
 ### Configuration
+
 The following values must be configured in the SETENV TACL macro after installation of the sample:
 
 + pathmon-name - The process name of the Pathmon. The default is $NSIS.
@@ -33,6 +38,10 @@ The following values must be configured in the SETENV TACL macro after installat
 + sg-transaction-template-id - The SendGrid email template ID for payment notifications.
 + sg-card-status-template-id - The SendGrid email template ID for card status notifications.
 
++ enable-auth-exits - Set to 1 to enable the LightWave Auth Exits feature. Enabling this feature will invoke the sample Token Server application. The Token Server will load the tokens from the *twilio-auth-file* and the *sg-auth-file*.
++ twilio-auth-file - The name of the TWAUTH file.
++ sg-auth-file - The name of the SGAUTH file.
+
 The LightWave Server API is configured to use the value of the =NSIS-PATHMON DEFINE as the Pathmon process name. This DEFINE is set by the SETENV macro. The LightWave Server instance must be restarted with this DEFINE set in order to for the DEFINE to recognized.
 
 ### SMS Configuration
@@ -42,8 +51,20 @@ If using SMS notifications, the SETENV file must be updated with your Twilio SMS
 If using email notifications, the SETENV file must be updated with your Twilio SendGrid account information, and the SGAUTH file must be updated with the SendGrid email API key. For more information see the [SGAUTH](./resources/sgauth.txt) template file and [Request Authentication and Signing](https://docs.nuwavetech.com/lightwave-client/1.2.7/request-authentication-and-signing#id-(1.2.7_r4)RequestAuthenticationandSigning-GenericAuthorizationHeaderwithToken) in the LightWave Client documentation.
 
 Email templates have been included with the source. You may install these templates or create your own. The provided templates are:
-  + [Card Status Template](./resources/tmplstat.html)
-  + [Transaction Template](./resources/tmpltran.html)
+
++ [Card Status Template](./resources/tmplstat.html)
++ [Transaction Template](./resources/tmpltran.html)
+
+### Auth Exits Configuration
+
+If enabled, LightWave Client invokes the sample Token Server to retrieve the Twilio/SendGrind tokens for the HTTP Authorization header.
+
+ LightWave Client Auth Exits are configured via YAML configuration files:
+
++ twae for for Twilio
++ sgae for SendGrid
+
+See the [LightWave Client Auth Exits documentation](https://docs.nuwavetech.com/lightwave-client-authentication-exits/1.4.0-beta.2/) for further information on the format and content of these files. (Note that this is preview documentation and is subject to change.)
 
 ### Installation
 
@@ -69,39 +90,54 @@ Note: to download the PAK file, click `nsispak.bin` in the file list to display 
 Logon to TACL on your NonStop system to peform the installation and build steps.
 
 #### Unpak the PAK archive
-```
+
+```text
 TACL > UNPAK NSISPAK ($*.*.*), VOL $vol.subvol, LISTALL, MYID
 ```
+
 #### Customize and run SETENV
+
 After running SETENV, restart LightWave Server so that it will recognize the =NSIS-PATHMON define.
-```
+
+```text
 TACL> T/EDIT SETENV
 TACL> RUN SETENV
 ```
+
 #### If using SMS notifications, customize the TWAUTH file.
-```
+
+```text
 TACL> T/EDIT TWAUTH
 ```
 
 #### If using email notications, customize the SGAUTH file.
-```
+
+```text
 TACL> T/EDIT SGAUTH
 ```
 
 #### Build the application DDL dictionary and servers
+
+```text
+TACL> RUN BUILD
 ```
-TACL > RUN BUILD
-```
+
 #### Install the LightWave Server service definitions
+
+```text
+TACL> RUN INSTSVC
 ```
-TACL > RUN INSTSVC
-```
+
 #### Optionally install the sample data
+
 After installation, the application files are empty. This process will install sample data with one sample user and card.
+
+```text
+TACL> RUN UNPAKDAT
 ```
-TACL > RUN UNPAKDAT
-```
+
 #### Start the Pathway
-```
-TACL > RUN STARTPW
+
+```text
+TACL> RUN STARTPW
 ```

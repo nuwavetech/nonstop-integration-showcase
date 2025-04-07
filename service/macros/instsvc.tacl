@@ -24,6 +24,7 @@ run [:isv].lwscom ; filesystem [:isv] ; &
   import dictionary [:dictname] !, file psimdict
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output Dicionary installation failed.
+  #unframe
   #return
 ]
 
@@ -31,6 +32,7 @@ run [:isv].lwscom ; filesystem [:isv] ; &
   import api [:apiname] !, file psimapi
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output API installation failed.
+  #unframe
   #return
 ]
 
@@ -44,7 +46,8 @@ run [:isv].lwscom ; filesystem [:isv] ; &
   acp allow-anonymous-access, &
   enabled
 [#if [ :_completion:completioncode ] <> 0 |then|
-  #output Service createing failed.
+  #output Service creation failed.
+  #unframe
   #return
 ]
 
@@ -74,6 +77,7 @@ run [:isv].lwccom ; filesystem [:isv] ; &
   import api * !, file sgapi
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output API installation failed.
+  #unframe
   #return
 ]
 
@@ -81,6 +85,7 @@ run [:isv].lwccom ; filesystem [:isv] ; &
   import api * !, file twapi
 [#if [ :_completion:completioncode ] <> 0 |then|
   #output API installation failed.
+  #unframe
   #return
 ]
 
@@ -89,6 +94,7 @@ run [:isv].lwccom ; filesystem [:isv] ; &
     import api * !, file kfkpapi
   [#if [ :_completion:completioncode ] <> 0 |then|
     #output API installation failed.
+    #unframe
     #return
   ]
 ]
