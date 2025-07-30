@@ -89,6 +89,14 @@ run [:isv].lwccom ; filesystem [:isv] ; &
   #return
 ]
 
+run [:isv].lwccom ; filesystem [:isv] ; &
+  import api * !, file isoapi
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output API installation failed.
+  #unframe
+  #return
+]
+
 [#if [#param enable-kafka-producer] <> 0 |then|
   run [:isv].lwccom ; filesystem [:isv] ; &
     import api * !, file kfkpapi

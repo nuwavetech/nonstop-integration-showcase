@@ -32,6 +32,9 @@
 #set #param enable-kafka-consumer       0
 #set #param kfk-rest-proxy-base-url-v3  https://nsis-kafka.demo.nuwavetech.com/api/kafka/v3
 
+== Enter ISO info here:
+#set #param iso-base-url                https://nsis-iso.demo.nuwavetech.com
+
 delete define =nsis?pathmon
 add define =nsis-pathmon, class map, file [#param pathmon-name]
 

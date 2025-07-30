@@ -36,7 +36,6 @@ NSIS.app = {
     NSIS.views.requestlog.init();
     NSIS.views.settings.init();
     NSIS.views.about.init();
-
     // Register global event handlers
     NSIS.app.registerEventHandlers();
 
