@@ -18,6 +18,7 @@
 #include "psim.h"
 #include "lw.h"
 #include "kfkp.h"
+#include "iso.h"
 
 #pragma list
 
@@ -26,6 +27,8 @@ static short transaction_filenum;
 static short card_filenum;
 static char pathmon_name[32];
 static char* acct_serverclass = "ACCT-SERVER";
+char amount_str[20];
+char trans_id[20];
 
 #ifdef ENABLE_KAFKA_PRODUCER
 static char* kfk_producer_serverclass = "KFK-PRODUCERSVR";
@@ -235,7 +238,74 @@ static void create_payment(void* request) {
                        (char*)&alert_rq, (char*)&alert_rp, sizeof(alert_rq),
                        sizeof(alert_rp));
   }
+  {
+    static char* iso_serverclass = "ISO-SERVER";
+    payment_card_authorize_rq_def card_auth_req;
+    payment_card_authoe_200_rp_def card_auth_rep;
 
+    /* Reset request */
+    memset(&card_auth_req, 0, sizeof(card_auth_req));
+
+    /* Set header with request code */
+    card_auth_req.lightwave_rq_header.rq_code = rq_payment_card_authorize;
+
+    /*
+    auth
+    rq.document.accptr-authstn-req.authstn-req.tx.tx-stls.card-pmt-invc.trad-dlvry.consgnmt.consgn(r).pty-id.id
+    is the account id tx.tx-dtls.card-pmt-invc.line-itm.fin-adjstmnt.amt is the
+    amount and currency doc.ACCPTR-AUTHSTN-REQ .AUTHSTN-REQ.ENVT.CRDHLDR.nm is
+    the name
+    */
+
+    strncpy(
+        card_auth_req.caaa_001_document.accptr_authstn_req.hdr.msg_fctn, "REQU",
+        sizeof(
+            card_auth_req.caaa_001_document.accptr_authstn_req.hdr.msg_fctn));
+
+    strncpy(
+        card_auth_req.caaa_001_document.accptr_authstn_req.hdr.initg_pty.issr,
+        "NSIS",
+        sizeof(card_auth_req.caaa_001_document.accptr_authstn_req.hdr.initg_pty
+                   .issr));
+
+    // amount --
+    snprintf(amount_str, sizeof(amount_str), "%d",
+             transaction.payment_detail.amount);
+
+    strncpy(card_auth_req.caaa_001_document.accptr_authstn_req.authstn_req.tx
+                .tx_dtls.ttl_amt,
+            amount_str,
+            sizeof(card_auth_req.caaa_001_document.accptr_authstn_req
+                       .authstn_req.tx.tx_dtls.ttl_amt));
+
+    // merch name - DONE
+    strncpy(card_auth_req.caaa_001_document.accptr_authstn_req.authstn_req.envt
+                .mrchnt.cmon_nm,
+            transaction.payment_detail.merchant_name,
+            sizeof(card_auth_req.caaa_001_document.accptr_authstn_req
+                       .authstn_req.envt.mrchnt.cmon_nm));
+
+    // name on card
+    strncpy(card_auth_req.caaa_001_document.accptr_authstn_req.authstn_req.envt
+                .crdhldr.nm,
+            transaction.payment_detail.name_on_card,
+            sizeof(card_auth_req.caaa_001_document.accptr_authstn_req
+                       .authstn_req.envt.crdhldr.nm));
+
+    rc = SERVERCLASS_SENDL_((char*)pathmon_name, (short)strlen(pathmon_name),
+                            (char*)iso_serverclass,
+                            (short)strlen(iso_serverclass),
+                            (char*)&card_auth_req, (char*)&card_auth_rep,
+                            sizeof(card_auth_req), sizeof(card_auth_rep));
+
+    if (rc != 0) {
+      short pe;
+      short fe;
+
+      SERVERCLASS_SEND_INFO_(&pe, &fe);
+      printf("ISO SERVERCLASS_SEND failed: %hd:%hd\n", pe, fe);
+    }
+  }
 /* If successful, and Kafka is enabled, send the payment event to Kafka. */
 #ifdef ENABLE_KAFKA_PRODUCER
   if (reply_code == RP_CODE_SUCCESS) {
