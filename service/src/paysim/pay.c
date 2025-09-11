@@ -27,8 +27,9 @@ static short transaction_filenum;
 static short card_filenum;
 static char pathmon_name[32];
 static char* acct_serverclass = "ACCT-SERVER";
-char amount_str[20];
-char trans_id[20];
+char amount_str[18];
+long long amount;
+double amount_double;
 
 #ifdef ENABLE_KAFKA_PRODUCER
 static char* kfk_producer_serverclass = "KFK-PRODUCERSVR";
@@ -249,48 +250,53 @@ static void create_payment(void* request) {
     /* Set header with request code */
     card_auth_req.lightwave_rq_header.rq_code = rq_payment_card_authorize;
 
-    /*
-    auth
-    rq.document.accptr-authstn-req.authstn-req.tx.tx-stls.card-pmt-invc.trad-dlvry.consgnmt.consgn(r).pty-id.id
-    is the account id tx.tx-dtls.card-pmt-invc.line-itm.fin-adjstmnt.amt is the
-    amount and currency doc.ACCPTR-AUTHSTN-REQ .AUTHSTN-REQ.ENVT.CRDHLDR.nm is
-    the name
-    */
+    strcpy(
+        card_auth_req.pacs_008_document.fito_ficstmr_cdt_trf.grp_hdr.nb_of_txs,
+        "1");
+
+    /** Amount*/
+
+    amount = transaction.payment_detail.amount;
+    amount_double = (double)amount / 100.0;
+
+    sprintf(amount_str, "%.2f", amount_double);
 
     strncpy(
-        card_auth_req.caaa_001_document.accptr_authstn_req.hdr.msg_fctn, "REQU",
-        sizeof(
-            card_auth_req.caaa_001_document.accptr_authstn_req.hdr.msg_fctn));
+        card_auth_req.pacs_008_document.fito_ficstmr_cdt_trf.cdt_trf_tx_inf[0]
+            .intr_bk_sttlm_amt.value_rw,
+        amount_str, sizeof(amount_str));
+
+    /** Currency */
+    strncpy(
+        card_auth_req.pacs_008_document.fito_ficstmr_cdt_trf.cdt_trf_tx_inf[0]
+            .intr_bk_sttlm_amt.ccy,
+        "USD", 3);
+
+    /** Timestamp */
+    card_auth_req.pacs_008_document.fito_ficstmr_cdt_trf.grp_hdr.cre_dt_tm =
+        transaction.timestamp;
+
+    /** Merchant Name */
+    strncpy(
+        card_auth_req.pacs_008_document.fito_ficstmr_cdt_trf.cdt_trf_tx_inf[0]
+            .cdtr.nm,
+        transaction.payment_detail.merchant_name,
+        sizeof(transaction.payment_detail.merchant_name));
+
+    /** Name on Card*/
+    strncpy(
+        card_auth_req.pacs_008_document.fito_ficstmr_cdt_trf.cdt_trf_tx_inf[0]
+            .dbtr_acct.nm,
+        transaction.payment_detail.name_on_card,
+        sizeof(transaction.payment_detail.name_on_card));
+
+    /** Card Number */
 
     strncpy(
-        card_auth_req.caaa_001_document.accptr_authstn_req.hdr.initg_pty.issr,
-        "NSIS",
-        sizeof(card_auth_req.caaa_001_document.accptr_authstn_req.hdr.initg_pty
-                   .issr));
-
-    // amount --
-    snprintf(amount_str, sizeof(amount_str), "%d",
-             transaction.payment_detail.amount);
-
-    strncpy(card_auth_req.caaa_001_document.accptr_authstn_req.authstn_req.tx
-                .tx_dtls.ttl_amt,
-            amount_str,
-            sizeof(card_auth_req.caaa_001_document.accptr_authstn_req
-                       .authstn_req.tx.tx_dtls.ttl_amt));
-
-    // merch name - DONE
-    strncpy(card_auth_req.caaa_001_document.accptr_authstn_req.authstn_req.envt
-                .mrchnt.cmon_nm,
-            transaction.payment_detail.merchant_name,
-            sizeof(card_auth_req.caaa_001_document.accptr_authstn_req
-                       .authstn_req.envt.mrchnt.cmon_nm));
-
-    // name on card
-    strncpy(card_auth_req.caaa_001_document.accptr_authstn_req.authstn_req.envt
-                .crdhldr.nm,
-            transaction.payment_detail.name_on_card,
-            sizeof(card_auth_req.caaa_001_document.accptr_authstn_req
-                       .authstn_req.envt.crdhldr.nm));
+        card_auth_req.pacs_008_document.fito_ficstmr_cdt_trf.cdt_trf_tx_inf[0]
+            .dbtr_acct.id.othr.id,
+        transaction.payment_detail.card_number,
+        sizeof(transaction.payment_detail.card_number));
 
     rc = SERVERCLASS_SENDL_((char*)pathmon_name, (short)strlen(pathmon_name),
                             (char*)iso_serverclass,

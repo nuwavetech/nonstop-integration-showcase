@@ -3,7 +3,7 @@
   "description": "ISO 20022 demo",
   "version": 1,
   "id": "03443a9ca0cc1f1d818001010000012ef1",
-  "modificationTime": 1756675630,
+  "modificationTime": 1757547598,
   "isBrief": false,
   "operations": [
     {
@@ -17,35 +17,36 @@
             "mappings": [
               {
                 "source": {
-                  "type": "ipm"
+                  "type": "ipm",
+                  "data": "32"
                 },
                 "target": {
                   "type": "body",
-                  "value": "caaa001_Document"
+                  "value": "pacs008_Document"
                 }
               }
             ],
             "contentType": "text/xml",
             "contentTypeIsCustom": true,
             "acceptTypes": [
-              "*/*"
+              "text/xml"
             ]
           },
           "responses": [
             {
+              "httpStatus": "200",
               "mappings": [
                 {
                   "target": {
-                    "type": "ipm"
+                    "type": "ipm",
+                    "data": "16"
                   },
                   "source": {
                     "type": "body",
-                    "value": "caaa002_Document"
+                    "value": "pacs002_Document"
                   }
                 }
-              ],
-              "httpStatus": "200",
-              "description": "Successful authorization"
+              ]
             }
           ],
           "verb": "POST",
@@ -58,196 +59,83 @@
   ],
   "types": {
     "type": {
-      "caaa001_anyType": {
+      "pacs008_anyType": {
         "elements": []
       },
-      "caaa001_DateAndDateTimeChoice": {
+      "pacs008_InstructionForNextAgent1": {
         "elements": [
           {
-            "name": "Dt",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "DtTm",
-            "type": "timestamp",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_KEK3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "KEKId",
-            "type": "caaa001_KEKIdentifier1",
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyNcrptnAlgo",
-            "type": "caaa001_AlgorithmIdentification9",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcrptdKey",
-            "type": "base64Binary",
-            "size": 140,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Consignment2": {
-        "elements": [
-          {
-            "name": "Consgnr",
-            "type": "caaa001_TradeParty1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Consgn",
-            "type": "caaa001_TradeParty1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrnsprtMeans",
-            "type": "caaa001_TransportMeans3",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_PartyIdentification45": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "caaa001_Party8Choice",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Nm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PstlAdr",
-            "type": "caaa001_PostalAddress6",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtryOfRes",
-            "type": "string",
-            "size": 2,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtctDtls",
-            "type": "caaa001_Contacts3",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_TradeAgreement6": {
-        "elements": [
-          {
-            "name": "Buyr",
-            "type": "caaa001_TradeParty1",
-            "minOccurs": 0
-          },
-          {
-            "name": "Sellr",
-            "type": "caaa001_TradeParty1",
-            "minOccurs": 0
-          },
-          {
-            "name": "QtnDocId",
-            "type": "caaa001_DocumentIdentification22",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtrctDocId",
-            "type": "caaa001_DocumentIdentification22",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "BuyrOrdrIdDoc",
-            "type": "caaa001_DocumentIdentification22",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlRefDoc",
-            "type": "caaa001_DocumentGeneralInformation2",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "Incotrms",
-            "type": "caaa001_Incoterms3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CertificateIssuer1": {
-        "elements": [
-          {
-            "name": "RltvDstngshdNm",
-            "type": "caaa001_RelativeDistinguishedName1",
-            "maxOccurs": 2,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Document": {
-        "elements": [
-          {
-            "name": "AccptrAuthstnReq",
-            "type": "caaa001_AcceptorAuthorisationRequestV03",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_TransportMeans3": {
-        "elements": [
-          {
-            "name": "MdCd",
+            "name": "Cd",
             "type": "string",
             "size": 4,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Id",
+            "name": "InstrInf",
             "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Nm",
-            "type": "string",
-            "size": 35,
+            "size": 140,
             "hideIfEmpty": true,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_GenericOrganisationIdentification1": {
+      "pacs008_Document": {
+        "elements": [
+          {
+            "name": "FIToFICstmrCdtTrf",
+            "type": "pacs008_FIToFICustomerCreditTransferV02",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_CreditorReferenceType1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_DocumentAdjustment1": {
+        "elements": [
+          {
+            "name": "Amt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtDbtInd",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Rsn",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AddtlInf",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_GenericOrganisationIdentification1": {
         "elements": [
           {
             "name": "Id",
@@ -257,7 +145,7 @@
           },
           {
             "name": "SchmeNm",
-            "type": "caaa001_OrganisationIdentificationSchemeName1Choice",
+            "type": "pacs008_OrganisationIdentificationSchemeName1Choice",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
@@ -270,402 +158,102 @@
           }
         ]
       },
-      "caaa001_DetailedAmount6": {
+      "pacs008_NameAndAddress10": {
         "elements": [
-          {
-            "name": "Amt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "DtTm",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "CardDataNtryMd",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ICCRltdData",
-            "type": "base64Binary",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Labl",
-            "type": "string",
-            "size": 140,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_DetailedAmount4": {
-        "elements": [
-          {
-            "name": "Amt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "Labl",
-            "type": "string",
-            "size": 140,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CardPaymentTransaction21": {
-        "elements": [
-          {
-            "name": "SaleRefId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxId",
-            "type": "caaa001_TransactionIdentifier1",
-            "minOccurs": 0
-          },
-          {
-            "name": "POIId",
-            "type": "caaa001_GenericIdentification32",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "InitrTxId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RcptTxId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlSvc",
-            "type": "string",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "SvcAttr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxRslt",
-            "type": "caaa001_CardPaymentTransactionResult1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_DetailedAmount5": {
-        "elements": [
-          {
-            "name": "CshBck",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Grtty",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Fees",
-            "type": "caaa001_DetailedAmount4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "Rbt",
-            "type": "caaa001_DetailedAmount4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "ValAddedTax",
-            "type": "caaa001_DetailedAmount4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_PersonIdentificationSchemeName1Choice": {
-        "elements": [
-          {
-            "name": "Cd",
-            "type": "string",
-            "size": 4,
-            "minOccurs": 0
-          },
-          {
-            "name": "Prtry",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_LegalOrganisation1": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
           {
             "name": "Nm",
             "type": "string",
             "size": 140,
-            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Adr",
+            "type": "pacs008_PostalAddress6",
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_PointOfInteractionComponentCharacteristics2": {
+      "pacs008_RegulatoryReporting3": {
         "elements": [
           {
-            "name": "Mmry",
-            "type": "caaa001_MemoryCharacteristics1",
+            "name": "DbtCdtRptgInd",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Authrty",
+            "type": "pacs008_RegulatoryAuthority2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Dtls",
+            "type": "pacs008_StructuredRegulatoryReporting3",
             "minOccurs": 0,
             "maxOccurs": 2
-          },
-          {
-            "name": "Com",
-            "type": "caaa001_CommunicationCharacteristics2",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "SctyAccsMdls",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SbcbrIdntyMdls",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyChckVal",
-            "type": "base64Binary",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
           }
         ]
       },
-      "caaa001_CardPaymentTransaction22": {
+      "pacs008_CashAccountType2": {
         "elements": [
           {
-            "name": "TxCaptr",
-            "type": "boolean",
-            "minOccurs": 0
-          },
-          {
-            "name": "TxTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlSvc",
-            "type": "string",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "SvcAttr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MrchntCtgyCd",
+            "name": "Cd",
             "type": "string",
             "size": 4,
             "minOccurs": 0
           },
           {
-            "name": "SaleRefId",
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_PaymentIdentification3": {
+        "elements": [
+          {
+            "name": "InstrId",
             "type": "string",
             "size": 35,
             "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "EndToEndId",
+            "type": "string",
+            "size": 35,
             "minOccurs": 0
           },
           {
             "name": "TxId",
-            "type": "caaa001_TransactionIdentifier1",
+            "type": "string",
+            "size": 35,
             "minOccurs": 0
           },
           {
-            "name": "OrgnlTx",
-            "type": "caaa001_CardPaymentTransaction21",
+            "name": "ClrSysRef",
+            "type": "string",
+            "size": 35,
             "hideIfEmpty": true,
             "minOccurs": 0
-          },
+          }
+        ]
+      },
+      "pacs008_StructuredRegulatoryReporting3": {
+        "elements": [
           {
-            "name": "InitrTxId",
+            "name": "Tp",
             "type": "string",
             "size": 35,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "RcncltnId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxDtls",
-            "type": "caaa001_CardPaymentTransactionDetails12",
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlTxData",
-            "type": "string",
-            "size": 70,
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_ProductIdentifier2Choice": {
-        "elements": [
-          {
-            "name": "StrdPdctIdr",
-            "type": "caaa001_ProductIdentifier2",
-            "minOccurs": 0
-          },
-          {
-            "name": "OthrPdctIdr",
-            "type": "caaa001_GenericIdentification4",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_LineItemAllowanceCharge1": {
-        "elements": [
-          {
-            "name": "ChrgInd",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ActlAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "BsisQty",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ClctnPct",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SeqNb",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Rsn",
-            "type": "caaa001_DiscountOrChargeType1Choice",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_InformationType1Choice": {
-        "elements": [
-          {
-            "name": "Cd",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Prtry",
-            "type": "string",
-            "size": 140,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PostalAddress13": {
-        "elements": [
-          {
-            "name": "AdrLine",
-            "type": "string",
-            "size": 70,
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "StrtNm",
-            "type": "string",
-            "size": 70,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "BldgNb",
-            "type": "string",
-            "size": 16,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PstCd",
-            "type": "string",
-            "size": 16,
-            "minOccurs": 0
-          },
-          {
-            "name": "TwnNm",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtrySubDvsn",
-            "type": "string",
-            "size": 35,
+            "name": "Dt",
+            "type": "timestamp",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
@@ -673,31 +261,48 @@
             "name": "Ctry",
             "type": "string",
             "size": 2,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CurrencyAndAmount": {
-        "elements": []
-      },
-      "caaa001_TrackData1": {
-        "elements": [
-          {
-            "name": "TrckNb",
-            "type": "string",
-            "size": 1,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "TrckVal",
+            "name": "Cd",
             "type": "string",
-            "size": 140,
+            "size": 10,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Amt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Inf",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs008_ClearingSystemMemberIdentification2": {
+        "elements": [
+          {
+            "name": "ClrSysId",
+            "type": "pacs008_ClearingSystemIdentification2Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "MmbId",
+            "type": "string",
+            "size": 35,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_OrganisationIdentificationSchemeName1Choice": {
+      "pacs008_PersonIdentificationSchemeName1Choice": {
         "elements": [
           {
             "name": "Cd",
@@ -713,7 +318,7 @@
           }
         ]
       },
-      "caaa001_OrganisationIdentification6": {
+      "pacs008_FinancialInstitutionIdentification7": {
         "elements": [
           {
             "name": "BIC",
@@ -723,1448 +328,120 @@
             "minOccurs": 0
           },
           {
-            "name": "Othr",
-            "type": "caaa001_GenericOrganisationIdentification1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_GenericIdentification4": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "IdTp",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_KeyTransport3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RcptId",
-            "type": "caaa001_CertificateIdentifier1",
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyNcrptnAlgo",
-            "type": "caaa001_AlgorithmIdentification7",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcrptdKey",
-            "type": "base64Binary",
-            "size": 256,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_RecurringTransaction2": {
-        "elements": [
-          {
-            "name": "InstlmtPlan",
-            "type": "string",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "PlanId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SeqNb",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PrdUnit",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "InstlmtPrd",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TtlNbOfPmts",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "FrstPmtDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TtlAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "FrstAmt",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Chrgs",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CardPaymentInvoice1": {
-        "elements": [
-          {
-            "name": "InvcHdr",
-            "type": "caaa001_InvoiceHeader1",
-            "minOccurs": 0
-          },
-          {
-            "name": "TradAgrmt",
-            "type": "caaa001_TradeAgreement6",
-            "minOccurs": 0
-          },
-          {
-            "name": "TradDlvry",
-            "type": "caaa001_TradeDelivery1",
-            "minOccurs": 0
-          },
-          {
-            "name": "LineItm",
-            "type": "caaa001_LineItem10",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_GenericIdentification48": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "Vrsn",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AuthenticatedData3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Rcpt",
-            "type": "caaa001_Recipient3Choice",
-            "maxOccurs": 2,
-            "minOccurs": 0
-          },
-          {
-            "name": "MACAlgo",
-            "type": "caaa001_AlgorithmIdentification10",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcpsltdCntt",
-            "type": "caaa001_EncapsulatedContent2",
-            "minOccurs": 0
-          },
-          {
-            "name": "MAC",
-            "type": "base64Binary",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_LineItem10": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TradPdct",
-            "type": "caaa001_TradeProduct1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "BuyrOrdrId",
-            "type": "caaa001_DocumentIdentification23",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtrctId",
-            "type": "caaa001_DocumentIdentification22",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PurchsAcctgAcct",
-            "type": "caaa001_AccountingAccount1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "NetPric",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "NetPricQty",
-            "type": "caaa001_Quantity4",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "NetPricAllwncChrg",
-            "type": "caaa001_LineItemAllowanceCharge1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "NetWght",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "GrssPric",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "GrssPricQty",
-            "type": "caaa001_Quantity4",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "GrssWght",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "LogstcsChrg",
-            "type": "caaa001_ChargesDetails2",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "Tax",
-            "type": "caaa001_LineItemTax1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "AllwncChrg",
-            "type": "caaa001_LineItemAllowanceCharge1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "FinAdjstmnt",
-            "type": "caaa001_Adjustment4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "BlldQty",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PackgQty",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PerPackgUnitQty",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Packgng",
-            "type": "caaa001_Packaging1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "ChrgFreeQty",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MeasrQtyStart",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MeasrQtyEnd",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MeasrDtTmStart",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MeasrDtTmEnd",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShipTo",
-            "type": "caaa001_TradeParty1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Incotrms",
-            "type": "caaa001_Incoterms3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DlvryDtTm",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DlvryNoteId",
-            "type": "caaa001_DocumentIdentification22",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MntrySummtn",
-            "type": "caaa001_LineItemMonetarySummation1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "InclNote",
-            "type": "caaa001_AdditionalInformation1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_AcceptorAuthorisationRequest3": {
-        "elements": [
-          {
-            "name": "Envt",
-            "type": "caaa001_CardPaymentEnvironment20",
-            "minOccurs": 0
-          },
-          {
-            "name": "Cntxt",
-            "type": "caaa001_CardPaymentContext5",
-            "minOccurs": 0
-          },
-          {
-            "name": "Tx",
-            "type": "caaa001_CardPaymentTransaction22",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CardPaymentEnvironment20": {
-        "elements": [
-          {
-            "name": "Acqrr",
-            "type": "caaa001_Acquirer2",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Mrchnt",
-            "type": "caaa001_Organisation8",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "POI",
-            "type": "caaa001_PointOfInteraction3",
-            "minOccurs": 0
-          },
-          {
-            "name": "Card",
-            "type": "caaa001_PaymentCard7",
-            "minOccurs": 0
-          },
-          {
-            "name": "Crdhldr",
-            "type": "caaa001_Cardholder5",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PrtctdCrdhldrData",
-            "type": "caaa001_ContentInformationType7",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CardPaymentContext5": {
-        "elements": [
-          {
-            "name": "PmtCntxt",
-            "type": "caaa001_PaymentContext5",
-            "minOccurs": 0
-          },
-          {
-            "name": "SaleCntxt",
-            "type": "caaa001_SaleContext1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Product1": {
-        "elements": [
-          {
-            "name": "PdctCd",
-            "type": "string",
-            "size": 70,
-            "minOccurs": 0
-          },
-          {
-            "name": "UnitOfMeasr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PdctQty",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "UnitPric",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PdctAmt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "TaxTp",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlPdctInf",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Recipient3Choice": {
-        "elements": [
-          {
-            "name": "KeyTrnsprt",
-            "type": "caaa001_KeyTransport3",
-            "minOccurs": 0
-          },
-          {
-            "name": "KEK",
-            "type": "caaa001_KEK3",
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyIdr",
-            "type": "caaa001_KEKIdentifier1",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Incoterms4Choice": {
-        "elements": [
-          {
-            "name": "Cd",
-            "type": "string",
-            "size": 4,
-            "minOccurs": 0
-          },
-          {
-            "name": "Prtry",
-            "type": "caaa001_GenericIdentification13",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_ChargesDetails2": {
-        "elements": [
-          {
-            "name": "Amt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PointOfInteraction3": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "caaa001_GenericIdentification32",
-            "minOccurs": 0
-          },
-          {
-            "name": "SysNm",
-            "type": "string",
-            "size": 70,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "GrpId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Cpblties",
-            "type": "caaa001_PointOfInteractionCapabilities2",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Cmpnt",
-            "type": "caaa001_PointOfInteractionComponent4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_BinaryFile1": {
-        "elements": [
-          {
-            "name": "MIMETp",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "NcodgTp",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CharSet",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "InclBinryObjct",
-            "type": "base64Binary",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CardPaymentTransactionResult1": {
-        "elements": [
-          {
-            "name": "AuthstnNtty",
-            "type": "caaa001_GenericIdentification33",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RspnToAuthstn",
-            "type": "caaa001_ResponseType1",
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthstnCd",
-            "type": "string",
-            "size": 8,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_GenericIdentification33": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShrtNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_GenericIdentification32": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "Tp",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShrtNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_GenericIdentification31": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShrtNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AlgorithmIdentification10": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa001_Parameter1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_TransactionIdentifier1": {
-        "elements": [
-          {
-            "name": "TxDtTm",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "TxRef",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AlgorithmIdentification8": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa001_Parameter3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AlgorithmIdentification7": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa001_Parameter2",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AlgorithmIdentification6": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa001_Parameter1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Commission19": {
-        "elements": [
-          {
-            "name": "Amt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlInf",
-            "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Commission18": {
-        "elements": [
-          {
-            "name": "Rate",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlInf",
-            "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AlgorithmIdentification9": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa001_Parameter1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PointOfInteractionComponent4": {
-        "elements": [
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Id",
-            "type": "caaa001_PointOfInteractionComponentIdentification1",
-            "minOccurs": 0
-          },
-          {
-            "name": "Sts",
-            "type": "caaa001_PointOfInteractionComponentStatus1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "StdCmplc",
-            "type": "caaa001_GenericIdentification48",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "Chrtcs",
-            "type": "caaa001_PointOfInteractionComponentCharacteristics2",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Assmnt",
-            "type": "caaa001_PointOfInteractionComponentAssessment1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_TradeDelivery1": {
-        "elements": [
-          {
-            "name": "DlvryPrd",
-            "type": "caaa001_Period1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DlvryDtTm",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShipFr",
-            "type": "caaa001_TradeParty1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShipTo",
-            "type": "caaa001_TradeParty1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "UltmtShipTo",
-            "type": "caaa001_TradeParty1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DlvryNote",
-            "type": "caaa001_DocumentIdentification22",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Consgnmt",
-            "type": "caaa001_Consignment2",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_PaymentContext5": {
-        "elements": [
-          {
-            "name": "CardPres",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CrdhldrPres",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AttndncCntxt",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxEnvt",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxChanl",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AttndntMsgCpbl",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AttndntLang",
-            "type": "string",
-            "size": 2,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CardDataNtryMd",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "FllbckInd",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SpprtdOptn",
-            "type": "string",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_PersonIdentification5": {
-        "elements": [
-          {
-            "name": "DtAndPlcOfBirth",
-            "type": "caaa001_DateAndPlaceOfBirth",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Othr",
-            "type": "caaa001_GenericPersonIdentification1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_PersonIdentification7": {
-        "elements": [
-          {
-            "name": "DrvrsLicNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CstmrNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SclSctyNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AlnRegnNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PsptNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TaxIdNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "IdntyCardNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MplyrIdNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MplyeeIdNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "EmailAdr",
-            "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DtAndPlcOfBirth",
-            "type": "caaa001_DateAndPlaceOfBirth",
+            "name": "ClrSysMmbId",
+            "type": "pacs008_ClearingSystemMemberIdentification2",
             "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Othr",
-            "type": "caaa001_GenericIdentification4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_EnvelopedData3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Rcpt",
-            "type": "caaa001_Recipient3Choice",
-            "maxOccurs": 2,
-            "minOccurs": 0
-          },
-          {
-            "name": "NcrptdCntt",
-            "type": "caaa001_EncryptedContent2",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PaymentCard7": {
-        "elements": [
-          {
-            "name": "PrtctdCardData",
-            "type": "caaa001_ContentInformationType7",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PlainCardData",
-            "type": "caaa001_PlainCardData4",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CardCtryCd",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CardCcyCd",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CardPdctPrfl",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CardBrnd",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlCardData",
-            "type": "string",
-            "size": 70,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Traceability1": {
-        "elements": [
-          {
-            "name": "RlayId",
-            "type": "caaa001_GenericIdentification31",
-            "minOccurs": 0
-          },
-          {
-            "name": "TracDtTmIn",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "TracDtTmOut",
-            "type": "timestamp",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PlainCardData4": {
-        "elements": [
-          {
-            "name": "PAN",
-            "type": "string",
-            "size": 28,
-            "minOccurs": 0
-          },
-          {
-            "name": "CardSeqNb",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "FctvDt",
-            "type": "string",
-            "size": 10,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "XpryDt",
-            "type": "string",
-            "size": 10,
-            "minOccurs": 0
-          },
-          {
-            "name": "SvcCd",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrckData",
-            "type": "caaa001_TrackData1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "CardSctyCd",
-            "type": "caaa001_CardSecurityInformation1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_EncryptedContent2": {
-        "elements": [
-          {
-            "name": "CnttTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "CnttNcrptnAlgo",
-            "type": "caaa001_AlgorithmIdentification6",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcrptdData",
-            "type": "base64Binary",
-            "size": 256,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Header7": {
-        "elements": [
-          {
-            "name": "MsgFctn",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "PrtcolVrsn",
-            "type": "string",
-            "size": 6,
-            "minOccurs": 0
-          },
-          {
-            "name": "XchgId",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "CreDtTm",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "InitgPty",
-            "type": "caaa001_GenericIdentification32",
-            "minOccurs": 0
-          },
-          {
-            "name": "RcptPty",
-            "type": "caaa001_GenericIdentification32",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Tracblt",
-            "type": "caaa001_Traceability1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_TaxTypeFormat1Choice": {
-        "elements": [
-          {
-            "name": "Cd",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Prtry",
-            "type": "caaa001_GenericIdentification13",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Acquirer2": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "caaa001_GenericIdentification32",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ParamsVrsn",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_GenericIdentification13": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 4,
-            "minOccurs": 0
-          },
-          {
-            "name": "SchmeNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Party8Choice": {
-        "elements": [
-          {
-            "name": "OrgId",
-            "type": "caaa001_OrganisationIdentification6",
-            "minOccurs": 0
-          },
-          {
-            "name": "PrvtId",
-            "type": "caaa001_PersonIdentification5",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_ProductCharacteristics1Choice": {
-        "elements": [
-          {
-            "name": "StrdPdctChrtcs",
-            "type": "caaa001_ProductCharacteristics1",
-            "minOccurs": 0
-          },
-          {
-            "name": "OthrPdctChrtcs",
-            "type": "caaa001_GenericIdentification4",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_RelativeDistinguishedName1": {
-        "elements": [
-          {
-            "name": "AttrTp",
-            "type": "string",
             "minOccurs": 0
           },
           {
-            "name": "AttrVal",
+            "name": "Nm",
             "type": "string",
             "size": 140,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_EncapsulatedContent2": {
-        "elements": [
-          {
-            "name": "CnttTp",
-            "type": "string",
+            "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Cntt",
-            "type": "base64Binary",
-            "size": 256,
+            "name": "PstlAdr",
+            "type": "pacs008_PostalAddress6",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Othr",
+            "type": "pacs008_GenericFinancialIdentification1",
             "hideIfEmpty": true,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_DiscountTypeFormat1Choice": {
+      "pacs008_ReferredDocumentType1Choice": {
         "elements": [
           {
             "name": "Cd",
             "type": "string",
+            "size": 4,
             "minOccurs": 0
           },
           {
             "name": "Prtry",
-            "type": "caaa001_GenericIdentification13",
+            "type": "string",
+            "size": 35,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_DisplayCapabilities2": {
+      "pacs008_AccountIdentification4Choice": {
         "elements": [
           {
-            "name": "DispTp",
+            "name": "IBAN",
             "type": "string",
+            "size": 34,
             "minOccurs": 0
           },
           {
-            "name": "NbOfLines",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "LineWidth",
-            "type": "numeric",
+            "name": "Othr",
+            "type": "pacs008_GenericAccountIdentification1",
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_DateAndPlaceOfBirth": {
+      "pacs008_StructuredRemittanceInformation7": {
+        "elements": [
+          {
+            "name": "RfrdDocInf",
+            "type": "pacs008_ReferredDocumentInformation3",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "RfrdDocAmt",
+            "type": "pacs008_RemittanceAmount1",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrRefInf",
+            "type": "pacs008_CreditorReferenceInformation2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Invcr",
+            "type": "pacs008_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Invcee",
+            "type": "pacs008_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AddtlRmtInf",
+            "type": "string",
+            "size": 140,
+            "minOccurs": 0,
+            "maxOccurs": 3
+          }
+        ]
+      },
+      "pacs008_ActiveOrHistoricCurrencyAndAmount": {
+        "elements": [
+          {
+            "name": "value",
+            "size": 18,
+            "type": "string"
+          },
+          {
+            "name": "Ccy",
+            "size": 3,
+            "type": "string",
+            "minOccurs": 1
+          }
+        ]
+      },
+      "pacs008_DateAndPlaceOfBirth": {
         "elements": [
           {
             "name": "BirthDt",
@@ -2192,109 +469,75 @@
           }
         ]
       },
-      "caaa001_SaleContext1": {
+      "pacs008_PaymentTypeInformation21": {
         "elements": [
           {
-            "name": "SaleId",
+            "name": "InstrPrty",
             "type": "string",
-            "size": 35,
+            "size": 4,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "SaleRefNb",
+            "name": "ClrChanl",
             "type": "string",
-            "size": 35,
+            "size": 4,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "SaleRcncltnId",
-            "type": "string",
-            "size": 35,
+            "name": "SvcLvl",
+            "type": "pacs008_ServiceLevel8Choice",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "CshrId",
-            "type": "string",
-            "size": 35,
+            "name": "LclInstrm",
+            "type": "pacs008_LocalInstrument2Choice",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "ShftNb",
-            "type": "string",
-            "size": 2,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlSaleData",
-            "type": "string",
-            "size": 70,
+            "name": "CtgyPurp",
+            "type": "pacs008_CategoryPurpose1Choice",
             "hideIfEmpty": true,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_LineItemMonetarySummation1": {
+      "pacs008_ClearingSystemIdentification2Choice": {
         "elements": [
           {
-            "name": "LineTtlAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "AllwncTtlAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "ChrgTtlAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "TaxTtlAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "TaxBsisTtlAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "InfAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_ResponseType1": {
-        "elements": [
-          {
-            "name": "Rspn",
+            "name": "Cd",
             "type": "string",
+            "size": 5,
             "minOccurs": 0
           },
           {
-            "name": "RspnRsn",
+            "name": "Prtry",
             "type": "string",
             "size": 35,
-            "hideIfEmpty": true,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_GenericPersonIdentification1": {
+      "pacs008_OrganisationIdentificationSchemeName1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_GenericPersonIdentification1": {
         "elements": [
           {
             "name": "Id",
@@ -2304,7 +547,7 @@
           },
           {
             "name": "SchmeNm",
-            "type": "caaa001_PersonIdentificationSchemeName1Choice",
+            "type": "pacs008_PersonIdentificationSchemeName1Choice",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
@@ -2317,143 +560,258 @@
           }
         ]
       },
-      "caaa001_TaxExemptionReasonFormatChoice": {
+      "pacs008_CategoryPurpose1Choice": {
         "elements": [
           {
-            "name": "Ustrd",
+            "name": "Cd",
             "type": "string",
-            "size": 140,
-            "minOccurs": 0
-          },
-          {
-            "name": "Strd",
-            "type": "string",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_OnLinePIN3": {
-        "elements": [
-          {
-            "name": "NcrptdPINBlck",
-            "type": "caaa001_ContentInformationType7",
-            "minOccurs": 0
-          },
-          {
-            "name": "PINFrmt",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlInpt",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Period1": {
-        "elements": [
-          {
-            "name": "StartDt",
-            "type": "caaa001_DateFormat4Choice",
-            "minOccurs": 0
-          },
-          {
-            "name": "EndDt",
-            "type": "caaa001_DateFormat4Choice",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_DateFormat4Choice": {
-        "elements": [
-          {
-            "name": "Dt",
-            "type": "caaa001_DateAndDateTimeChoice",
-            "minOccurs": 0
-          },
-          {
-            "name": "NotSpcfdDt",
-            "type": "string",
+            "size": 4,
             "minOccurs": 0
           },
           {
             "name": "Prtry",
-            "type": "caaa001_GenericIdentification13",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AccountingAccount1": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "CostRefPttrn",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_ProductCategory1": {
-        "elements": [
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Ctgy",
             "type": "string",
             "size": 35,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_TaxParty3": {
+      "pacs008_ReferredDocumentType2": {
         "elements": [
           {
-            "name": "TaxId",
+            "name": "CdOrPrtry",
+            "type": "pacs008_ReferredDocumentType1Choice",
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
             "type": "string",
             "size": 35,
             "hideIfEmpty": true,
             "minOccurs": 0
-          },
+          }
+        ]
+      },
+      "pacs008_OrganisationIdentification4": {
+        "elements": [
           {
-            "name": "TaxTp",
+            "name": "BICOrBEI",
             "type": "string",
-            "size": 35,
+            "size": 12,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "RegnId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TaxXmptnRsn",
-            "type": "caaa001_TaxExemptionReasonFormatChoice",
+            "name": "Othr",
+            "type": "pacs008_GenericOrganisationIdentification1",
             "minOccurs": 0,
             "maxOccurs": 2
           }
         ]
       },
-      "caaa001_PostalAddress6": {
+      "pacs008_GenericAccountIdentification1": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 34,
+            "minOccurs": 0
+          },
+          {
+            "name": "SchmeNm",
+            "type": "pacs008_AccountSchemeName1Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_Purpose2Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_RemittanceInformation5": {
+        "elements": [
+          {
+            "name": "Ustrd",
+            "type": "string",
+            "size": 140,
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "Strd",
+            "type": "pacs008_StructuredRemittanceInformation7",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs008_SettlementTimeRequest2": {
+        "elements": [
+          {
+            "name": "CLSTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "TillTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "FrTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "RjctTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_RemittanceAmount1": {
+        "elements": [
+          {
+            "name": "DuePyblAmt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "DscntApldAmt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtNoteAmt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "TaxAmt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AdjstmntAmtAndRsn",
+            "type": "pacs008_DocumentAdjustment1",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "RmtdAmt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_FIToFICustomerCreditTransferV02": {
+        "elements": [
+          {
+            "name": "GrpHdr",
+            "type": "pacs008_GroupHeader33",
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtTrfTxInf",
+            "type": "pacs008_CreditTransferTransactionInformation11",
+            "maxOccurs": 2,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_SettlementInformation13": {
+        "elements": [
+          {
+            "name": "SttlmMtd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "SttlmAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ClrSys",
+            "type": "pacs008_ClearingSystemIdentification3Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstgRmbrsmntAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstgRmbrsmntAgtAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstdRmbrsmntAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstdRmbrsmntAgtAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ThrdRmbrsmntAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ThrdRmbrsmntAgtAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_PostalAddress6": {
         "elements": [
           {
             "name": "AdrTp",
             "type": "string",
+            "size": 4,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
@@ -2522,133 +880,31 @@
           }
         ]
       },
-      "caaa001_Packaging1": {
-        "elements": [
-          {
-            "name": "Tp",
-            "type": "string",
-            "size": 4,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Nm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_ProductCategory1Choice": {
-        "elements": [
-          {
-            "name": "StrdPdctCtgy",
-            "type": "caaa001_ProductCategory1",
-            "minOccurs": 0
-          },
-          {
-            "name": "OthrPdctCtgy",
-            "type": "caaa001_GenericIdentification4",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AdditionalInformation1": {
-        "elements": [
-          {
-            "name": "InfTp",
-            "type": "caaa001_InformationType1Choice",
-            "minOccurs": 0
-          },
-          {
-            "name": "InfVal",
-            "type": "string",
-            "size": 256,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_DocumentIdentification23": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "DtOfIsse",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "OrdrLineId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CountryCodeAndName1": {
+      "pacs008_ServiceLevel8Choice": {
         "elements": [
           {
             "name": "Cd",
             "type": "string",
-            "size": 2,
-            "hideIfEmpty": true,
+            "size": 4,
             "minOccurs": 0
           },
           {
-            "name": "Nm",
+            "name": "Prtry",
             "type": "string",
             "size": 35,
-            "hideIfEmpty": true,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_DocumentIdentification22": {
+      "pacs008_CreditorReferenceType2": {
         "elements": [
           {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
+            "name": "CdOrPrtry",
+            "type": "pacs008_CreditorReferenceType1Choice",
             "minOccurs": 0
           },
           {
-            "name": "DtOfIsse",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Adjustment4": {
-        "elements": [
-          {
-            "name": "Drctn",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Amt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Incoterms3": {
-        "elements": [
-          {
-            "name": "IncotrmsCd",
-            "type": "caaa001_Incoterms4Choice",
-            "minOccurs": 0
-          },
-          {
-            "name": "Lctn",
+            "name": "Issr",
             "type": "string",
             "size": 35,
             "hideIfEmpty": true,
@@ -2656,205 +912,12 @@
           }
         ]
       },
-      "caaa001_AcceptorAuthorisationRequestV03": {
-        "elements": [
-          {
-            "name": "Hdr",
-            "type": "caaa001_Header7",
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthstnReq",
-            "type": "caaa001_AcceptorAuthorisationRequest3",
-            "minOccurs": 0
-          },
-          {
-            "name": "SctyTrlr",
-            "type": "caaa001_ContentInformationType8",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CurrencyConversion1": {
-        "elements": [
-          {
-            "name": "CcyConvsId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Rslt",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "RspnRsn",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcy",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcyNmrc",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcyDcml",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcyNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RsltgAmt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "XchgRate",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "NvrtdXchgRate",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "QtnDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "VldUntil",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcy",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcyNmrc",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcyDcml",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcyNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "OrgnlAmt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "ComssnDtls",
-            "type": "caaa001_Commission19",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "MrkUpDtls",
-            "type": "caaa001_Commission18",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "DclrtnDtls",
-            "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PointOfInteractionComponentAssessment1": {
-        "elements": [
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Assgnr",
-            "type": "string",
-            "size": 35,
-            "maxOccurs": 2,
-            "minOccurs": 0
-          },
-          {
-            "name": "DlvryDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "XprtnDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Nb",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PointOfInteractionComponentStatus1": {
-        "elements": [
-          {
-            "name": "VrsnNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Sts",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Contacts3": {
+      "pacs008_ContactDetails2": {
         "elements": [
           {
             "name": "NmPrfx",
             "type": "string",
+            "size": 4,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
@@ -2899,18 +962,1626 @@
             "size": 35,
             "hideIfEmpty": true,
             "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_BranchAndFinancialInstitutionIdentification4": {
+        "elements": [
+          {
+            "name": "FinInstnId",
+            "type": "pacs008_FinancialInstitutionIdentification7",
+            "minOccurs": 0
           },
           {
-            "name": "JobTitl",
+            "name": "BrnchId",
+            "type": "pacs008_BranchData2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_CashAccount16": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "pacs008_AccountIdentification4Choice",
+            "minOccurs": 0
+          },
+          {
+            "name": "Tp",
+            "type": "pacs008_CashAccountType2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Ccy",
+            "type": "string",
+            "size": 3,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Nm",
+            "type": "string",
+            "size": 70,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_RemittanceLocation2": {
+        "elements": [
+          {
+            "name": "RmtId",
             "type": "string",
             "size": 35,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Rspnsblty",
+            "name": "RmtLctnMtd",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "RmtLctnElctrncAdr",
+            "type": "string",
+            "size": 256,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "RmtLctnPstlAdr",
+            "type": "pacs008_NameAndAddress10",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_LocalInstrument2Choice": {
+        "elements": [
+          {
+            "name": "Cd",
             "type": "string",
             "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_GroupHeader33": {
+        "elements": [
+          {
+            "name": "MsgId",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "CreDtTm",
+            "type": "timestamp",
+            "minOccurs": 0
+          },
+          {
+            "name": "BtchBookg",
+            "type": "boolean",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "NbOfTxs",
+            "type": "string",
+            "size": 15,
+            "minOccurs": 0
+          },
+          {
+            "name": "CtrlSum",
+            "type": "string",
+            "size": 18,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "TtlIntrBkSttlmAmt",
+            "type": "pacs008_ActiveCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrBkSttlmDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "SttlmInf",
+            "type": "pacs008_SettlementInformation13",
+            "minOccurs": 0
+          },
+          {
+            "name": "PmtTpInf",
+            "type": "pacs008_PaymentTypeInformation21",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstgAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstdAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_Party6Choice": {
+        "elements": [
+          {
+            "name": "OrgId",
+            "type": "pacs008_OrganisationIdentification4",
+            "minOccurs": 0
+          },
+          {
+            "name": "PrvtId",
+            "type": "pacs008_PersonIdentification5",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_ClearingSystemIdentification3Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 3,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_CreditTransferTransactionInformation11": {
+        "elements": [
+          {
+            "name": "PmtId",
+            "type": "pacs008_PaymentIdentification3",
+            "minOccurs": 0
+          },
+          {
+            "name": "PmtTpInf",
+            "type": "pacs008_PaymentTypeInformation21",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrBkSttlmAmt",
+            "type": "pacs008_ActiveCurrencyAndAmount",
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrBkSttlmDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "SttlmPrty",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "SttlmTmIndctn",
+            "type": "pacs008_SettlementDateTimeIndication1",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "SttlmTmReq",
+            "type": "pacs008_SettlementTimeRequest2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AccptncDtTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PoolgAdjstmntDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstdAmt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "XchgRate",
+            "type": "string",
+            "size": 11,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ChrgBr",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "ChrgsInf",
+            "type": "pacs008_ChargesInformation5",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "PrvsInstgAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PrvsInstgAgtAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstgAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstdAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrmyAgt1",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrmyAgt1Acct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrmyAgt2",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrmyAgt2Acct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrmyAgt3",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrmyAgt3Acct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "UltmtDbtr",
+            "type": "pacs008_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InitgPty",
+            "type": "pacs008_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Dbtr",
+            "type": "pacs008_PartyIdentification32",
+            "minOccurs": 0
+          },
+          {
+            "name": "DbtrAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "DbtrAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "minOccurs": 0
+          },
+          {
+            "name": "DbtrAgtAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrAgt",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrAgtAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Cdtr",
+            "type": "pacs008_PartyIdentification32",
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrAcct",
+            "type": "pacs008_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "UltmtCdtr",
+            "type": "pacs008_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstrForCdtrAgt",
+            "type": "pacs008_InstructionForCreditorAgent1",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "InstrForNxtAgt",
+            "type": "pacs008_InstructionForNextAgent1",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "Purp",
+            "type": "pacs008_Purpose2Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "RgltryRptg",
+            "type": "pacs008_RegulatoryReporting3",
+            "minOccurs": 0,
+            "maxOccurs": 10
+          },
+          {
+            "name": "RltdRmtInf",
+            "type": "pacs008_RemittanceLocation2",
+            "minOccurs": 0,
+            "maxOccurs": 10
+          },
+          {
+            "name": "RmtInf",
+            "type": "pacs008_RemittanceInformation5",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_SettlementDateTimeIndication1": {
+        "elements": [
+          {
+            "name": "DbtDtTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtDtTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_RegulatoryAuthority2": {
+        "elements": [
+          {
+            "name": "Nm",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Ctry",
+            "type": "string",
+            "size": 2,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_ChargesInformation5": {
+        "elements": [
+          {
+            "name": "Amt",
+            "type": "pacs008_ActiveOrHistoricCurrencyAndAmount",
+            "minOccurs": 0
+          },
+          {
+            "name": "Pty",
+            "type": "pacs008_BranchAndFinancialInstitutionIdentification4",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_BranchData2": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Nm",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PstlAdr",
+            "type": "pacs008_PostalAddress6",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_AccountSchemeName1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_GenericFinancialIdentification1": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "SchmeNm",
+            "type": "pacs008_FinancialIdentificationSchemeName1Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_InstructionForCreditorAgent1": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstrInf",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_PartyIdentification32": {
+        "elements": [
+          {
+            "name": "Nm",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PstlAdr",
+            "type": "pacs008_PostalAddress6",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Id",
+            "type": "pacs008_Party6Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CtryOfRes",
+            "type": "string",
+            "size": 2,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CtctDtls",
+            "type": "pacs008_ContactDetails2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_PersonIdentification5": {
+        "elements": [
+          {
+            "name": "DtAndPlcOfBirth",
+            "type": "pacs008_DateAndPlaceOfBirth",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Othr",
+            "type": "pacs008_GenericPersonIdentification1",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs008_ActiveCurrencyAndAmount": {
+        "elements": [
+          {
+            "name": "value",
+            "size": 18,
+            "type": "string"
+          },
+          {
+            "name": "Ccy",
+            "size": 3,
+            "type": "string",
+            "minOccurs": 1
+          }
+        ]
+      },
+      "pacs008_FinancialIdentificationSchemeName1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_ReferredDocumentInformation3": {
+        "elements": [
+          {
+            "name": "Tp",
+            "type": "pacs008_ReferredDocumentType2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Nb",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "RltdDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs008_CreditorReferenceInformation2": {
+        "elements": [
+          {
+            "name": "Tp",
+            "type": "pacs008_CreditorReferenceType2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Ref",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_anyType": {
+        "elements": []
+      },
+      "pacs002_NumberOfTransactionsPerStatus3": {
+        "elements": [
+          {
+            "name": "DtldNbOfTxs",
+            "type": "string",
+            "size": 15,
+            "minOccurs": 0
+          },
+          {
+            "name": "DtldSts",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "DtldCtrlSum",
+            "type": "string",
+            "size": 18,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_Document": {
+        "elements": [
+          {
+            "name": "FIToFIPmtStsRpt",
+            "type": "pacs002_FIToFIPaymentStatusReportV03",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_CreditorReferenceType1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_DocumentAdjustment1": {
+        "elements": [
+          {
+            "name": "Amt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtDbtInd",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Rsn",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AddtlInf",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_GenericOrganisationIdentification1": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "SchmeNm",
+            "type": "pacs002_OrganisationIdentificationSchemeName1Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_AmountType3Choice": {
+        "elements": [
+          {
+            "name": "InstdAmt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "minOccurs": 0
+          },
+          {
+            "name": "EqvtAmt",
+            "type": "pacs002_EquivalentAmount2",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_CashAccountType2": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ClearingSystemMemberIdentification2": {
+        "elements": [
+          {
+            "name": "ClrSysId",
+            "type": "pacs002_ClearingSystemIdentification2Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "MmbId",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_PersonIdentificationSchemeName1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_AmendmentInformationDetails6": {
+        "elements": [
+          {
+            "name": "OrgnlMndtId",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlCdtrSchmeId",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlCdtrAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlCdtrAgtAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlDbtr",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlDbtrAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlDbtrAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlDbtrAgtAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlFnlColltnDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlFrqcy",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_FinancialInstitutionIdentification7": {
+        "elements": [
+          {
+            "name": "BIC",
+            "type": "string",
+            "size": 12,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ClrSysMmbId",
+            "type": "pacs002_ClearingSystemMemberIdentification2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Nm",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PstlAdr",
+            "type": "pacs002_PostalAddress6",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Othr",
+            "type": "pacs002_GenericFinancialIdentification1",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ReferredDocumentType1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_FIToFIPaymentStatusReportV03": {
+        "elements": [
+          {
+            "name": "GrpHdr",
+            "type": "pacs002_GroupHeader37",
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlGrpInfAndSts",
+            "type": "pacs002_OriginalGroupInformation20",
+            "minOccurs": 0
+          },
+          {
+            "name": "TxInfAndSts",
+            "type": "pacs002_PaymentTransactionInformation26",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs002_AccountIdentification4Choice": {
+        "elements": [
+          {
+            "name": "IBAN",
+            "type": "string",
+            "size": 34,
+            "minOccurs": 0
+          },
+          {
+            "name": "Othr",
+            "type": "pacs002_GenericAccountIdentification1",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_StructuredRemittanceInformation7": {
+        "elements": [
+          {
+            "name": "RfrdDocInf",
+            "type": "pacs002_ReferredDocumentInformation3",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "RfrdDocAmt",
+            "type": "pacs002_RemittanceAmount1",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrRefInf",
+            "type": "pacs002_CreditorReferenceInformation2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Invcr",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Invcee",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AddtlRmtInf",
+            "type": "string",
+            "size": 140,
+            "minOccurs": 0,
+            "maxOccurs": 3
+          }
+        ]
+      },
+      "pacs002_ActiveOrHistoricCurrencyAndAmount": {
+        "elements": [
+          {
+            "name": "value",
+            "size": 18,
+            "type": "string"
+          },
+          {
+            "name": "Ccy",
+            "size": 3,
+            "type": "string",
+            "minOccurs": 1
+          }
+        ]
+      },
+      "pacs002_DateAndPlaceOfBirth": {
+        "elements": [
+          {
+            "name": "BirthDt",
+            "type": "timestamp",
+            "minOccurs": 0
+          },
+          {
+            "name": "PrvcOfBirth",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CityOfBirth",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "CtryOfBirth",
+            "type": "string",
+            "size": 2,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ClearingSystemIdentification2Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 5,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_OriginalTransactionReference13": {
+        "elements": [
+          {
+            "name": "IntrBkSttlmAmt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Amt",
+            "type": "pacs002_AmountType3Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "IntrBkSttlmDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ReqdColltnDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ReqdExctnDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrSchmeId",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "SttlmInf",
+            "type": "pacs002_SettlementInformation13",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PmtTpInf",
+            "type": "pacs002_PaymentTypeInformation22",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PmtMtd",
+            "type": "string",
+            "size": 3,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "MndtRltdInf",
+            "type": "pacs002_MandateRelatedInformation6",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "RmtInf",
+            "type": "pacs002_RemittanceInformation5",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "UltmtDbtr",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Dbtr",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "DbtrAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "DbtrAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "DbtrAgtAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrAgtAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Cdtr",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtrAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "UltmtCdtr",
+            "type": "pacs002_PartyIdentification32",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_PaymentTypeInformation22": {
+        "elements": [
+          {
+            "name": "InstrPrty",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ClrChanl",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "SvcLvl",
+            "type": "pacs002_ServiceLevel8Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "LclInstrm",
+            "type": "pacs002_LocalInstrument2Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "SeqTp",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CtgyPurp",
+            "type": "pacs002_CategoryPurpose1Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_OrganisationIdentificationSchemeName1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_GenericPersonIdentification1": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "SchmeNm",
+            "type": "pacs002_PersonIdentificationSchemeName1Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_CategoryPurpose1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ReferredDocumentType2": {
+        "elements": [
+          {
+            "name": "CdOrPrtry",
+            "type": "pacs002_ReferredDocumentType1Choice",
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_OrganisationIdentification4": {
+        "elements": [
+          {
+            "name": "BICOrBEI",
+            "type": "string",
+            "size": 12,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Othr",
+            "type": "pacs002_GenericOrganisationIdentification1",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs002_GenericAccountIdentification1": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 34,
+            "minOccurs": 0
+          },
+          {
+            "name": "SchmeNm",
+            "type": "pacs002_AccountSchemeName1Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_MandateRelatedInformation6": {
+        "elements": [
+          {
+            "name": "MndtId",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "DtOfSgntr",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AmdmntInd",
+            "type": "boolean",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AmdmntInfDtls",
+            "type": "pacs002_AmendmentInformationDetails6",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ElctrncSgntr",
+            "type": "string",
+            "size": 256,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "FrstColltnDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "FnlColltnDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Frqcy",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_OriginalGroupInformation20": {
+        "elements": [
+          {
+            "name": "OrgnlMsgId",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlMsgNmId",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlCreDtTm",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlNbOfTxs",
+            "type": "string",
+            "size": 15,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlCtrlSum",
+            "type": "string",
+            "size": 18,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "GrpSts",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "StsRsnInf",
+            "type": "pacs002_StatusReasonInformation8",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "NbOfTxsPerSts",
+            "type": "pacs002_NumberOfTransactionsPerStatus3",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs002_RemittanceInformation5": {
+        "elements": [
+          {
+            "name": "Ustrd",
+            "type": "string",
+            "size": 140,
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "Strd",
+            "type": "pacs002_StructuredRemittanceInformation7",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs002_RemittanceAmount1": {
+        "elements": [
+          {
+            "name": "DuePyblAmt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "DscntApldAmt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CdtNoteAmt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "TaxAmt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AdjstmntAmtAndRsn",
+            "type": "pacs002_DocumentAdjustment1",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "RmtdAmt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_SettlementInformation13": {
+        "elements": [
+          {
+            "name": "SttlmMtd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "SttlmAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ClrSys",
+            "type": "pacs002_ClearingSystemIdentification3Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstgRmbrsmntAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstgRmbrsmntAgtAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstdRmbrsmntAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "InstdRmbrsmntAgtAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ThrdRmbrsmntAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "ThrdRmbrsmntAgtAcct",
+            "type": "pacs002_CashAccount16",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_PostalAddress6": {
+        "elements": [
+          {
+            "name": "AdrTp",
+            "type": "string",
+            "size": 4,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
@@ -2920,433 +2591,202 @@
             "size": 70,
             "hideIfEmpty": true,
             "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Organisation8": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "caaa001_GenericIdentification32",
-            "hideIfEmpty": true,
-            "minOccurs": 0
           },
           {
-            "name": "CmonNm",
+            "name": "SubDept",
             "type": "string",
             "size": 70,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "LctnCtgy",
+            "name": "StrtNm",
             "type": "string",
+            "size": 70,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Adr",
+            "name": "BldgNb",
             "type": "string",
-            "size": 140,
+            "size": 16,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "CtryCd",
+            "name": "PstCd",
             "type": "string",
-            "size": 3,
+            "size": 16,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "SchmeData",
-            "type": "string",
-            "size": 140,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_InvoiceHeader1": {
-        "elements": [
-          {
-            "name": "Id",
+            "name": "TwnNm",
             "type": "string",
             "size": 35,
+            "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "TpCd",
-            "type": "string",
-            "size": 4,
-            "minOccurs": 0
-          },
-          {
-            "name": "Nm",
+            "name": "CtrySubDvsn",
             "type": "string",
             "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Ctry",
+            "type": "string",
+            "size": 2,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "AdrLine",
+            "type": "string",
+            "size": 70,
             "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "IsseDtTm",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "caaa001_TradeParty1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "LangCd",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CpyInd",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DocPurp",
-            "type": "string",
-            "size": 4,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "InclNote",
-            "type": "caaa001_AdditionalInformation6",
-            "minOccurs": 0,
-            "maxOccurs": 2
+            "maxOccurs": 7
           }
         ]
       },
-      "caaa001_CardSecurityInformation1": {
-        "elements": [
-          {
-            "name": "CSCMgmt",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "CSCVal",
-            "type": "string",
-            "size": 4,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_IssuerAndSerialNumber1": {
-        "elements": [
-          {
-            "name": "Issr",
-            "type": "caaa001_CertificateIssuer1",
-            "minOccurs": 0
-          },
-          {
-            "name": "SrlNb",
-            "type": "base64Binary",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_DiscountOrChargeType1Choice": {
-        "elements": [
-          {
-            "name": "ChrgTp",
-            "type": "caaa001_ChargeTypeFormat3Choice",
-            "minOccurs": 0
-          },
-          {
-            "name": "DscntTp",
-            "type": "caaa001_DiscountTypeFormat1Choice",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AddressVerification1": {
-        "elements": [
-          {
-            "name": "AdrDgts",
-            "type": "string",
-            "size": 5,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PstlCdDgts",
-            "type": "string",
-            "size": 5,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CardholderAuthentication5": {
-        "elements": [
-          {
-            "name": "AuthntcnMtd",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthntcnNtty",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthntcnVal",
-            "type": "string",
-            "size": 40,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CrdhldrOnLinePIN",
-            "type": "caaa001_OnLinePIN3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthntcnColltnInd",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_AdditionalInformation6": {
-        "elements": [
-          {
-            "name": "InfTp",
-            "type": "string",
-            "size": 4,
-            "minOccurs": 0
-          },
-          {
-            "name": "InfVal",
-            "type": "string",
-            "size": 256,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CommunicationCharacteristics2": {
-        "elements": [
-          {
-            "name": "ComTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "RmotPty",
-            "type": "string",
-            "maxOccurs": 2,
-            "minOccurs": 0
-          },
-          {
-            "name": "Actv",
-            "type": "boolean",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Parameter2": {
-        "elements": [
-          {
-            "name": "DgstAlgo",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MskGnrtrAlgo",
-            "type": "caaa001_AlgorithmIdentification8",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_MemoryCharacteristics1": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "TtlSz",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "FreeSz",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "Unit",
-            "type": "string",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Parameter1": {
-        "elements": [
-          {
-            "name": "InitlstnVctr",
-            "type": "base64Binary",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_ChargeTypeFormat3Choice": {
+      "pacs002_ServiceLevel8Choice": {
         "elements": [
           {
             "name": "Cd",
             "type": "string",
+            "size": 4,
             "minOccurs": 0
           },
           {
             "name": "Prtry",
-            "type": "caaa001_GenericIdentification13",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Parameter3": {
-        "elements": [
-          {
-            "name": "DgstAlgo",
             "type": "string",
-            "hideIfEmpty": true,
+            "size": 35,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_TradeParty1": {
+      "pacs002_EquivalentAmount2": {
         "elements": [
           {
-            "name": "PtyId",
-            "type": "caaa001_PartyIdentification45",
+            "name": "Amt",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
             "minOccurs": 0
           },
           {
-            "name": "LglOrg",
-            "type": "caaa001_LegalOrganisation1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TaxPty",
-            "type": "caaa001_TaxParty3",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_AggregationTransaction1": {
-        "elements": [
-          {
-            "name": "FrstPmtDtTm",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "LastPmtDtTm",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "NbOfPmts",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "IndvPmt",
-            "type": "caaa001_DetailedAmount6",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_ContentInformationType7": {
-        "elements": [
-          {
-            "name": "CnttTp",
+            "name": "CcyOfTrf",
             "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "EnvlpdData",
-            "type": "caaa001_EnvelopedData3",
+            "size": 3,
             "minOccurs": 0
           }
         ]
       },
-      "caaa001_Cardholder5": {
+      "pacs002_CreditorReferenceType2": {
         "elements": [
           {
-            "name": "Id",
-            "type": "caaa001_PersonIdentification7",
+            "name": "CdOrPrtry",
+            "type": "pacs002_CreditorReferenceType1Choice",
+            "minOccurs": 0
+          },
+          {
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ContactDetails2": {
+        "elements": [
+          {
+            "name": "NmPrfx",
+            "type": "string",
+            "size": 4,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
             "name": "Nm",
             "type": "string",
-            "size": 45,
+            "size": 140,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Lang",
+            "name": "PhneNb",
             "type": "string",
-            "size": 2,
+            "size": 34,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "BllgAdr",
-            "type": "caaa001_PostalAddress13",
+            "name": "MobNb",
+            "type": "string",
+            "size": 34,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "ShppgAdr",
-            "type": "caaa001_PostalAddress13",
+            "name": "FaxNb",
+            "type": "string",
+            "size": 34,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Authntcn",
-            "type": "caaa001_CardholderAuthentication5",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "AdrVrfctn",
-            "type": "caaa001_AddressVerification1",
+            "name": "EmailAdr",
+            "type": "string",
+            "size": 256,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "PrsnlData",
+            "name": "Othr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_BranchAndFinancialInstitutionIdentification4": {
+        "elements": [
+          {
+            "name": "FinInstnId",
+            "type": "pacs002_FinancialInstitutionIdentification7",
+            "minOccurs": 0
+          },
+          {
+            "name": "BrnchId",
+            "type": "pacs002_BranchData2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_CashAccount16": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "pacs002_AccountIdentification4Choice",
+            "minOccurs": 0
+          },
+          {
+            "name": "Tp",
+            "type": "pacs002_CashAccountType2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Ccy",
+            "type": "string",
+            "size": 3,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Nm",
             "type": "string",
             "size": 70,
             "hideIfEmpty": true,
@@ -3354,539 +2794,12 @@
           }
         ]
       },
-      "caaa001_ContentInformationType8": {
+      "pacs002_GroupHeader37": {
         "elements": [
           {
-            "name": "CnttTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthntcdData",
-            "type": "caaa001_AuthenticatedData3",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_DocumentGeneralInformation2": {
-        "elements": [
-          {
-            "name": "DocTp",
-            "type": "string",
-            "size": 4,
-            "minOccurs": 0
-          },
-          {
-            "name": "DocNb",
+            "name": "MsgId",
             "type": "string",
             "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "SndrRcvrSeqId",
-            "type": "string",
-            "size": 140,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "IsseDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "URL",
-            "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AttchdBinryFile",
-            "type": "caaa001_BinaryFile1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_LineItemTax1": {
-        "elements": [
-          {
-            "name": "ClctdAmt",
-            "type": "caaa001_CurrencyAndAmount",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "TpCd",
-            "type": "caaa001_TaxTypeFormat1Choice",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TaxPtDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ClctdRate",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtgyCd",
-            "type": "string",
-            "size": 4,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtgyNm",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_ProductCharacteristics1": {
-        "elements": [
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Chrtcs",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_ProductCharacteristics2": {
-        "elements": [
-          {
-            "name": "Chrtc",
-            "type": "caaa001_ProductCharacteristics1Choice",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ValMeasr",
-            "type": "caaa001_Quantity3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_TradeProduct1": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "caaa001_ProductIdentifier2Choice",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "Nm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Desc",
-            "type": "string",
-            "size": 140,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CtryOfOrgn",
-            "type": "caaa001_CountryCodeAndName1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "PdctChrtcs",
-            "type": "caaa001_ProductCharacteristics2",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "PdctCtgy",
-            "type": "caaa001_ProductCategory1Choice",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "GblSrlIdr",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_CardPaymentTransactionDetails12": {
-        "elements": [
-          {
-            "name": "Ccy",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "TtlAmt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "AmtQlfr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DtldAmt",
-            "type": "caaa001_DetailedAmount5",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "VldtyDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "OnLineRsn",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "UattnddLvlCtgy",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AcctTp",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ConvsAccptd",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CcyConvs",
-            "type": "caaa001_CurrencyConversion1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Instlmt",
-            "type": "caaa001_RecurringTransaction2",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AggtnTx",
-            "type": "caaa001_AggregationTransaction1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Pdct",
-            "type": "caaa001_Product1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "CardPmtInvc",
-            "type": "caaa001_CardPaymentInvoice1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ICCRltdData",
-            "type": "base64Binary",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_CertificateIdentifier1": {
-        "elements": [
-          {
-            "name": "IssrAndSrlNb",
-            "type": "caaa001_IssuerAndSerialNumber1",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_ProductIdentifier2": {
-        "elements": [
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Idr",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_PointOfInteractionCapabilities2": {
-        "elements": [
-          {
-            "name": "CardRdngCpblties",
-            "type": "string",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "CrdhldrVrfctnCpblties",
-            "type": "string",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "OnLineCpblties",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "DispCpblties",
-            "type": "caaa001_DisplayCapabilities2",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "PrtLineWidth",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "AvlblLang",
-            "type": "string",
-            "size": 2,
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa001_PointOfInteractionComponentIdentification1": {
-        "elements": [
-          {
-            "name": "ItmNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PrvdrId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SrlNb",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_KEKIdentifier1": {
-        "elements": [
-          {
-            "name": "KeyId",
-            "type": "string",
-            "size": 140,
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyVrsn",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "DerivtnId",
-            "type": "base64Binary",
-            "size": 16,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Quantity3": {
-        "elements": [
-          {
-            "name": "Val",
-            "type": "numeric",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa001_Quantity4": {
-        "elements": [
-          {
-            "name": "Val",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "Fctr",
-            "type": "string",
-            "size": 15,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_anyType": {
-        "elements": []
-      },
-      "caaa002_Traceability1": {
-        "elements": [
-          {
-            "name": "RlayId",
-            "type": "caaa002_GenericIdentification31",
-            "minOccurs": 0
-          },
-          {
-            "name": "TracDtTmIn",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "TracDtTmOut",
-            "type": "timestamp",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_KEK3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "KEKId",
-            "type": "caaa002_KEKIdentifier1",
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyNcrptnAlgo",
-            "type": "caaa002_AlgorithmIdentification9",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcrptdKey",
-            "type": "base64Binary",
-            "size": 140,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_PlainCardData5": {
-        "elements": [
-          {
-            "name": "PAN",
-            "type": "string",
-            "size": 28,
-            "minOccurs": 0
-          },
-          {
-            "name": "CardSeqNb",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "FctvDt",
-            "type": "string",
-            "size": 10,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "XpryDt",
-            "type": "string",
-            "size": 10,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_EncryptedContent2": {
-        "elements": [
-          {
-            "name": "CnttTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "CnttNcrptnAlgo",
-            "type": "caaa002_AlgorithmIdentification6",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcrptdData",
-            "type": "base64Binary",
-            "size": 256,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Header7": {
-        "elements": [
-          {
-            "name": "MsgFctn",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "PrtcolVrsn",
-            "type": "string",
-            "size": 6,
-            "minOccurs": 0
-          },
-          {
-            "name": "XchgId",
-            "type": "string",
-            "size": 3,
             "minOccurs": 0
           },
           {
@@ -3895,1004 +2808,373 @@
             "minOccurs": 0
           },
           {
-            "name": "InitgPty",
-            "type": "caaa002_GenericIdentification32",
-            "minOccurs": 0
-          },
-          {
-            "name": "RcptPty",
-            "type": "caaa002_GenericIdentification32",
+            "name": "InstgAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Tracblt",
-            "type": "caaa002_Traceability1",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa002_CertificateIssuer1": {
-        "elements": [
-          {
-            "name": "RltvDstngshdNm",
-            "type": "caaa002_RelativeDistinguishedName1",
-            "maxOccurs": 2,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Document": {
-        "elements": [
-          {
-            "name": "AccptrAuthstnRspn",
-            "type": "caaa002_AcceptorAuthorisationResponseV03",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_TransactionVerificationResult2": {
-        "elements": [
-          {
-            "name": "ElctrncComrcAuthntcnRslt",
-            "type": "string",
-            "size": 256,
+            "name": "InstdAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
             "hideIfEmpty": true,
             "minOccurs": 0
-          },
-          {
-            "name": "CSCRslt",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CrdhldrAdrVrfctnRslt",
-            "type": "string",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "DclndPdctCd",
-            "type": "string",
-            "size": 70,
-            "minOccurs": 0,
-            "maxOccurs": 2
           }
         ]
       },
-      "caaa002_DetailedAmount4": {
+      "pacs002_LocalInstrument2Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_Party6Choice": {
+        "elements": [
+          {
+            "name": "OrgId",
+            "type": "pacs002_OrganisationIdentification4",
+            "minOccurs": 0
+          },
+          {
+            "name": "PrvtId",
+            "type": "pacs002_PersonIdentification5",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ClearingSystemIdentification3Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 3,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ChargesInformation5": {
         "elements": [
           {
             "name": "Amt",
-            "type": "numeric",
+            "type": "pacs002_ActiveOrHistoricCurrencyAndAmount",
             "minOccurs": 0
           },
           {
-            "name": "Labl",
+            "name": "Pty",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_BranchData2": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Nm",
             "type": "string",
             "size": 140,
             "hideIfEmpty": true,
             "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_DetailedAmount5": {
-        "elements": [
-          {
-            "name": "CshBck",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
           },
           {
-            "name": "Grtty",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Fees",
-            "type": "caaa002_DetailedAmount4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "Rbt",
-            "type": "caaa002_DetailedAmount4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "ValAddedTax",
-            "type": "caaa002_DetailedAmount4",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          }
-        ]
-      },
-      "caaa002_RelativeDistinguishedName1": {
-        "elements": [
-          {
-            "name": "AttrTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "AttrVal",
-            "type": "string",
-            "size": 140,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_CardPaymentTransaction23": {
-        "elements": [
-          {
-            "name": "SaleRefId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxId",
-            "type": "caaa002_TransactionIdentifier1",
-            "minOccurs": 0
-          },
-          {
-            "name": "RcptTxId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RcncltnId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "IntrchngData",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TxDtls",
-            "type": "caaa002_CardPaymentTransactionDetails13",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_EncapsulatedContent2": {
-        "elements": [
-          {
-            "name": "CnttTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Cntt",
-            "type": "base64Binary",
-            "size": 256,
+            "name": "PstlAdr",
+            "type": "pacs002_PostalAddress6",
             "hideIfEmpty": true,
             "minOccurs": 0
           }
         ]
       },
-      "caaa002_CardPaymentTransaction24": {
+      "pacs002_AccountSchemeName1Choice": {
         "elements": [
           {
-            "name": "AuthstnRslt",
-            "type": "caaa002_AuthorisationResult1",
-            "minOccurs": 0
-          },
-          {
-            "name": "TxVrfctnRslt",
-            "type": "caaa002_TransactionVerificationResult2",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Bal",
-            "type": "caaa002_AmountAndDirection41",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Actn",
-            "type": "caaa002_Action3",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "CcyConvs",
-            "type": "caaa002_CurrencyConversion1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_CurrencyAndAmount": {
-        "elements": []
-      },
-      "caaa002_AcceptorAuthorisationResponse3": {
-        "elements": [
-          {
-            "name": "Envt",
-            "type": "caaa002_CardPaymentEnvironment21",
-            "minOccurs": 0
-          },
-          {
-            "name": "Tx",
-            "type": "caaa002_CardPaymentTransaction23",
-            "minOccurs": 0
-          },
-          {
-            "name": "TxRspn",
-            "type": "caaa002_CardPaymentTransaction24",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_ResponseType1": {
-        "elements": [
-          {
-            "name": "Rspn",
+            "name": "Cd",
             "type": "string",
+            "size": 4,
             "minOccurs": 0
           },
           {
-            "name": "RspnRsn",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AcceptorAuthorisationResponseV03": {
-        "elements": [
-          {
-            "name": "Hdr",
-            "type": "caaa002_Header7",
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthstnRspn",
-            "type": "caaa002_AcceptorAuthorisationResponse3",
-            "minOccurs": 0
-          },
-          {
-            "name": "SctyTrlr",
-            "type": "caaa002_ContentInformationType8",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_KeyTransport3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RcptId",
-            "type": "caaa002_CertificateIdentifier1",
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyNcrptnAlgo",
-            "type": "caaa002_AlgorithmIdentification7",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcrptdKey",
-            "type": "base64Binary",
-            "size": 256,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AmountAndDirection41": {
-        "elements": [
-          {
-            "name": "Amt",
-            "type": "caaa002_CurrencyAndAmount",
-            "minOccurs": 0
-          },
-          {
-            "name": "Sgn",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AuthenticatedData3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Rcpt",
-            "type": "caaa002_Recipient3Choice",
-            "maxOccurs": 2,
-            "minOccurs": 0
-          },
-          {
-            "name": "MACAlgo",
-            "type": "caaa002_AlgorithmIdentification10",
-            "minOccurs": 0
-          },
-          {
-            "name": "NcpsltdCntt",
-            "type": "caaa002_EncapsulatedContent2",
-            "minOccurs": 0
-          },
-          {
-            "name": "MAC",
-            "type": "base64Binary",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_CardPaymentEnvironment21": {
-        "elements": [
-          {
-            "name": "AcqrrId",
-            "type": "caaa002_GenericIdentification32",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "MrchntId",
-            "type": "caaa002_GenericIdentification32",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "POIId",
-            "type": "caaa002_GenericIdentification32",
-            "minOccurs": 0
-          },
-          {
-            "name": "PrtctdCardData",
-            "type": "caaa002_ContentInformationType7",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "PlainCardData",
-            "type": "caaa002_PlainCardData5",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Recipient3Choice": {
-        "elements": [
-          {
-            "name": "KeyTrnsprt",
-            "type": "caaa002_KeyTransport3",
-            "minOccurs": 0
-          },
-          {
-            "name": "KEK",
-            "type": "caaa002_KEK3",
-            "minOccurs": 0
-          },
-          {
-            "name": "KeyIdr",
-            "type": "caaa002_KEKIdentifier1",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_CurrencyConversion1": {
-        "elements": [
-          {
-            "name": "CcyConvsId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Rslt",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "RspnRsn",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcy",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcyNmrc",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcyDcml",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "TrgtCcyNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RsltgAmt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "XchgRate",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "NvrtdXchgRate",
-            "type": "numeric",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "QtnDt",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "VldUntil",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcy",
-            "type": "string",
-            "size": 3,
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcyNmrc",
-            "type": "string",
-            "size": 3,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcyDcml",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "SrcCcyNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "OrgnlAmt",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "ComssnDtls",
-            "type": "caaa002_Commission19",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "MrkUpDtls",
-            "type": "caaa002_Commission18",
-            "minOccurs": 0,
-            "maxOccurs": 2
-          },
-          {
-            "name": "DclrtnDtls",
-            "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_TMSTrigger1": {
-        "elements": [
-          {
-            "name": "TMSCtctLvl",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "TMSId",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TMSCtctDtTm",
-            "type": "timestamp",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_GenericIdentification33": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShrtNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_GenericIdentification32": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "Tp",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShrtNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_GenericIdentification31": {
-        "elements": [
-          {
-            "name": "Id",
-            "type": "string",
-            "size": 35,
-            "minOccurs": 0
-          },
-          {
-            "name": "Tp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Issr",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "ShrtNm",
-            "type": "string",
-            "size": 35,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_ActionMessage1": {
-        "elements": [
-          {
-            "name": "MsgDstn",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "MsgCntt",
-            "type": "string",
-            "size": 256,
-            "minOccurs": 0
-          },
-          {
-            "name": "MsgCnttSgntr",
-            "type": "string",
-            "size": 70,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_IssuerAndSerialNumber1": {
-        "elements": [
-          {
-            "name": "Issr",
-            "type": "caaa002_CertificateIssuer1",
-            "minOccurs": 0
-          },
-          {
-            "name": "SrlNb",
-            "type": "base64Binary",
-            "size": 35,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AlgorithmIdentification10": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa002_Parameter1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_TransactionIdentifier1": {
-        "elements": [
-          {
-            "name": "TxDtTm",
-            "type": "timestamp",
-            "minOccurs": 0
-          },
-          {
-            "name": "TxRef",
+            "name": "Prtry",
             "type": "string",
             "size": 35,
             "minOccurs": 0
           }
         ]
       },
-      "caaa002_AlgorithmIdentification8": {
+      "pacs002_StatusReasonInformation8": {
         "elements": [
           {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa002_Parameter3",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Parameter2": {
-        "elements": [
-          {
-            "name": "DgstAlgo",
-            "type": "string",
+            "name": "Orgtr",
+            "type": "pacs002_PartyIdentification32",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "MskGnrtrAlgo",
-            "type": "caaa002_AlgorithmIdentification8",
+            "name": "Rsn",
+            "type": "pacs002_StatusReason6Choice",
             "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AlgorithmIdentification7": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa002_Parameter2",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Parameter1": {
-        "elements": [
-          {
-            "name": "InitlstnVctr",
-            "type": "base64Binary",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AlgorithmIdentification6": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa002_Parameter1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Commission19": {
-        "elements": [
-          {
-            "name": "Amt",
-            "type": "numeric",
             "minOccurs": 0
           },
           {
             "name": "AddtlInf",
             "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Commission18": {
-        "elements": [
-          {
-            "name": "Rate",
-            "type": "numeric",
-            "minOccurs": 0
-          },
-          {
-            "name": "AddtlInf",
-            "type": "string",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Parameter3": {
-        "elements": [
-          {
-            "name": "DgstAlgo",
-            "type": "string",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_Action3": {
-        "elements": [
-          {
-            "name": "ActnTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "MsgToPres",
-            "type": "caaa002_ActionMessage1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AlgorithmIdentification9": {
-        "elements": [
-          {
-            "name": "Algo",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "Param",
-            "type": "caaa002_Parameter1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_AuthorisationResult1": {
-        "elements": [
-          {
-            "name": "AuthstnNtty",
-            "type": "caaa002_GenericIdentification33",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "RspnToAuthstn",
-            "type": "caaa002_ResponseType1",
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthstnCd",
-            "type": "string",
-            "size": 8,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "CmpltnReqrd",
-            "type": "boolean",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          },
-          {
-            "name": "TMSTrggr",
-            "type": "caaa002_TMSTrigger1",
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_ContentInformationType7": {
-        "elements": [
-          {
-            "name": "CnttTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "EnvlpdData",
-            "type": "caaa002_EnvelopedData3",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_ContentInformationType8": {
-        "elements": [
-          {
-            "name": "CnttTp",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "AuthntcdData",
-            "type": "caaa002_AuthenticatedData3",
+            "size": 105,
             "minOccurs": 0,
             "maxOccurs": 2
           }
         ]
       },
-      "caaa002_CardPaymentTransactionDetails13": {
+      "pacs002_StatusReason6Choice": {
         "elements": [
           {
-            "name": "Ccy",
+            "name": "Cd",
             "type": "string",
-            "size": 3,
+            "size": 4,
             "minOccurs": 0
           },
           {
-            "name": "TtlAmt",
-            "type": "numeric",
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_GenericFinancialIdentification1": {
+        "elements": [
+          {
+            "name": "Id",
+            "type": "string",
+            "size": 35,
             "minOccurs": 0
           },
           {
-            "name": "DtldAmt",
-            "type": "caaa002_DetailedAmount5",
+            "name": "SchmeNm",
+            "type": "pacs002_FinancialIdentificationSchemeName1Choice",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "VldtyDt",
+            "name": "Issr",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_PartyIdentification32": {
+        "elements": [
+          {
+            "name": "Nm",
+            "type": "string",
+            "size": 140,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "PstlAdr",
+            "type": "pacs002_PostalAddress6",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Id",
+            "type": "pacs002_Party6Choice",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CtryOfRes",
+            "type": "string",
+            "size": 2,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "CtctDtls",
+            "type": "pacs002_ContactDetails2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_PersonIdentification5": {
+        "elements": [
+          {
+            "name": "DtAndPlcOfBirth",
+            "type": "pacs002_DateAndPlaceOfBirth",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Othr",
+            "type": "pacs002_GenericPersonIdentification1",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          }
+        ]
+      },
+      "pacs002_FinancialIdentificationSchemeName1Choice": {
+        "elements": [
+          {
+            "name": "Cd",
+            "type": "string",
+            "size": 4,
+            "minOccurs": 0
+          },
+          {
+            "name": "Prtry",
+            "type": "string",
+            "size": 35,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_ReferredDocumentInformation3": {
+        "elements": [
+          {
+            "name": "Tp",
+            "type": "pacs002_ReferredDocumentType2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Nb",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "RltdDt",
+            "type": "timestamp",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_CreditorReferenceInformation2": {
+        "elements": [
+          {
+            "name": "Tp",
+            "type": "pacs002_CreditorReferenceType2",
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "Ref",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          }
+        ]
+      },
+      "pacs002_PaymentTransactionInformation26": {
+        "elements": [
+          {
+            "name": "StsId",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlInstrId",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlEndToEndId",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "OrgnlTxId",
+            "type": "string",
+            "size": 35,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "TxSts",
+            "type": "string",
+            "size": 4,
+            "hideIfEmpty": true,
+            "minOccurs": 0
+          },
+          {
+            "name": "StsRsnInf",
+            "type": "pacs002_StatusReasonInformation8",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "ChrgsInf",
+            "type": "pacs002_ChargesInformation5",
+            "minOccurs": 0,
+            "maxOccurs": 2
+          },
+          {
+            "name": "AccptncDtTm",
             "type": "timestamp",
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "AcctTp",
+            "name": "AcctSvcrRef",
             "type": "string",
+            "size": 35,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "ICCRltdData",
-            "type": "base64Binary",
-            "size": 256,
-            "hideIfEmpty": true,
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_CertificateIdentifier1": {
-        "elements": [
-          {
-            "name": "IssrAndSrlNb",
-            "type": "caaa002_IssuerAndSerialNumber1",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_EnvelopedData3": {
-        "elements": [
-          {
-            "name": "Vrsn",
-            "type": "numeric",
+            "name": "ClrSysRef",
+            "type": "string",
+            "size": 35,
             "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "Rcpt",
-            "type": "caaa002_Recipient3Choice",
-            "maxOccurs": 2,
+            "name": "InstgAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "NcrptdCntt",
-            "type": "caaa002_EncryptedContent2",
-            "minOccurs": 0
-          }
-        ]
-      },
-      "caaa002_KEKIdentifier1": {
-        "elements": [
-          {
-            "name": "KeyId",
-            "type": "string",
-            "size": 140,
+            "name": "InstdAgt",
+            "type": "pacs002_BranchAndFinancialInstitutionIdentification4",
+            "hideIfEmpty": true,
             "minOccurs": 0
           },
           {
-            "name": "KeyVrsn",
-            "type": "string",
-            "minOccurs": 0
-          },
-          {
-            "name": "DerivtnId",
-            "type": "base64Binary",
-            "size": 16,
+            "name": "OrgnlTxRef",
+            "type": "pacs002_OriginalTransactionReference13",
             "hideIfEmpty": true,
             "minOccurs": 0
           }
@@ -5003,8 +3285,8 @@
             "type": "LightWaveRqHeader"
           },
           {
-            "name": "caaa001_Document",
-            "type": "caaa001_Document"
+            "name": "pacs008_Document",
+            "type": "pacs008_Document"
           }
         ]
       },
@@ -5018,8 +3300,8 @@
             "type": "LightWaveRpHeader"
           },
           {
-            "name": "caaa002_Document",
-            "type": "caaa002_Document"
+            "name": "pacs002_Document",
+            "type": "pacs002_Document"
           }
         ]
       }
