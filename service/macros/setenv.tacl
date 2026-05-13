@@ -35,6 +35,9 @@
 == Enter ISO info here:
 #set #param iso-base-url                https://nsis-iso.demo.nuwavetech.com
 
+== Enter CBPR info here:
+#set #param cbpr-base-url               https://isohub-demo-service.demo.nuwavetech.com
+
 delete define =nsis?pathmon
 add define =nsis-pathmon, class map, file [#param pathmon-name]
 

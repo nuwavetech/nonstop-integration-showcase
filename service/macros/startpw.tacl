@@ -67,7 +67,7 @@ set pathway maxparams           20
 set pathway maxpathcoms         4
 set pathway maxprograms         10
 set pathway maxserverclasses    20
-set pathway maxserverprocesses  40
+set pathway maxserverprocesses  50
 set pathway maxspi              4
 set pathway maxstartups         4
 set pathway maxtcps             2
@@ -161,6 +161,23 @@ set server out                  [hometerm]
 set server program              payserv
 set server param pathmon-name   [#param pathmon-name]
 add server pay-server
+
+reset server
+set server cpus                 1:0
+set server createdelay          10 secs
+set server deletedelay          10 mins
+set server highpin              on
+set server linkdepth            4
+set server maxservers           4
+set server maxlinks             20
+set server numstatic            1
+set server tmf                  off
+set server debug                off
+set server in                   [hometerm]
+set server out                  [hometerm]
+set server program              cbprserv
+set server param pathmon-name   [#param pathmon-name]
+add server cbpr-server
 
 reset server
 set server cpus                 0:1
@@ -290,6 +307,30 @@ add server twl-server
   set server param                twilio-auth-file twauth
   add server tkn-server
   ]
+]
+
+[#append pwin
+reset server
+set server cpus                 1:0
+set server createdelay          10 secs
+set server deletedelay          10 mins
+set server highpin              on
+set server linkdepth            4
+set server maxservers           4
+set server maxlinks             20
+set server numstatic            0
+set server tmf                  off
+set server debug                off
+set server in                   [hometerm]
+set server out                  [hometerm]
+set server program              [client]
+set server param log            +logcfg
+set server param diag-log       +logcfg
+set server param api            cbprcapi
+set server param base-url       [#param cbpr-base-url]
+set server param monitor        "api log diag-log"
+set server param pathmon-name   [#param pathmon-name]
+add server cbpr-service
 ]
 
 [#append pwin

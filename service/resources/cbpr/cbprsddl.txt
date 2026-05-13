@@ -1,0 +1,183 @@
+!
+! This is the DDL that defines the structures for the Cross-Border Payments
+! and Reporting (CBPR) NSIS demo.
+!
+! Copyright (c) 2026 NuWave Technologies, Inc. All rights reserved.
+!
+?comments
+?notimestamp
+
+?section constants
+!
+! CBPR Request Codes
+!
+constant rq-code-mt-generate                value 9.
+constant rq-code-mt-translate               value 11.
+constant rq-code-mx-validate                value 12.
+constant rq-code-mx-parse                   value 13.
+!
+! CBPR Response Codes
+!
+constant rp-code-success                    value 0.
+constant rp-code-warning                    value 1.
+constant rp-code-bad-request                value 400.
+constant rp-code-internal-error             value 500.
+!
+! Error responses. HTTP status is 400, 500.
+!
+constant error-code-inv-field               value 1.
+constant error-code-send-failure            value 2.
+!
+! Miscellaneous
+!
+constant max-warnings                       value 4.
+constant max-errors                         value 16.
+constant max-fields                         value 64.
+
+?section commons
+
+def rq-code                                 type binary 16.
+def rp-code                                 type binary 16.
+def error-code                              type binary 16.
+
+def bic                                     type character 12.
+def account                                 type character 36.
+def amount                                  type character 24.
+def message-type                            type character 16.
+def name-lines                              type character 140.
+def transaction-id                          type character 36.
+
+def rp-code-enum-cbpr type enum begin.
+  89 rp-code-cbpr-success                   value rp-code-success.
+  89 rp-code-cbpr-warning                   value rp-code-warning.
+end.
+
+def debtor.
+* @LightWaveAttribute(name="name")
+02  db-name                                 type name-lines.
+* @LightWaveAttribute(name="bic")
+02  db-bic                                  type bic.
+* @LightWaveAttribute(name="account")
+02  db-account                              type account.
+end
+
+def creditor.
+* @LightWaveAttribute(name="name")
+02  cr-name                                 type name-lines.
+* @LightWaveAttribute(name="bic")
+02  cr-bic                                  type bic.
+* @LightWaveAttribute(name="account")
+02  cr-account                              type account.
+end
+
+!def error-detail.
+!02 error-code                               type *.
+!02 error-message                            type character 1024.
+!end.
+
+!def error-rp.
+!02 rp-code                                  type *.
+!02 error-detail                             type *.
+!end.
+
+!def validate-error.
+!02  path                                    type character 256.
+!02  message                                 type character 256.
+!end
+
+?section messages
+
+def mt-generate-rq.
+02 rq-code                                  type * value rq-code-mt-generate.
+02 transaction-id                           type *.
+02 message-type                             type *.
+02 form-data.
+   04 debtor                                type *.
+   04 creditor                              type *.
+   04 amount                                type *.
+   04 currency                              type character 3.
+   04 filler                                type character 1.
+   04 remittance-info                       type character 140.
+02 defaults.
+   04  settlement-method                    type character 4.
+   04  charges-code                         type character 4.
+   04  instruction-priority                 type character 4.
+   04  service-level-code                   type character 4.
+   04  value-date-offset-days               type binary 16.
+   04  sender-reference                     type character 16.
+   04  receiver-reference                   type character 16.
+end
+
+def mt-generate-rp.
+* @LightWaveAttribute(hide="1")
+02  rp-code                                 type rp-code-enum-cbpr.
+02  transaction-id                          type *.
+02  mt-message                              type character 10000.
+02  message-type                            type *.
+end
+
+def mt-translate-rq.
+02 rq-code                                  type * value rq-code-mt-translate.
+02 transaction-id                           type *.
+02 mt-message                               pic x(100000).
+end
+
+def mt-translate-rp.
+* @LightWaveAttribute(hide="1")
+02  rp-code                                 type rp-code-enum-cbpr.
+02  transaction-id                          type *.
+02  mx-message                              pic x(100000).
+* @LightWaveAttribute(type="boolean")
+02  valid                                   type binary 32.
+02  message-type                            type *.
+* @LightWaveAttribute(hide="1")
+02  warnings-count                          type binary 16.
+02  warnings                                type character 128
+                                              occurs 0 to max-warnings times
+                                              depending on warnings-count.
+end
+
+def mx-validate-rq.
+02 rq-code                                  type * value rq-code-mx-validate.
+02 transaction-id                           type *.
+02 mx-message                               pic x(100000).
+end
+
+def mx-validate-rp.
+* @LightWaveAttribute(hide="1")
+02  rp-code                                 type rp-code-enum-cbpr.
+02  transaction-id                          type *.
+* @LightWaveAttribute(type="boolean")
+02  valid                                   type binary 32.
+02  schema-version                          type message-type.
+* @LightWaveAttribute(hide="1")
+02  errors-count                            type binary 16.
+02  errors                                  type character 256
+                                              occurs 0 to max-errors times
+                                              depending on errors-count.
+end
+
+def mx-parse-rq.
+02 rq-code                                  type * value rq-code-mx-parse.
+02 transaction-id                           type *.
+02 mx-message                               pic x(100000).
+end
+
+def mx-parse-rp.
+* @LightWaveAttribute(hide="1")
+02  rp-code                                 type rp-code-enum-cbpr.
+02  transaction-id                          type *.
+02  message-type                            type *.
+02  total-fields                            type binary 16.
+02  fields                                  occurs 0 to max-fields times
+                                              depending on total-fields.
+    04 field-name                           type character 16.
+    04 field-value                          type character 512.
+end
+
+def error-rp.
+* @LightWaveAttribute(hide="1")
+02  rp-code                                 type *.
+* @LightWaveAttribute(name="error")
+02  error-message                           type character 1024.
+end

@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<dictionary xmlns="http://schemas.nuwavetech.com/schemas/lightwave/dictionary-1.0.xsd" id="07e20be760ae351d828001010000012ef1" name="com.nuwavetech.demo.nsis-cbpr-dictionary" ddlOrigin="MXwgIHwxNzc4NjE3NjAwfFxDR05BQzIuJERBVDE2QS5DQlBSRElDVA==">
+  <types>
+    <type name="Account" size="36" ddlType="1" ddlName="ACCOUNT" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxBQ0NPVU5UfFxDR05BQzIuJERBVDE2QS5DQlBSRElDVA==">
+      <element name="account" type="string" offset="0" size="36" hide="1"/>
+    </type>
+    <type name="Amount" size="24" ddlType="1" ddlName="AMOUNT" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxBTU9VTlR8XENHTkFDMi4kREFUMTZBLkNCUFJESUNU">
+      <element name="amount" type="string" offset="0" size="24" hide="1"/>
+    </type>
+    <type name="Bic" size="12" ddlType="1" ddlName="BIC" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxCSUN8XENHTkFDMi4kREFUMTZBLkNCUFJESUNU">
+      <element name="bic" type="string" offset="0" size="12" hide="1"/>
+    </type>
+    <type name="Creditor" size="188" ddlType="1" ddlName="CREDITOR" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxDUkVESVRPUnxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <!--@LightWaveAttribute(name="name")-->
+      <element name="name" type="string" offset="0" size="140"/>
+      <!--@LightWaveAttribute(name="bic")-->
+      <element name="bic" type="string" offset="140" size="12"/>
+      <!--@LightWaveAttribute(name="account")-->
+      <element name="account" type="string" offset="152" size="36"/>
+    </type>
+    <type name="Debtor" size="188" ddlType="1" ddlName="DEBTOR" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxERUJUT1J8XENHTkFDMi4kREFUMTZBLkNCUFJESUNU">
+      <!--@LightWaveAttribute(name="name")-->
+      <element name="name" type="string" offset="0" size="140"/>
+      <!--@LightWaveAttribute(name="bic")-->
+      <element name="bic" type="string" offset="140" size="12"/>
+      <!--@LightWaveAttribute(name="account")-->
+      <element name="account" type="string" offset="152" size="36"/>
+    </type>
+    <type name="ErrorCode" size="2" ddlType="1" ddlName="ERROR-CODE" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxFUlJPUi1DT0RFfFxDR05BQzIuJERBVDE2QS5DQlBSRElDVA==">
+      <element name="errorCode" type="short" offset="0" size="2"/>
+    </type>
+    <type name="ErrorRp" size="1026" ddlType="1" ddlName="ERROR-RP" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxFUlJPUi1SUHxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <!--@LightWaveAttribute(hide="1")-->
+      <element name="rpCode" type="short" offset="0" size="2" hide="1"/>
+      <!--@LightWaveAttribute(name="error")-->
+      <element name="error" type="string" offset="2" size="1024"/>
+    </type>
+    <type name="MessageType" size="16" ddlType="1" ddlName="MESSAGE-TYPE" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNRVNTQUdFLVRZUEV8XENHTkFDMi4kREFUMTZBLkNCUFJESUNU">
+      <element name="messageType" type="string" offset="0" size="16"/>
+    </type>
+    <type name="MtGenerateRp" size="10054" ddlType="1" ddlName="MT-GENERATE-RP" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNVC1HRU5FUkFURS1SUHxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <!--@LightWaveAttribute(hide="1")-->
+      <element name="rpCode" type="short" offset="0" size="2" hide="1"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <element name="mtMessage" type="string" offset="38" size="10000"/>
+      <element name="messageType" type="string" offset="10038" size="16"/>
+    </type>
+    <type name="MtGenerateRq" size="648" ddlType="1" ddlName="MT-GENERATE-RQ" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNVC1HRU5FUkFURS1SUXxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <element name="rqCode" type="short" offset="0" size="2" value="9"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <element name="messageType" type="string" offset="38" size="16"/>
+      <element name="formData" type="MtGenerateRqFormData" offset="54" size="544"/>
+      <element name="defaults" type="MtGenerateRqDefaults" offset="598" size="50"/>
+    </type>
+    <type name="MtGenerateRqDefaults" size="50" ddlType="0">
+      <element name="settlementMethod" type="string" offset="0" size="4"/>
+      <element name="chargesCode" type="string" offset="4" size="4"/>
+      <element name="instructionPriority" type="string" offset="8" size="4"/>
+      <element name="serviceLevelCode" type="string" offset="12" size="4"/>
+      <element name="valueDateOffsetDays" type="short" offset="16" size="2"/>
+      <element name="senderReference" type="string" offset="18" size="16"/>
+      <element name="receiverReference" type="string" offset="34" size="16"/>
+    </type>
+    <type name="MtGenerateRqFormData" size="544" ddlType="0">
+      <element name="debtor" type="Debtor" offset="0" size="188"/>
+      <element name="creditor" type="Creditor" offset="188" size="188"/>
+      <element name="amount" type="string" offset="376" size="24"/>
+      <element name="currency" type="string" offset="400" size="3"/>
+      <element name="userFiller1" type="string" offset="403" size="1" hide="1"/>
+      <element name="remittanceInfo" type="string" offset="404" size="140"/>
+    </type>
+    <type name="MtTranslateRp" size="100572" ddlType="1" ddlName="MT-TRANSLATE-RP" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNVC1UUkFOU0xBVEUtUlB8XENHTkFDMi4kREFUMTZBLkNCUFJESUNU">
+      <!--@LightWaveAttribute(hide="1")-->
+      <element name="rpCode" type="short" offset="0" size="2" hide="1"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <element name="mxMessage" type="string" offset="38" size="100000"/>
+      <!--@LightWaveAttribute(type="boolean")-->
+      <element name="valid" type="boolean" offset="100038" size="4"/>
+      <element name="messageType" type="string" offset="100042" size="16"/>
+      <!--@LightWaveAttribute(hide="1")-->
+      <element name="warningsCount" type="short" offset="100058" size="2" hide="1"/>
+      <element name="warnings" type="string" minOccurs="0" maxOccurs="4" offset="100060" size="128" dependsOn="warningsCount"/>
+    </type>
+    <type name="MtTranslateRq" size="100038" ddlType="1" ddlName="MT-TRANSLATE-RQ" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNVC1UUkFOU0xBVEUtUlF8XENHTkFDMi4kREFUMTZBLkNCUFJESUNU">
+      <element name="rqCode" type="short" offset="0" size="2" value="11"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <element name="mtMessage" type="string" offset="38" size="100000"/>
+    </type>
+    <type name="MxParseRp" size="33848" ddlType="1" ddlName="MX-PARSE-RP" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNWC1QQVJTRS1SUHxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <!--@LightWaveAttribute(hide="1")-->
+      <element name="rpCode" type="short" offset="0" size="2" hide="1"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <element name="messageType" type="string" offset="38" size="16"/>
+      <element name="totalFields" type="short" offset="54" size="2"/>
+      <element name="fields" type="MxParseRpFields" minOccurs="0" maxOccurs="64" offset="56" size="528" dependsOn="totalFields"/>
+    </type>
+    <type name="MxParseRpFields" size="528" ddlType="0">
+      <element name="fieldName" type="string" offset="0" size="16"/>
+      <element name="fieldValue" type="string" offset="16" size="512"/>
+    </type>
+    <type name="MxParseRq" size="100038" ddlType="1" ddlName="MX-PARSE-RQ" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNWC1QQVJTRS1SUXxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <element name="rqCode" type="short" offset="0" size="2" value="13"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <element name="mxMessage" type="string" offset="38" size="100000"/>
+    </type>
+    <type name="MxValidateRp" size="4156" ddlType="1" ddlName="MX-VALIDATE-RP" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNWC1WQUxJREFURS1SUHxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <!--@LightWaveAttribute(hide="1")-->
+      <element name="rpCode" type="short" offset="0" size="2" hide="1"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <!--@LightWaveAttribute(type="boolean")-->
+      <element name="valid" type="boolean" offset="38" size="4"/>
+      <element name="schemaVersion" type="string" offset="42" size="16"/>
+      <!--@LightWaveAttribute(hide="1")-->
+      <element name="errorsCount" type="short" offset="58" size="2" hide="1"/>
+      <element name="errors" type="string" minOccurs="0" maxOccurs="16" offset="60" size="256" dependsOn="errorsCount"/>
+    </type>
+    <type name="MxValidateRq" size="100038" ddlType="1" ddlName="MX-VALIDATE-RQ" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxNWC1WQUxJREFURS1SUXxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <element name="rqCode" type="short" offset="0" size="2" value="12"/>
+      <element name="transactionId" type="string" offset="2" size="36"/>
+      <element name="mxMessage" type="string" offset="38" size="100000"/>
+    </type>
+    <type name="NameLines" size="140" ddlType="1" ddlName="NAME-LINES" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxOQU1FLUxJTkVTfFxDR05BQzIuJERBVDE2QS5DQlBSRElDVA==">
+      <element name="nameLines" type="string" offset="0" size="140"/>
+    </type>
+    <type name="RpCode" size="2" ddlType="1" ddlName="RP-CODE" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxSUC1DT0RFfFxDR05BQzIuJERBVDE2QS5DQlBSRElDVA==">
+      <element name="rpCode" type="short" offset="0" size="2"/>
+    </type>
+    <type name="RpCodeEnumCbpr" size="2" ddlType="1" ddlName="RP-CODE-ENUM-CBPR" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxSUC1DT0RFLUVOVU0tQ0JQUnxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <element name="rpCodeEnumCbpr" type="short" offset="0" size="2"/>
+    </type>
+    <type name="RqCode" size="2" ddlType="1" ddlName="RQ-CODE" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxSUS1DT0RFfFxDR05BQzIuJERBVDE2QS5DQlBSRElDVA==">
+      <element name="rqCode" type="short" offset="0" size="2"/>
+    </type>
+    <type name="TransactionId" size="36" ddlType="1" ddlName="TRANSACTION-ID" ddlModified="2026-05-12T14:26" ddlOrigin="MXxJRHxUUkFOU0FDVElPTi1JRHxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <element name="transactionId" type="string" offset="0" size="36"/>
+    </type>
+    <type name="ValidateError" size="512" ddlType="1" ddlName="VALIDATE-ERROR" ddlModified="2026-05-12T07:20" ddlOrigin="MXxJRHxWQUxJREFURS1FUlJPUnxcQ0dOQUMyLiREQVQxNkEuQ0JQUkRJQ1Q=">
+      <element name="path" type="string" offset="0" size="256"/>
+      <element name="message" type="string" offset="256" size="256"/>
+    </type>
+  </types>
+</dictionary>

@@ -1,0 +1,663 @@
+{
+  "name": "com.nuwavetech.demo.nsis-iso20022-demo-api",
+  "description": "ISO 20022 Demo Service",
+  "types": {
+    "type": {
+      "MtRequest": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "mt",
+            "type": "string",
+            "size": 100000
+          }
+        ]
+      },
+      "MxRequest": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "mx",
+            "type": "string",
+            "size": 100000
+          }
+        ]
+      },
+      "MxResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "mx",
+            "type": "string",
+            "size": 100000
+          },
+          {
+            "name": "valid",
+            "type": "boolean"
+          },
+          {
+            "name": "warnings-count",
+            "type": "short",
+            "hide": true
+          },
+          {
+            "name": "warnings",
+            "minOccurs": 0,
+            "maxOccurs": 4,
+            "dependsOn": "warnings-count",
+            "type": "string",
+            "size": 256
+          }
+        ]
+      },
+      "FieldsType": {
+        "anonymous": true,
+        "elements": [
+          {
+            "name": "additionalProperties",
+            "type": "string",
+            "size": 512,
+            "map": {
+              "maxOccurs": 32,
+              "keySize": 16
+            }
+          }
+        ]
+      },
+      "MtParseResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "type",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "fields",
+            "type": "FieldsType"
+          }
+        ]
+      },
+      "FieldsType-01": {
+        "anonymous": true,
+        "elements": [
+          {
+            "name": "additionalProperties",
+            "type": "string",
+            "size": 512,
+            "map": {
+              "maxOccurs": 64,
+              "keySize": 16
+            }
+          }
+        ]
+      },
+      "MxParseResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "type",
+            "type": "string",
+            "size": 32
+          },
+          {
+            "name": "fields",
+            "type": "FieldsType-01"
+          }
+        ]
+      },
+      "MxValidateResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "valid",
+            "type": "boolean"
+          },
+          {
+            "name": "errors-count",
+            "type": "short",
+            "hide": true
+          },
+          {
+            "name": "errors",
+            "minOccurs": 1,
+            "maxOccurs": 16,
+            "dependsOn": "errors-count",
+            "type": "string",
+            "size": 256
+          }
+        ]
+      },
+      "ErrorResponse": {
+        "anonymous": false,
+        "elements": [
+          {
+            "name": "error",
+            "type": "string",
+            "size": 128
+          }
+        ]
+      }
+    }
+  },
+  "operations": [
+    {
+      "path": "/api/convert/mt-to-mx",
+      "methods": [
+        {
+          "id": 11,
+          "verb": "POST",
+          "alias": "convertMtToMx",
+          "description": "Convert MT103 to ISO 20022 pacs.008",
+          "request": {
+            "mappings": [
+              {
+                "target": {
+                  "type": "body",
+                  "value": "MtRequest"
+                },
+                "required": true,
+                "source": {
+                  "type": "ipm"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "acceptTypes": [
+              "application/json"
+            ],
+            "contentTypeIsCustom": false
+          },
+          "responses": [
+            {
+              "httpStatus": "200",
+              "description": "Conversion successful",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "MxResponse"
+                  },
+                  "target": {
+                    "type": "ipm"
+                  }
+                }
+              ]
+            },
+            {
+              "httpStatus": "400",
+              "description": "The request body could not be parsed or the message content is structurally invalid (e.g. malformed MT block structure, non-XML content submitted as MX payload).\n",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "ErrorResponse"
+                  },
+                  "target": {
+                    "type": "ipm"
+                  }
+                }
+              ]
+            }
+          ],
+          "api": {
+            "stringPadding": "zeros"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/api/mt/parse",
+      "methods": [
+        {
+          "id": 10,
+          "verb": "POST",
+          "alias": "parseMt",
+          "description": "Parse a SWIFT MT message",
+          "request": {
+            "mappings": [
+              {
+                "target": {
+                  "type": "body",
+                  "value": "MtRequest"
+                },
+                "required": true,
+                "source": {
+                  "type": "ipm"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "acceptTypes": [
+              "application/json"
+            ]
+          },
+          "responses": [
+            {
+              "httpStatus": "200",
+              "description": "Message parsed successfully",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "MtParseResponse"
+                  }
+                }
+              ]
+            },
+            {
+              "httpStatus": "400",
+              "description": "The request body could not be parsed or the message content is structurally invalid (e.g. malformed MT block structure, non-XML content submitted as MX payload).\n",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "ErrorResponse"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/api/mx/parse",
+      "methods": [
+        {
+          "id": 13,
+          "verb": "POST",
+          "alias": "parseMx",
+          "description": "Parse an ISO 20022 MX message",
+          "request": {
+            "mappings": [
+              {
+                "target": {
+                  "type": "body",
+                  "value": "MxRequest"
+                },
+                "required": true,
+                "source": {
+                  "type": "ipm"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "acceptTypes": [
+              "application/json"
+            ]
+          },
+          "responses": [
+            {
+              "httpStatus": "200",
+              "description": "Message parsed successfully",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "MxParseResponse"
+                  }
+                }
+              ]
+            },
+            {
+              "httpStatus": "400",
+              "description": "The request body could not be parsed or the message content is structurally invalid (e.g. malformed MT block structure, non-XML content submitted as MX payload).\n",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "ErrorResponse"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/api/mx/validate",
+      "methods": [
+        {
+          "id": 12,
+          "verb": "POST",
+          "alias": "validateMx",
+          "description": "Validate an ISO 20022 MX message",
+          "request": {
+            "mappings": [
+              {
+                "target": {
+                  "type": "body",
+                  "value": "MxRequest"
+                },
+                "required": true,
+                "source": {
+                  "type": "ipm"
+                }
+              }
+            ],
+            "contentType": "application/json",
+            "acceptTypes": [
+              "application/json"
+            ]
+          },
+          "responses": [
+            {
+              "httpStatus": "200",
+              "description": "Validation result (valid or invalid — always HTTP 200)",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "MxValidateResponse"
+                  }
+                }
+              ]
+            },
+            {
+              "httpStatus": "400",
+              "description": "The request body could not be parsed or the message content is structurally invalid (e.g. malformed MT block structure, non-XML content submitted as MX payload).\n",
+              "mappings": [
+                {
+                  "source": {
+                    "type": "body",
+                    "value": "ErrorResponse"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "id": "03fdd397d69d551d828001010000012ef1",
+  "modificationTime": 1778599044,
+  "isBrief": false,
+  "generatedTypes": {
+    "WARNING": "These types are generated by LightWave Client and should not be manually edited.",
+    "type": {
+      "LightWaveRqHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rqCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "rqVersion",
+            "type": "unsignedShort",
+            "size": 2
+          },
+          {
+            "name": "rqTimeout",
+            "type": "unsignedInt",
+            "size": 4
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveRpHeader": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "rpCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "httpStatus",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoCode",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "infoDetail",
+            "type": "short",
+            "size": 2
+          },
+          {
+            "name": "reserved",
+            "type": "string",
+            "size": 24
+          }
+        ]
+      },
+      "LightWaveErrorRp": {
+        "generated": true,
+        "lightwave": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "errorSource",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorCode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorSubcode",
+            "type": "int",
+            "size": 4
+          },
+          {
+            "name": "errorMessage",
+            "type": "string",
+            "size": 4096
+          }
+        ]
+      },
+      "ConvertMtToMxRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "convertMtToMx",
+        "description": "Convert MT103 to ISO 20022 pacs.008",
+        "operation": "POST /api/convert/mt-to-mx",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "MtRequest",
+            "type": "MtRequest"
+          }
+        ]
+      },
+      "ConvertMtToMx200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "MxResponse",
+            "type": "MxResponse"
+          }
+        ]
+      },
+      "ConvertMtToMx400Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ErrorResponse",
+            "type": "ErrorResponse"
+          }
+        ]
+      },
+      "ParseMtRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "parseMt",
+        "description": "Parse a SWIFT MT message",
+        "operation": "POST /api/mt/parse",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "MtRequest",
+            "type": "MtRequest"
+          }
+        ]
+      },
+      "ParseMt200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "MtParseResponse",
+            "type": "MtParseResponse"
+          }
+        ]
+      },
+      "ParseMt400Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ErrorResponse",
+            "type": "ErrorResponse"
+          }
+        ]
+      },
+      "ParseMxRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "parseMx",
+        "description": "Parse an ISO 20022 MX message",
+        "operation": "POST /api/mx/parse",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "MxRequest",
+            "type": "MxRequest"
+          }
+        ]
+      },
+      "ParseMx200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "MxParseResponse",
+            "type": "MxParseResponse"
+          }
+        ]
+      },
+      "ParseMx400Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ErrorResponse",
+            "type": "ErrorResponse"
+          }
+        ]
+      },
+      "ValidateMxRq": {
+        "generated": true,
+        "lightwave": false,
+        "isRequest": true,
+        "alias": "validateMx",
+        "description": "Validate an ISO 20022 MX message",
+        "operation": "POST /api/mx/validate",
+        "elements": [
+          {
+            "name": "LightWaveRqHeader",
+            "type": "LightWaveRqHeader"
+          },
+          {
+            "name": "MxRequest",
+            "type": "MxRequest"
+          }
+        ]
+      },
+      "ValidateMx200Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "MxValidateResponse",
+            "type": "MxValidateResponse"
+          }
+        ]
+      },
+      "ValidateMx400Rp": {
+        "generated": true,
+        "lightwave": false,
+        "isReply": true,
+        "elements": [
+          {
+            "name": "LightWaveRpHeader",
+            "type": "LightWaveRpHeader"
+          },
+          {
+            "name": "ErrorResponse",
+            "type": "ErrorResponse"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,442 @@
+{
+  "name": "com.nuwavetech.demo.nsis-cbpr-api",
+  "description": "Cross-Border Payments",
+  "id": "03393f7d2aa8011d828001010000012ef1",
+  "modificationTime": 1778602912,
+  "isBrief": false,
+  "isNative": false,
+  "operations": [
+    {
+      "path": "/api/iso20022/mt/generate",
+      "methods": [
+        {
+          "api": {
+            "type": "serverclass",
+            "stringPadding": "zeros",
+            "transactionTimeout": 0,
+            "processName": {
+              "type": "constant",
+              "value": "=NSIS-PATHMON"
+            },
+            "serverclass": {
+              "type": "constant",
+              "value": "CBPR-SERVER"
+            }
+          },
+          "request": {
+            "mappings": [
+              {
+                "target": "*",
+                "source": {
+                  "type": "body",
+                  "value": "*"
+                }
+              }
+            ],
+            "messageType": {
+              "dictionary": "07e20be760ae351d828001010000012ef1",
+              "definition": "MtGenerateRq"
+            }
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "value": "*",
+                    "type": "body"
+                  },
+                  "source": "*"
+                }
+              ],
+              "replyCode": "0",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "MtGenerateRp"
+              },
+              "httpStatus": 200,
+              "cloakingPaths": []
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "400",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 400
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "500",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 500
+            }
+          ],
+          "cacheControl": {
+            "enabled": false,
+            "maxAge": 60
+          },
+          "verb": "POST",
+          "alias": "mtgeneratepost",
+          "description": "Return the fields from a Switft MT message"
+        }
+      ]
+    },
+    {
+      "path": "/api/iso20022/parse",
+      "methods": [
+        {
+          "api": {
+            "type": "serverclass",
+            "stringPadding": "zeros",
+            "transactionTimeout": 0,
+            "processName": {
+              "type": "constant",
+              "value": "=NSIS-PATHMON"
+            },
+            "serverclass": {
+              "type": "constant",
+              "value": "CBPR-SERVER"
+            }
+          },
+          "request": {
+            "mappings": [
+              {
+                "target": "*",
+                "source": {
+                  "type": "body",
+                  "value": "*"
+                }
+              }
+            ],
+            "messageType": {
+              "dictionary": "07e20be760ae351d828001010000012ef1",
+              "definition": "MxParseRq"
+            }
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "value": "*",
+                    "type": "body"
+                  },
+                  "source": "*"
+                }
+              ],
+              "replyCode": "0",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "MxParseRp"
+              },
+              "httpStatus": 200
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "1",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "MxParseRp"
+              },
+              "httpStatus": 201
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "400",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 400
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "500",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 500
+            }
+          ],
+          "cacheControl": {
+            "enabled": false,
+            "maxAge": 60
+          },
+          "verb": "POST",
+          "alias": "mxparsepost",
+          "description": "Parse an MX (ISO 20022) Message to its constituent fields"
+        }
+      ]
+    },
+    {
+      "path": "/api/iso20022/translate",
+      "methods": [
+        {
+          "api": {
+            "type": "serverclass",
+            "stringPadding": "zeros",
+            "transactionTimeout": 0,
+            "processName": {
+              "type": "constant",
+              "value": "=NSIS-PATHMON"
+            },
+            "serverclass": {
+              "type": "constant",
+              "value": "CBPR-SERVER"
+            }
+          },
+          "request": {
+            "mappings": [
+              {
+                "target": "*",
+                "source": {
+                  "type": "body",
+                  "value": "*"
+                }
+              }
+            ],
+            "messageType": {
+              "dictionary": "07e20be760ae351d828001010000012ef1",
+              "definition": "MtTranslateRq"
+            }
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "value": "*",
+                    "type": "body"
+                  },
+                  "source": "*"
+                }
+              ],
+              "replyCode": "0",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "MtTranslateRp"
+              },
+              "httpStatus": 200
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "1",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "MtTranslateRp"
+              },
+              "httpStatus": 201
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "400",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 400
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "500",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 500
+            }
+          ],
+          "cacheControl": {
+            "enabled": false,
+            "maxAge": 60
+          },
+          "verb": "POST",
+          "description": "Translate an MT message into an MX (ISO 20022) message",
+          "alias": ""
+        }
+      ]
+    },
+    {
+      "path": "/api/iso20022/validate",
+      "methods": [
+        {
+          "api": {
+            "type": "serverclass",
+            "stringPadding": "zeros",
+            "transactionTimeout": 0,
+            "processName": {
+              "type": "constant",
+              "value": "=NSIS-PATHMON"
+            },
+            "serverclass": {
+              "type": "constant",
+              "value": "CBPR-SERVER"
+            }
+          },
+          "request": {
+            "mappings": [
+              {
+                "target": "*",
+                "source": {
+                  "type": "body",
+                  "value": "*"
+                }
+              }
+            ],
+            "messageType": {
+              "dictionary": "07e20be760ae351d828001010000012ef1",
+              "definition": "MxValidateRq"
+            }
+          },
+          "responses": [
+            {
+              "mappings": [
+                {
+                  "target": {
+                    "value": "*",
+                    "type": "body"
+                  },
+                  "source": "*"
+                }
+              ],
+              "replyCode": "0",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "MxValidateRp"
+              },
+              "httpStatus": 200
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "1",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "MxValidateRp"
+              },
+              "httpStatus": 201
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "400",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 400
+            },
+            {
+              "mappings": [
+                {
+                  "source": "*",
+                  "target": {
+                    "type": "body",
+                    "value": "*"
+                  }
+                }
+              ],
+              "replyCode": "500",
+              "messageType": {
+                "dictionary": "07e20be760ae351d828001010000012ef1",
+                "definition": "ErrorRp"
+              },
+              "httpStatus": 500
+            }
+          ],
+          "cacheControl": {
+            "enabled": false,
+            "maxAge": 60
+          },
+          "verb": "POST",
+          "description": "Validate an MX (ISO 20022) Message",
+          "alias": "mxvalidatepost"
+        }
+      ]
+    }
+  ]
+}

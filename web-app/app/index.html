@@ -67,6 +67,17 @@
                   <span data-feather="users"></span>Transactions</a>
               </li>
             </ul>
+            <!-- ISO 20022 Demo section -->
+            <h6
+              class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>ISO 20022 DEMO</span>
+            </h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a id="iso20022-link" class="nav-link" href="#/iso20022">
+                  <span data-feather="globe"></span>Cross-Border Payment</a>
+              </li>
+            </ul>
             <!-- Showcase Tools section -->
             <h6
               class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -466,6 +477,109 @@
             </div>
           </div>
           <!-- end of payment view -->
+          <!-- start of iso20022 view -->
+          <div class="view" id="iso20022-view">
+            <div
+              class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+              <span class="h3">ISO 20022 Cross-Border Payment</span>
+              <div class="btn-toolbar mb-2 mb-md-0">
+              </div>
+            </div>
+            <div class="pl-1">
+              <p class="text-muted">
+                Enter pacs.008 payment details, then progress through the
+                stages to see the SWIFT MT message, MT-to-MX translation,
+                CBPR+ validation, and parsed business fields.
+                <br>
+                <small>
+                  <em>Note:</em> the translation service is in test mode,
+                  which requires BICs to have a <code>0</code> in
+                  position 8 (e.g. <code>BANKUS30</code>).
+                </small>
+              </p>
+              <form id="iso20022-form" novalidate>
+                <div id="iso20022-fields"></div>
+
+                <details class="mb-3">
+                  <summary class="text-muted" style="cursor:pointer;">
+                    Advanced defaults (read-only)
+                  </summary>
+                  <div id="iso20022-defaults" class="mt-2"></div>
+                </details>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="iso20022-problem">Introduce a problem</label>
+                    <select id="iso20022-problem" class="form-control form-control-sm"></select>
+                  </div>
+                </div>
+
+                <div class="mt-3 mb-2" role="group">
+                  <button type="submit" id="iso20022-generate-button"
+                    class="btn xbtn-sm btn-outline-secondary">
+                    <span class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span>
+                    Generate
+                  </button>
+                </div>
+              </form>
+
+              <!-- Stage 1: MT message -->
+              <div class="iso-stage" id="iso20022-mt-panel">
+                <h5>Stage 1 &mdash; SWIFT MT Message
+                  <span class="badge badge-secondary" id="iso20022-mt-type"></span>
+                </h5>
+                <pre id="iso20022-mt-pre"></pre>
+                <div class="mt-2">
+                  <button type="button" id="iso20022-translate-button"
+                    class="btn xbtn-sm btn-outline-secondary">
+                    <span class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span>
+                    Translate to MX
+                  </button>
+                </div>
+              </div>
+
+              <!-- Stage 2: MX message -->
+              <div class="iso-stage" id="iso20022-mx-panel">
+                <h5>Stage 2 &mdash; ISO 20022 MX Message
+                  <span class="badge badge-secondary" id="iso20022-mx-type"></span>
+                </h5>
+                <div id="iso20022-translator-annotations" class="mb-2"></div>
+                <pre id="iso20022-mx-pre"></pre>
+                <div class="mt-2">
+                  <button type="button" id="iso20022-validate-button"
+                    class="btn xbtn-sm btn-outline-secondary">
+                    <span class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span>
+                    Validate CBPR+
+                  </button>
+                  <button type="button" id="iso20022-parse-button"
+                    class="btn xbtn-sm btn-outline-secondary">
+                    <span class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span>
+                    Parse Business Fields
+                  </button>
+                </div>
+              </div>
+
+              <!-- Stage 3: validation result -->
+              <div class="iso-stage" id="iso20022-validation-panel">
+                <h5>Stage 3 &mdash; CBPR+ Validation</h5>
+                <div id="iso20022-validation-result"></div>
+              </div>
+
+              <!-- Stage 4: parsed business fields -->
+              <div class="iso-stage" id="iso20022-parse-panel">
+                <h5>Stage 4 &mdash; Parsed Business Fields
+                  <span class="badge badge-secondary" id="iso20022-parse-type"></span>
+                </h5>
+                <div id="iso20022-parse-apphdr"></div>
+                <div id="iso20022-parse-document"></div>
+              </div>
+            </div>
+          </div>
+          <!-- end of iso20022 view -->
           <!-- start of transaction view -->
           <div class="view" id="transaction-view">
             <div
@@ -814,6 +928,8 @@
     <script src="js/views/cards.js"></script>
     <script src="js/views/card.js"></script>
     <script src="js/views/payment.js"></script>
+    <script src="js/iso20022/schemas.js"></script>
+    <script src="js/views/iso20022.js"></script>
     <script src="js/views/transaction.js"></script>
     <script src="js/views/transactions.js"></script>
     <script src="js/views/requestlog.js"></script>

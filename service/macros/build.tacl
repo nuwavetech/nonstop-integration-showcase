@@ -52,7 +52,7 @@ comp^opts
 == Creates the DDL dictionary and C header files.
 
 #output
-#output Building the DDL Dictionary ...
+#output Building the Paysim DDL Dictionary ...
 
 #set ddlin
 
@@ -101,7 +101,34 @@ sink [#purge ddlout]
 ddl2 / inv ddlin, out ddlout /
 
 [#if [ :_completion:completioncode ] <> 0 |then|
-  #output Dicionary build completed with warnings or errors.
+  #output Paysim Dictionary build completed with warnings or errors.
+  #unframe
+  #return
+]
+
+#output Building the CBPR DDL Dictionary ...
+
+#set ddlin
+[#append ddlin
+??dict cbprdict !
+??c cbprsh !
+??cobol cbprscpy !
+??source cbprsddl
+??noc
+??nocobol
+
+??c cbprch !
+??cobol cbprccpy !
+??source cbprcddl ( LIGHTWAVE-DEF, API-DEF )
+??noc
+??nocobol
+]
+
+sink [#purge ddlout]
+ddl2 / inv ddlin, out ddlout /
+
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output CBPR Dictionary build completed with warnings or errors.
   #unframe
   #return
 ]
@@ -118,6 +145,9 @@ ddl2 / inv ddlin, out ddlout /
 :buildserv
 
 #set basename TKN
+:buildserv
+
+#set basename CBPR
 :buildserv
 
 #output Creating database files ....
