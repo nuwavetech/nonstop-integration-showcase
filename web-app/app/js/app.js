@@ -31,6 +31,7 @@ NSIS.app = {
     NSIS.views.cards.init();
     NSIS.views.card.init();
     NSIS.views.payment.init();
+    NSIS.views.iso20022.init();
     NSIS.views.transaction.init();
     NSIS.views.transactions.init();
     NSIS.views.requestlog.init();
@@ -96,6 +97,9 @@ NSIS.app = {
       break;
     case "payment":
       NSIS.views.payment.render();
+      break;
+    case "iso20022":
+      NSIS.views.iso20022.render();
       break;
     case "transaction":
       NSIS.views.transaction.render(path);

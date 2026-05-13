@@ -29,4 +29,6 @@
 #set #param enable-kafka-consumer
 #set #param kfk-rest-proxy-base-url-v3
 
+#set #param cbpr-base-url
+
 delete define =nsis?pathmon

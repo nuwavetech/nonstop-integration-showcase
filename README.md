@@ -4,7 +4,7 @@ This Integration Showcase demonstrates the powerful integration capabilities of 
 
 ## Overview
 
-The showcase illustrates how **LightWave Server™** can REST-enable traditional HPE NonStop applications and services. Through the Payment Card Simulation interface, you can explore various integration points where LightWave products facilitate communication between modern web applications and HPE NonStop server processes.
+The showcase illustrates how **LightWave Server™** can REST-enable traditional HPE NonStop applications and services. Through the Payment Card  and Cross-Border Payments Simulations interfaces, you can explore various integration points where LightWave products facilitate communication between modern web applications and HPE NonStop server processes.
 
 Key integration features demonstrated include:
 
@@ -23,6 +23,8 @@ When enabled, the showcase demonstrates external API integration by using **Ligh
 - Payment notification emails delivered via the [SendGrid Email](https://www.sendgrid.com) REST API
 - Payment transaction details are streamed to a Kafka instance via the
                       LightWave Client Kafka Connector
+
+Cross-Border Payments illustrates using LightWave Client to *generate* a Swift MT message from data entered on a form, *translate* that MT message to a ISO 20022 (Swift MX) message, *validate* that ISO 20022 message against CBPR+ rules, and *parse* the ISO 20022 message into a table of labelled field names and values.
 
 ![NSIS Overview](./web-app/app/img/nsis_diagram.png?raw=true)
 

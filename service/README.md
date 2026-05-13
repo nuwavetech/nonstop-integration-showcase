@@ -19,6 +19,13 @@ Twilio [Twilio SendGrid email API](https://sendgrid.com/en-us/solutions/email-ap
 + An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.8 or greater.
 + A Twilio SendGrid account enabled for the email API. It's possible to use a trial account and send email notifications.
 
+#### To enable the Cross-Border Payment (ISO 20022) demo
+
+The Cross-Border Payment demo translates and validates SWIFT MT and ISO 20022 messages via an off-NonStop microservice reached over REST. It requires:
+
++ An installed instance of [LightWave Client](https://docs.nuwavetech.com/lightwave-client) version 1.2.8 or greater.
++ A reachable instance of the cross-border translation/validation microservice (the default `cbpr-base-url` points at NuWave's hosted demo instance).
+
 ### Configuration
 
 The following values must be configured in the SETENV TACL macro after installation of the sample:
@@ -37,6 +44,8 @@ The following values must be configured in the SETENV TACL macro after installat
 + sg-from-email - The email sender (from) email address.
 + sg-transaction-template-id - The SendGrid email template ID for payment notifications.
 + sg-card-status-template-id - The SendGrid email template ID for card status notifications.
+
++ cbpr-base-url - The base URL of the cross-border translation/validation microservice used by the Cross-Border Payment (ISO 20022) demo. The default points at NuWave's hosted demo instance and does not require changes for typical use.
 
 + enable-auth-exits - Set to 1 to enable the LightWave Auth Exits feature. Enabling this feature will invoke the sample Token Server application. The Token Server will load the tokens from the *twilio-auth-file* and the *sg-auth-file*.
 + twilio-auth-file - The name of the TWAUTH file.

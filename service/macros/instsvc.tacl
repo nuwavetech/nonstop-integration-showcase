@@ -8,6 +8,10 @@
 :dictname
 :isv
 :svcname
+:cbprlwcapi
+:cbprlwsapi
+:cbprdict
+:cbprsvc
 :tmp
 ]
 
@@ -15,6 +19,10 @@
 #set :svcname com.nuwavetech.demo.nsis-paysime-service
 #set :dictname com.nuwavetech.demo.nsis-paysim-dictionary
 #set :apiname com.nuwavetech.demo.nsis-paysim-api
+#set :cbprlwsapi com.nuwavetech.demo.nsis-cbpr-api
+#set :cbprlwcapi com.nuwavetech.demo.nsis-iso20022-demo-api
+#set :cbprdict com.nuwavetech.demo.nsis-cbpr-dictionary
+#set :cbprsvc com.nuwavetech.demo.nsis-cbpr-service
 
 #output
 #output Installing the Payment Simulation LightWave Server services ...
@@ -23,7 +31,7 @@
 run [:isv].lwscom ; filesystem [:isv] ; &
   import dictionary [:dictname] !, file psimdict
 [#if [ :_completion:completioncode ] <> 0 |then|
-  #output Dicionary installation failed.
+  #output Dictionary installation failed.
   #unframe
   #return
 ]
@@ -51,19 +59,67 @@ run [:isv].lwscom ; filesystem [:isv] ; &
   #return
 ]
 
+#output
+#output Installing the CBPR LightWave Server services ...
+#output
+
+run [:isv].lwscom ; filesystem [:isv] ; &
+  import dictionary [:cbprdict] !, file cbprdict
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output CBPR Dictionary installation failed.
+  #unframe
+  #return
+]
+
+run [:isv].lwscom ; filesystem [:isv] ; &
+  import api [:cbprlwsapi] !, file cbprsapi
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output CBPR LWS API installation failed.
+  #unframe
+  #return
+]
+
+run [:isv].lwscom / outv tmp / ; filesystem [:isv] ; allow 1 errors ; &
+  delete service [:cbprsvc]
+run [:isv].lwscom ; filesystem [:isv] ; &
+  add service [:cbprsvc],  name [:cbprsvc], &
+  description "Cross-Border Payments Service", &
+  version 1, &
+  api [:cbprlwsapi], &
+  acp allow-anonymous-access, &
+  enabled
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output CBPR Service creation failed.
+  #unframe
+  #return
+]
+
 #output LightWave Server service installation completed.
 #output
 
-#output Dictionary:
+#output Paysim Dictionary:
 run [:isv].lwscom ; filesystem [:isv] ; info dictionary [:dictname], detail
 
 #output
-#output API:
+#output Paysim API:
 run [:isv].lwscom ; filesystem [:isv] ; info api [:apiname], detail
 
 #output
-#output Service:
+#output Paysim Service:
 run [:isv].lwscom ; filesystem [:isv] ; info service [:svcname], detail
+#output
+#output
+
+#output CBPR Dictionary:
+run [:isv].lwscom ; filesystem [:isv] ; info dictionary [:cbprdict], detail
+
+#output
+#output CBPR API:
+run [:isv].lwscom ; filesystem [:isv] ; info api [:cbprlwsapi], detail
+
+#output
+#output CBPR Service:
+run [:isv].lwscom ; filesystem [:isv] ; info service [:cbprsvc], detail
 #output
 #output
 
@@ -105,6 +161,18 @@ run [:isv].lwccom ; filesystem [:isv] ; &
     #unframe
     #return
   ]
+]
+
+#output
+#output Installing the CBPR LightWave Client API definitions ...
+#output
+
+run [:isv].lwccom ; filesystem [:isv] ; &
+  import api [:cbprlwcapi] !, file cbprcapi
+[#if [ :_completion:completioncode ] <> 0 |then|
+  #output CBPR LWC API installation failed.
+  #unframe
+  #return
 ]
 
 #unframe
